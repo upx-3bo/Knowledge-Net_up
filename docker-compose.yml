@@ -1,0 +1,97 @@
+version: '3.8'
+services:
+  nebula:
+    image: vesoft/nebula-graphd:v3.8.0
+    container_name: nebula-graphd
+    environment:
+      - USER=root
+      - PASSWORD=nebula
+    ports:
+      - "9669:9669"
+    networks:
+      - nebula-net
+    volumes:
+      - nebula-data:/usr/local/nebula/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9669/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  nebula-metad:
+    image: vesoft/nebula-metad:v3.8.0
+    container_name: nebula-metad
+    environment:
+      - USER=root
+      - PASSWORD=nebula
+    networks:
+      - nebula-net
+    volumes:
+      - nebula-meta:/usr/local/nebula/data
+
+  nebula-storaged:
+    image: vesoft/nebula-storaged:v3.8.0
+    container_name: nebula-storaged
+    environment:
+      - USER=root
+      - PASSWORD=nebula
+    networks:
+      - nebula-net
+    volumes:
+      - nebula-store:/usr/local/nebula/data
+    depends_on:
+      - nebula-metad
+
+  nebula-studio:
+    image: vesoft/nebula-studio:v3.8.0
+    container_name: nebula-studio
+    ports:
+      - "7001:7001"
+    networks:
+      - nebula-net
+    depends_on:
+      - nebula
+
+  backend:
+    build: ./backend
+    container_name: kb-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - NEBULA_HOST=nebula
+      - NEBULA_PORT=9669
+      - NEBULA_USER=root
+      - NEBULA_PASSWORD=nebula
+      - LLM_API_KEY=${LLM_API_KEY:-}
+      - LLM_API_URL=${LLM_API_URL:-https://api.deepseek.com/v1}
+      - LLM_MODEL=${LLM_MODEL:-deepseek-chat}
+    networks:
+      - nebula-net
+    depends_on:
+      - nebula
+    volumes:
+      - ./backend:/app
+      - ./data:/app/data
+
+  frontend:
+    build: ./frontend
+    container_name: kb-frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - API_BASE_URL=http://backend:8000
+    networks:
+      - nebula-net
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+
+networks:
+  nebula-net:
+    driver: bridge
+
+volumes:
+  nebula-data:
+  nebula-meta:
+  nebula-store:
