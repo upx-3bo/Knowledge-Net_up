@@ -1,0 +1,90 @@
+{
+  "categories": [
+    {"name": "驱制一体技术", "level": 0, "description": "驱动与制动集成技术"},
+    {"name": "角模块", "level": 0, "description": "轮毂电机集成角模块"},
+    {"name": "轮毂电机", "level": 1, "description": "轮毂驱动电机技术"},
+    {"name": "制动系统", "level": 1, "description": "车辆制动技术"},
+    {"name": "液冷技术", "level": 1, "description": "液体冷却散热技术"},
+    {"name": "减速机构", "level": 1, "description": "减速传动机构"},
+    {"name": "高速端制动", "level": 2, "description": "电机高速端制动结构"},
+    {"name": "平行制动", "level": 3, "description": "平行轴制动结构"},
+    {"name": "正交制动", "level": 3, "description": "正交轴制动结构"}
+  ],
+  "category_relations": [
+    {"parent": "驱制一体技术", "child": "轮毂电机"},
+    {"parent": "驱制一体技术", "child": "制动系统"},
+    {"parent": "驱制一体技术", "child": "液冷技术"},
+    {"parent": "驱制一体技术", "child": "减速机构"},
+    {"parent": "制动系统", "child": "高速端制动"},
+    {"parent": "高速端制动", "child": "平行制动"},
+    {"parent": "高速端制动", "child": "正交制动"},
+    {"parent": "角模块", "child": "轮毂电机"},
+    {"parent": "角模块", "child": "制动系统"},
+    {"parent": "角模块", "child": "减速机构"}
+  ],
+  "technologies": [
+    {"name": "驱制动集成式液冷减速型轮毂电机", "description": "将驱动、制动、液冷、减速集成于一体的轮毂电机技术方案", "trl": 7, "keywords": "驱制一体,轮毂电机,液冷,减速"},
+    {"name": "高速端平行制动结构", "description": "在电机高速端采用平行轴布置的制动器结构，实现制动器小型化和高效制动", "trl": 6, "keywords": "平行制动,高速端,制动器"},
+    {"name": "高速端正交制动结构", "description": "在电机高速端采用正交轴布置的制动器结构，优化空间布置和制动效能", "trl": 6, "keywords": "正交制动,高速端,制动器"},
+    {"name": "轮毂电机液冷散热技术", "description": "利用液冷循环系统对轮毂电机进行高效散热的技术", "trl": 7, "keywords": "液冷,散热,热管理"},
+    {"name": "电机减速机构", "description": "轮毂电机用减速齿轮机构，实现高速电机到轮端减速", "trl": 8, "keywords": "减速器,齿轮,传动比"},
+    {"name": "集成式角模块", "description": "将驱动、制动、转向、悬架集成于一体的车轮模块", "trl": 5, "keywords": "角模块,集成,底盘"},
+    {"name": "电磁制动技术", "description": "利用电磁原理实现非接触制动的技术", "trl": 4, "keywords": "电磁制动,非接触,再生制动"},
+    {"name": "湿式制动技术", "description": "在润滑油环境中工作的制动器技术，散热好、寿命长", "trl": 6, "keywords": "湿式制动,油冷,耐久"}
+  ],
+  "technology_categories": [
+    {"tech": "驱制动集成式液冷减速型轮毂电机", "cat": "驱制一体技术"},
+    {"tech": "高速端平行制动结构", "cat": "平行制动"},
+    {"tech": "高速端正交制动结构", "cat": "正交制动"},
+    {"tech": "轮毂电机液冷散热技术", "cat": "液冷技术"},
+    {"tech": "电机减速机构", "cat": "减速机构"},
+    {"tech": "集成式角模块", "cat": "角模块"},
+    {"tech": "电磁制动技术", "cat": "制动系统"},
+    {"tech": "湿式制动技术", "cat": "制动系统"}
+  ],
+  "standards": [
+    {"name": "电动汽车用驱动电机系统技术要求", "code": "GB/T 18488.1-2015", "organization": "国家标准化管理委员会", "type": "国标"},
+    {"name": "机动车运行安全技术条件", "code": "GB 7258-2017", "organization": "国家标准化管理委员会", "type": "国标"},
+    {"name": "电动汽车制动性能试验方法", "code": "GB/T 38698-2020", "organization": "国家标准化管理委员会", "type": "国标"},
+    {"name": "道路车辆-制动衬片-压缩应变试验方法", "code": "ISO 6310-2021", "organization": "ISO", "type": "国际标准"},
+    {"name": "电动客车轮边驱动系统", "code": "QC/T 1086-2017", "organization": "工信部", "type": "行标"},
+    {"name": "液冷系统通用规范", "code": "GJB 3223-2005", "organization": "总装备部", "type": "国军标"}
+  ],
+  "technology_standards": [
+    {"tech": "驱制动集成式液冷减速型轮毂电机", "std_code": "GB/T 18488.1-2015", "compliance": "推荐"},
+    {"tech": "驱制动集成式液冷减速型轮毂电机", "std_code": "QC/T 1086-2017", "compliance": "强制"},
+    {"tech": "高速端平行制动结构", "std_code": "GB 7258-2017", "compliance": "强制"},
+    {"tech": "高速端正交制动结构", "std_code": "GB 7258-2017", "compliance": "强制"},
+    {"tech": "轮毂电机液冷散热技术", "std_code": "GJB 3223-2005", "compliance": "参考"}
+  ],
+  "patents": [
+    {"title": "一种驱制动集成式液冷减速型轮毂电机的高速端平行制动结构", "number": "CN2024XXXXXX", "applicant": "同济大学_熊璐", "abstract": "本发明涉及一种驱制动集成式液冷减速型轮毂电机的高速端平行制动结构..."},
+    {"title": "一种驱制动集成式液冷减速型轮毂电机的高速端正交制动结构", "number": "CN2024XXXXXX", "applicant": "同济大学_周泉", "abstract": "本发明涉及一种驱制动集成式液冷减速型轮毂电机的高速端正交制动结构..."}
+  ],
+  "technology_patents": [
+    {"tech": "高速端平行制动结构", "patent_num": "CN2024XXXXXX"},
+    {"tech": "高速端正交制动结构", "patent_num": "CN2024XXXXXX"}
+  ],
+  "resources": [
+    {"name": "熊璐", "type": "person", "description": "制动技术专家，高速端平行制动结构发明人", "department": "同济大学汽车学院"},
+    {"name": "周泉", "type": "person", "description": "制动技术专家，高速端正交制动结构发明人", "department": "同济大学汽车学院"},
+    {"name": "轮毂电机测试台架", "type": "equipment", "description": "轮毂电机性能测试台架", "department": "同济大学汽车学院"},
+    {"name": "制动系统仿真平台", "type": "tool", "description": "基于AMESim的制动系统仿真模型", "department": "同济大学汽车学院"},
+    {"name": "液冷系统设计规范", "type": "document", "description": "企业内部液冷系统设计指导文档", "department": "技术中心"}
+  ],
+  "technology_resources": [
+    {"tech": "高速端平行制动结构", "resource_name": "熊璐"},
+    {"tech": "高速端正交制动结构", "resource_name": "周泉"},
+    {"tech": "驱制动集成式液冷减速型轮毂电机", "resource_name": "轮毂电机测试台架"},
+    {"tech": "轮毂电机液冷散热技术", "resource_name": "液冷系统设计规范"}
+  ],
+  "technology_relations": [
+    {"from": "高速端平行制动结构", "to": "高速端正交制动结构", "type": "relates_to"},
+    {"from": "高速端平行制动结构", "to": "驱制动集成式液冷减速型轮毂电机", "type": "belongs_to"},
+    {"from": "高速端正交制动结构", "to": "驱制动集成式液冷减速型轮毂电机", "type": "belongs_to"},
+    {"from": "轮毂电机液冷散热技术", "to": "驱制动集成式液冷减速型轮毂电机", "type": "belongs_to"},
+    {"from": "电机减速机构", "to": "驱制动集成式液冷减速型轮毂电机", "type": "belongs_to"},
+    {"from": "湿式制动技术", "to": "高速端平行制动结构", "type": "relates_to"},
+    {"from": "电磁制动技术", "to": "高速端正交制动结构", "type": "relates_to"}
+  ]
+}
