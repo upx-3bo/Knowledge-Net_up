@@ -50,7 +50,7 @@ NEBULA_SPACE=auto_innovation_kg
 
 # AI 协助（OpenAI 兼容接口）—— 从原机 .env 拷贝同样的 LLM_* 值（含真实 key）
 LLM_API_KEY=<和原机一致的key>
-LLM_API_URL=https://ai-models.rnd.yinwang.com/ai-platform-models-agent/v1
+LLM_API_URL=https://your-llm-endpoint/v1
 LLM_MODEL=DeepSeek-V4-Flash
 
 # 工作台写入口令 —— 务必改成你自己的

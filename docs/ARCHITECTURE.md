@@ -86,5 +86,5 @@ NebulaGraph（WSL1 原生 3.8 · Space: auto_innovation_kg）
 
 华为内网示例：
 
-- `LLM_API_URL=https://ai-models.rnd.yinwang.com/ai-platform-models-agent/v1`
+- `LLM_API_URL=https://your-llm-endpoint/v1`
 - 需本机 DNS/VPN 可达，并填写平台真实 `LLM_MODEL`
