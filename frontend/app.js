@@ -2134,6 +2134,16 @@ function drawGraph2d(data, centerVid) {
       const seed = isTree ? treePos?.get?.(n.vid) || treePos?.[n.vid] : radial?.[n.vid];
       // 仅作初始种子，物理关闭 → 之后可自由拖动到任意位置（拖动结果在重绘时自动保留）
       const xy = kept || seed || null;
+      // 节点最终尺寸（含选中/搜索/审阅加粗与度加权），保持不变
+      const sizeFinal =
+        (isSel ? sizeBase + 8 : isSearchHit ? sizeBase + 6 : isReview ? sizeBase + 5 : sizeBase) + degBoost;
+      const fontSize = isSel ? 16 : n.tag === "vehicle" ? 16 : n.tag === "domain" ? 15 : n.tag === "module" ? 12 : 11;
+      const labelLines = labelText ? labelText.split("\n").length : 0;
+      // 二维同心圆：把标签从节点下方上移到圆心（不改 shape/size，靠字体垂直偏移）
+      const centerLabel = layoutMode === "radial" && !!labelText;
+      const labelVadjust = centerLabel
+        ? -(sizeFinal + (labelLines * fontSize * 1.15) / 2 + 4)
+        : 0;
       return {
         id: n.vid,
         label: labelText,
@@ -2144,18 +2154,19 @@ function drawGraph2d(data, centerVid) {
           hover: { background: isReview ? REVIEW_HL : base, border: "#fbbf24" },
         },
         font: {
-          color: isNear ? "#e2e8f0" : "#64748b",
+          color: centerLabel ? "#ffffff" : isNear ? "#e2e8f0" : "#64748b",
           face: "Segoe UI",
-          size: isSel ? 16 : n.tag === "vehicle" ? 16 : n.tag === "domain" ? 15 : n.tag === "module" ? 12 : 11,
+          size: fontSize,
           strokeWidth: 3,
           strokeColor: "#0b1220",
           align: "middle",
           background: "rgba(11,18,32,0.55)",
+          ...(centerLabel ? { vadjust: labelVadjust } : {}),
         },
         borderWidth: isReview ? 4 : isSel ? 4 : isSearchHit ? 4 : isNear ? 2 : 1,
         opacity: dimFilter ? 0.18 : isReview ? 1 : isNear ? 1 : 0.22,
         shape: "dot",
-        size: (isSel ? sizeBase + 8 : isSearchHit ? sizeBase + 6 : isReview ? sizeBase + 5 : sizeBase) + degBoost,
+        size: sizeFinal,
         // vis Barnes-Hut: repulsion ∝ mass_i * mass_j — hubs shove neighbors out
         mass,
         title: (() => {
