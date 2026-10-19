@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI4KnowledgeNet 工具原理与运行说明</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif;background:#f5f7fb;color:#2b3443;line-height:1.8;padding:0}
+.wrap{max-width:920px;margin:0 auto;padding:40px 36px 80px;background:#fff;min-height:100vh;box-shadow:0 0 30px rgba(0,0,0,.05)}
+h1{font-size:28px;color:#111827;border-bottom:3px solid #2563eb;padding-bottom:12px;margin-bottom:6px}
+h2{font-size:22px;color:#1d4ed8;margin:36px 0 14px;padding-left:12px;border-left:5px solid #2563eb}
+h3{font-size:17px;color:#111827;margin:24px 0 10px}
+p{margin:10px 0;color:#374151}
+ul,ol{margin:10px 0 10px 24px;color:#374151}
+li{margin:5px 0}
+code{background:#eef2f7;border:1px solid #dbe2ec;border-radius:4px;padding:1px 6px;font-family:Consolas,'Courier New',monospace;font-size:.88em;color:#b91c1c}
+pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:16px 18px;overflow:auto;margin:12px 0;font-size:13px;line-height:1.6}
+pre code{background:none;border:none;color:inherit;padding:0}
+blockquote{margin:12px 0;padding:10px 16px;background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 6px 6px 0;color:#1e3a8a}
+blockquote p{margin:0;color:inherit}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}
+th,td{border:1px solid #dbe2ec;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#1e293b;font-weight:600}
+tr:nth-child(even) td{background:#f8fafc}
+strong{color:#111827}
+a{color:#2563eb;text-decoration:none}
+a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #e2e8f0;margin:24px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>知识图谱工作台 · 工具原理与运行说明</h1>
+<blockquote><p>说明本工具是什么、如何运转、由哪些代码支撑、谁能用什么，以及日后要做某类改进时该从哪里下手。</p></blockquote>
+<hr>
+<h2>一、一句话总结</h2>
+<p><b>这是公司内部的一个网页版「汽车技术知识库」</b>：把散在文件夹里的 PDF/PPT/Word/论文整理成一张&quot;技术树&quot;，每个节点是一个技术点或一份材料，节点之间的连线表达&quot;属于哪个板块、支撑哪个技术点&quot;；所有知识经过梳理后存在<b>图数据库 NebulaGraph</b> 里，大家通过浏览器查看、检索、增删改，AI 能协助抽取资料入库。</p>
+<p>现在库里实际有：<b>整车 1 个、领域 3 个（底盘技术 / 整车信息系统 / 汽车材料）、子域 22 个、模块 145 个、技术点 95 个、支撑文档 212 个</b>，共 478 个节点、482 条关系。</p>
+<hr>
+<h2>二、整体怎么运转（三层结构）</h2>
+<pre><code>浏览器 UI（前端网页）
+      ↓  http 请求/JSON 数据
+后端服务 FastAPI + Python（一台服务器上跑）
+      ↓  nGQL 图查询
+NebulaGraph 图数据库（本机/WSL 里跑）</code></pre>
+<ul><li><b>前端（页面）</b>：负责&quot;给人看、给人点&quot;。画图、搜索框、统计数字、添加表单，全是浏览器里的代码（index.html / app.js）。它自己不存任何业务数据，一切都问后端要。</li><li><b>后端（服务）</b>：负责&quot;听命令、算逻辑、读写数据&quot;。浏览器每做一次操作，后端就执行对应的接口；同时承担 AI 抽取、历史记录、导入导出等逻辑。</li><li><b>图数据库（数据仓库）</b>：负责&quot;存知识&quot;。选它不用普通表格，是因为技术之间的关系是&quot;一棵树 + 交叉引用&quot;，图天生适合描述&quot;谁属于谁、谁支撑谁&quot;。</li></ul>
+<blockquote><p>前端和后端是<b>前后端分离</b>的典型结构，但它俩部署在同一台服务器上、由同一个后端服务器托管页面文件——所以访问一个地址（比如 <code>http://10.85.107.34:8000</code>）就能同时打开网页和调用接口，不用单独部署前端。</p></blockquote>
+<hr>
+<h2>三、页面（UI）和后端是什么关系</h2>
+<table><thead><tr><th>页面上的东西</th><th>背后调用的后端接口</th><th>作用</th></tr></thead><tbody><tr><td>顶部统计数字</td><td><code>/stats</code></td><td>各层节点数量</td></tr><tr><td>搜索框、节点列表</td><td><code>/vertices?keyword=</code></td><td>按名称/关键词查节点</td></tr><tr><td>首页全貌图</td><td><code>/overview</code></td><td>返回整张图（节点+连线）</td></tr><tr><td>点击某节点看子图/详情</td><td><code>/subgraph/{id}</code>、<code>/vertices/{id}/detail</code></td><td>展开该点的下层及关系</td></tr><tr><td>增加/删除节点、连线</td><td>POST/PATCH/DELETE <code>/vertices</code>、<code>/edges</code></td><td>写操作（需登录）</td></tr><tr><td>撤回/重做</td><td><code>/history/undo</code> <code>/history/redo</code></td><td>回滚最近一次写</td></tr><tr><td>最近修改记录</td><td><code>/activity/recent</code></td><td>最近 10 条操作列表</td></tr><tr><td>AI 抽取资料</td><td><code>/ai/extract</code></td><td>把文字转为结构化入库格式</td></tr><tr><td>导出/导入知识</td><td><code>/export/knowledge</code>、<code>/import/template</code>、<code>/import/knowledge</code></td><td>整库/子树导出与批量入库</td></tr><tr><td>帮助文档页</td><td><code>/wiki/*</code></td><td>本类文档的网页版</td></tr></tbody></table>
+<p>关键点：</p>
+<ul><li><b>读</b>随便用：只要浏览器能到服务器，任何人可看、可搜、可导出。</li><li><b>写要登录</b>：增删改前需输入写入口令换取临时 token，防止误操作和无关人员乱改。</li><li><b>每次写都会留痕</b>：写在 SQLite 小数据库里，用来撤回、看最近记录、将来做审计。</li></ul>
+<hr>
+<h2>四、NebulaGraph 在里面的角色</h2>
+<h3>4.1 它是唯一的数据仓库</h3>
+<ul><li>整张知识图（节点+连线+属性）<b>只存在 NebulaGraph</b> 里（空间名 <code>auto_innovation_kg</code>）。</li><li>它跑在本机 <b>WSL1</b> 里，不开 Docker——因为服务器是无嵌套虚拟化的虚拟机，只能这样装。</li><li>后端启动时会与它建立连接池，所有查询/写入都走它。</li></ul>
+<h3>4.2 有哪些后端代码在跟 Nebula 打交道</h3>
+<pre><code>backend/nebula_client.py   连接管理（连上/断开/执行 nGQL）
+backend/store.py           核心数据层：增删改查、搜索、子图、全貌、路径、统计（全部翻译成图查询）
+backend/architecture.py    固定 6 层架构规则（哪些标签允许挂在哪些标签下）
+scripts/nebula_health.py   健康检查（连不连得上、统计）
+scripts/nebula_init.py / nebula_seed_retry.py / nebula_wait_and_init.py   建库建 Schema 初始化
+scripts/backup_daily.py + snapshot.py   图数据快照备份
+scripts/audit_architecture.py           全库合规审计
+mcp_server/server.py       给 AI 助手用的读写工具（也是走 store.py → Nebula）</code></pre>
+<p>其中 <b>store.py 是命脉</b>：页面上 90% 的操作最终都是走到它，由它拼 nGQL 语句发给 NebulaGraph。改口径、提速、修 bug 大都发生在这里。</p>
+<h3>4.3 Nebula 为什么重要</h3>
+<ul><li>没有 Nebula → 后端起不来（连接失败），页面能打开但没有任何数据，任何操作都报&quot;数据连接错误&quot;。</li><li>它的数据是<b>唯一的</b>：丢了就丢了（除非做过快照），所以有 <code>backup_daily.py</code> 定期快照。</li></ul>
+<hr>
+<h2>五、哪些代码支撑着知识库运行</h2>
+<table><thead><tr><th>目录/文件</th><th>干什么用</th><th>角色</th></tr></thead><tbody><tr><td><code>backend/main.py</code></td><td>后端入口：挂接口、托管页面与文档</td><td>在线</td></tr><tr><td><code>backend/routers/*</code></td><td>各类接口（图 / AI / 导出 / 导入 / 采集 / 雷达）</td><td>在线</td></tr><tr><td><code>backend/store.py</code></td><td>所有图读写 + 业务逻辑（核心）</td><td>在线</td></tr><tr><td><code>backend/nebula_client.py</code></td><td>Nebula 连接池</td><td>在线</td></tr><tr><td><code>backend/architecture.py</code></td><td>固定 6 层架构规则（表单/校验/导入导出的统一口径）</td><td>在线</td></tr><tr><td><code>backend/history.py</code></td><td>操作历史（SQLite 旁路，撤回/重做/最近记录）</td><td>在线</td></tr><tr><td><code>backend/auth.py</code></td><td>写入口令 token 签发与校验</td><td>在线</td></tr><tr><td><code>backend/services/extractor.py</code> <code>llm.py</code> <code>fetch_url.py</code></td><td>AI 抽取 / 大模型调用 / 网页抓正文</td><td>在线（依赖 LLM 配置）</td></tr><tr><td><code>backend/services/export_knowledge.py</code> <code>import_knowledge.py</code></td><td>导出 / 批量导入</td><td>在线</td></tr><tr><td><code>backend/services/collector.py</code></td><td>自动采集（arXiv/资讯等来源抓取）</td><td>在线/后台</td></tr><tr><td><code>backend/radar/*</code></td><td>情报雷达（行业来源清单同步）</td><td>在线/后台</td></tr><tr><td><code>frontend/*</code></td><td>页面（index.html / app.js / styles.css / radar.html）</td><td>在线（静态文件）</td></tr><tr><td><code>scripts/*</code></td><td>初始化 / 健康 / 备份 / 审计 / 数据导入脚本</td><td>本机</td></tr><tr><td><code>mcp_server/server.py</code></td><td>给 AI 助手调用的图读写工具</td><td>在线（可选）</td></tr><tr><td><code>data/*.db</code></td><td>SQLite 旁路小库（历史/雷达/采集）</td><td>在线</td></tr></tbody></table>
+<p><b>链路</b>：页面把用户意图变成请求 → 后端接口按架构规则拼成图查询 → Nebula 执行并返回 → 后端加工成页面要的 JSON → 前端画出来。<code>store.py</code> 是&quot;翻译官&quot;，<code>architecture.py</code> 是&quot;规矩&quot;，<code>nebula.py</code> 是&quot;电话线&quot;。</p>
+<hr>
+<h2>六、现在的访问与权限边界</h2>
+<table><thead><tr><th>能力</th><th>任何内网用户（浏览器打开就能）</th><th>需要写入口令（登录）</th><th>必须在这台服务器/本机上操作</th></tr></thead><tbody><tr><td>打开页面、看全貌/子图/详情</td><td>✅</td><td></td><td></td></tr><tr><td>搜索、看统计、看操作历史</td><td>✅</td><td></td><td></td></tr><tr><td>导出知识 JSON/Markdown</td><td>✅</td><td></td><td></td></tr><tr><td>下载导入模板</td><td>✅</td><td></td><td></td></tr><tr><td>看帮助文档（/wiki）</td><td>✅</td><td></td><td></td></tr><tr><td>新增/修改/删除节点、连线</td><td></td><td>✅</td><td></td></tr><tr><td>撤回/重做</td><td></td><td>✅</td><td></td></tr><tr><td>AI 抽取后「确认写入」</td><td></td><td>✅</td><td></td></tr><tr><td>批量导入「写入」</td><td></td><td>✅</td><td></td></tr><tr><td>启动/停止后端、Nebula</td><td></td><td></td><td>✅</td></tr><tr><td>建库初始化/重置 Schema</td><td></td><td></td><td>✅</td></tr><tr><td>数据快照/备份/恢复</td><td></td><td></td><td>✅</td></tr><tr><td>架构合规审计</td><td></td><td></td><td>✅</td></tr><tr><td>改代码、改配置（.env / 接口 / 页面）</td><td></td><td></td><td>✅</td></tr><tr><td>安装依赖、升级版本</td><td></td><td></td><td>✅</td></tr></tbody></table>
+<p>一句话归纳：<b>看和读，浏览器就行；写，要口令；动数据库底层、动代码、动服务，必须在本机由维护者操作。</b></p>
+<hr>
+<h2>七、日后再做某类改进时，从哪里下手</h2>
+<p>下表按&quot;想改进的方面&quot;列出对应的文件 / 接口 / 操作，方便接到需求时快速定位。</p>
+<h3>想要优化页面 UI / 交互</h3>
+<p>1. 改前端文件：<code>frontend/app.js</code>（逻辑、作图）、<code>frontend/index.html</code>（结构、按钮）、<code>frontend/styles.css</code>（样式）。 2. 改完<b>必须</b>把 <code>index.html</code> 里的版本号升一档（<code>app.js?v=…</code>、<code>styles.css?v=…</code>），否则浏览器缓存旧文件看不到改动。 3. 前端改动<b>无需重启后端</b>，升版本号后浏览器刷新即可。 4. 若涉及新接口，先在 <code>backend/routers/</code> 加路由并重启后端，再把前端接上。</p>
+<h3>想查看后端数据 / 数据库状态</h3>
+<ul><li>页面直接看：<code>/stats</code>（各层节点数）、<code>/overview</code>（整图）、<code>/history</code>（操作历史）、<code>/activity/recent</code>（最近记录）。</li><li>命令行看一眼：<code>python scripts/nebula_health.py</code>（连接 + 统计）。</li><li>深入审图：<code>python scripts/audit_architecture.py --detail</code>（列出结构问题明细）。</li><li>直接连库查：进入 WSL1 用 <code>nebula-console</code> 连 <code>127.0.0.1:9669</code>，<code>USE auto_innovation_kg;</code> 后跑 nGQL。</li></ul>
+<h3>想给知识库扩容（批量加数据）</h3>
+<p>1. 先导当前结构做参照：页面「导出知识架构」选根与终点层，导出 JSON。 2. 按模板补充新资料：页面「导入知识架构」→下载模板 → 填内容 → 校验 → 确认写入。 3. 大批量用脚本：写 <code>scripts/ingest_*.py</code> 读整理好的 JSON 建节点/边（参考 <code>ingest_chassis_tech.py</code>）。 4. 写入前建议先跑一次快照备份。</p>
+<h3>想调整知识结构（层级/关系规则）</h3>
+<ul><li>层级与父子约束集中在 <code>backend/architecture.py</code>：改 <code>LEVELS</code>、<code>BELONGS_TO_PARENT</code>、<code>SUPPORTS_TARGETS</code>、<code>VID_PREFIX</code>。</li><li>改完重启后端，前端表单选项、导入导出校验会自动跟随（都读它）。</li><li>改完跑 <code>scripts/audit_architecture.py</code> 复查全库是否合规。</li></ul>
+<h3>想开启/调整 AI 能力</h3>
+<ul><li>编辑 <code>.env</code>：<code>LLM_API_URL</code> / <code>LLM_API_KEY</code> / <code>LLM_MODEL</code>（OpenAI 兼容接口，含华为内网模型网关）。</li><li>AI 业务代码在 <code>backend/services/</code>：<code>extractor.py</code>（抽取）、<code>llm.py</code>（模型调用）、<code>fetch_url.py</code>（网页抓正文）、<code>import_review.py</code>（复核）。</li><li>可用状态在页面 AI 面板或 <code>/ai/status</code> 查看。</li><li>改完 <code>.env</code> 需重启后端。</li></ul>
+<h3>想提高页面/查询性能</h3>
+<ul><li>查询侧：<code>backend/store.py</code> 里的拼 nGQL 与取数逻辑（批量取数、overview 配额、子图深度）。</li><li>前端侧：<code>frontend/app.js</code> 里的画布预算、渲染上限（软/硬阈值）、按层级/领域筛选减少一次性数据量。</li><li>大改动前先备份，改动后对照 <code>/stats</code>、<code>/overview</code> 与页面加载耗时验证。</li></ul>
+<h3>想做权限 / 审计 / 多角色</h3>
+<ul><li>现在只有一个写入口令（<code>backend/auth.py</code>，token 12h）+ 操作历史（<code>backend/history.py</code>）。</li><li>要加角色分权：扩展 <code>auth.py</code> 的 token 携带角色，接口层按角色放行。</li><li>要做审计面板：操作历史数据已齐（SQLite <code>ops</code> 表），加个查询页面即可。</li><li>改后重启后端生效。</li></ul>
+<h3>想改数据安全 / 备份策略</h3>
+<ul><li>快照脚本 <code>scripts/backup_daily.py</code>（每日、有变更才导出，同步共享盘可设 <code>BACKUP_SHARE_DIR</code>）。</li><li>恢复：从 <code>scripts/snapshots/</code> 的 <code>snapshot_*.json</code> 用导入链路/脚本回灌。</li><li>建议把快照目录或复制件放到共享盘/异地。</li></ul>
+<hr>
+<h2>八、当前系统状态速览</h2>
+<ul><li>运行方式：NebulaGraph 跑在本机 WSL1；后端 FastAPI 跑在 <code>0.0.0.0:8000</code>（标准端口；页面和文档由后端托管）。</li><li>说明：曾遇到 8000 进程卡死无法访问的问题，期间在同机 <code>8001</code> 端口开过临时实例应急；恢复步骤见《演进与维护工作流》「重启后端」。</li><li>数据量：6 层 478 节点 / 482 关系（整车 1、领域 3、子域 22、模块 145、技术点 95、文档 212）。</li><li>三个领域：底盘技术、整车信息系统、汽车材料。</li><li>写入保护：口令登录（12h token），每次写操作留痕（可撤回、可看最近记录）。</li><li>备份：<code>scripts/snapshots/</code> 有历史快照；<code>backup_daily.py</code> 支持每日检测+快照。</li><li>访问文档：浏览器打开 <code>http://&lt;服务器IP&gt;:8000/wiki/演进与维护工作流.html</code> 及同类文档。</li></ul>
+<hr>
+<h2>附：维护要点</h2>
+<p>改完页面记得升 <code>app.js?v=</code>/<code>styles.css?v=</code> 版本号；改完后端要重启 8000 进程；动数据前先跑一次快照。详细步骤见《演进与维护工作流》。</p>
+<div style="margin-top:48px;padding-top:18px;border-top:1px solid #e2e8f0;color:#94a3b8;font-size:12px;text-align:center">AI4KnowledgeNet 知识图谱工作台 · 文档</div>
+</div>
+</body>
+</html>

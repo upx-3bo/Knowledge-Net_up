@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI4KnowledgeNet 功能清单</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif;background:#f5f7fb;color:#2b3443;line-height:1.8;padding:0}
+.wrap{max-width:920px;margin:0 auto;padding:40px 36px 80px;background:#fff;min-height:100vh;box-shadow:0 0 30px rgba(0,0,0,.05)}
+h1{font-size:28px;color:#111827;border-bottom:3px solid #2563eb;padding-bottom:12px;margin-bottom:6px}
+h2{font-size:22px;color:#1d4ed8;margin:36px 0 14px;padding-left:12px;border-left:5px solid #2563eb}
+h3{font-size:17px;color:#111827;margin:24px 0 10px}
+p{margin:10px 0;color:#374151}
+ul,ol{margin:10px 0 10px 24px;color:#374151}
+li{margin:5px 0}
+code{background:#eef2f7;border:1px solid #dbe2ec;border-radius:4px;padding:1px 6px;font-family:Consolas,'Courier New',monospace;font-size:.88em;color:#b91c1c}
+pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:16px 18px;overflow:auto;margin:12px 0;font-size:13px;line-height:1.6}
+pre code{background:none;border:none;color:inherit;padding:0}
+blockquote{margin:12px 0;padding:10px 16px;background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 6px 6px 0;color:#1e3a8a}
+blockquote p{margin:0;color:inherit}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}
+th,td{border:1px solid #dbe2ec;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#1e293b;font-weight:600}
+tr:nth-child(even) td{background:#f8fafc}
+strong{color:#111827}
+a{color:#2563eb;text-decoration:none}
+a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #e2e8f0;margin:24px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>AI4KnowledgeNet 知识图谱工作台 · 功能清单</h1>
+<blockquote>版本：v0.4.0 ｜ 整理日期：2026-08-19<br>底层：FastAPI + NebulaGraph 3.8.3 + vis-network + 3d-force-graph（WebGL）<br>访问：浏览器打开 <code>http://<服务器IP>:8000</code></blockquote>
+<hr>
+<h2>一、总览</h2>
+<p>这个工作台把「散落在文件夹里的底盘/汽车技术资料」组织成一棵 <strong>领域 → 板块(subdomain) → 主题/技术点(technology) → 材料(material)</strong> 的知识网络，并提供<strong>可视化、检索、编辑、AI 辅助入库</strong>四大能力。所有操作实时写入共享的 NebulaGraph。</p>
+<hr>
+<h2>二、功能清单（按模块）</h2>
+<h3>A. 可视化与视图</h3>
+<table><thead><tr><th>功能</th><th>说明</th></tr></thead><tbody><tr><td><strong>2D / 3D 双视图</strong></td><td>顶部「二维 / 三维」一键切换；3D 用 WebGL 力导向图，2D 用 vis-network</td></tr><tr><td><strong>同心圆布局</strong></td><td>领域/板块按扇形分区，层次清晰（默认）</td></tr><tr><td><strong>力导向布局</strong></td><td>关联越多的节点越被斥力推开，适合看清网络结构</td></tr><tr><td><strong>重新撑开</strong></td><td>力导向下把重叠节点重新推开</td></tr><tr><td><strong>缩放 / 拖拽 / 旋转</strong></td><td>3D 可旋转视角；2D 拖拽画布；「适应」按钮一键居中</td></tr><tr><td><strong>3D 节点标注</strong></td><td>可开关；按层级（领域/子域/技术点/材料）选择显示哪些标签</td></tr><tr><td><strong>图例</strong></td><td>右下角显示各节点类型对应的颜色/大小</td></tr><tr><td><strong>节点大小分级</strong></td><td>领域最大、材料最小，一眼识别层级</td></tr></tbody></table>
+<h3>B. 检索与定位</h3>
+<table><thead><tr><th>功能</th><th>说明</th></tr></thead><tbody><tr><td><strong>关键字搜索</strong></td><td>按技术点/领域/材料名搜索，支持中英文、模糊</td></tr><tr><td><strong>类型筛选</strong></td><td>搜索时可限定只查技术点/领域/子域/材料</td></tr><tr><td><strong>高亮命中</strong></td><td>在图上高亮显示搜索命中的节点（2D/3D 通用），未命中变暗</td></tr><tr><td><strong>层级筛选（显示层级）</strong></td><td>只看某一层：领域 / 子域 / 技术点 / 材料</td></tr><tr><td><strong>层级范围</strong></td><td>「含上层」或「仅本层」</td></tr><tr><td><strong>领域筛选</strong></td><td>只看某个领域（子库），多人协作时隔离不同知识域</td></tr><tr><td><strong>节点列表</strong></td><td>左侧列出当前节点，点击列表中某项即可聚焦</td></tr></tbody></table>
+<h3>C. 聚焦与探索</h3>
+<table><thead><tr><th>功能</th><th>说明</th></tr></thead><tbody><tr><td><strong>聚焦子图</strong></td><td>点任意节点 → 显示它一跳/两跳内的邻居（所属层级 + 支撑材料），自动保留材料球体</td></tr><tr><td><strong>只看选中</strong></td><td>只显示当前选中点及其一跳邻居</td></tr><tr><td><strong>节点详情抽屉</strong></td><td>右侧弹出：节点标签、属性、邻居分组、来源链接</td></tr><tr><td><strong>打开链接</strong></td><td>材料节点可跳转到原文 URL / 复制共享盘路径</td></tr><tr><td><strong>查最短路径</strong></td><td>选起点+终点，<code>FIND SHORTEST PATH</code> 找两点间最短关联网，用于跨技术关联发现</td></tr></tbody></table>
+<h3>D. 图谱编辑（CRUD）</h3>
+<table><thead><tr><th>功能</th><th>说明</th></tr></thead><tbody><tr><td><strong>添加技术点</strong></td><td>填名称、上一层技术簇（可多级）、描述、关键词；支持「提炼/译中」AI 辅助</td></tr><tr><td><strong>添加支撑材料</strong></td><td>填材料名、支撑的技术点、类型（文档/论文/专利/标准/资讯）、标题、摘要、来源链接</td></tr><tr><td><strong>编辑节点/边</strong></td><td>PATCH 改属性；删除节点（连边级联）、删除单条边</td></tr><tr><td><strong>数据即时落库</strong></td><td>任何增删改实时写入 Nebula，刷新即最新态；幂等（IF NOT EXISTS）防重复</td></tr></tbody></table>
+<h3>E. AI 协助入库</h3>
+<table><thead><tr><th>功能</th><th>说明</th></tr></thead><tbody><tr><td><strong>LLM 状态检测</strong></td><td>AI 面板显示是否已配置可用的大模型服务</td></tr><tr><td><strong>自动抽取</strong></td><td>粘贴论文摘要/专利说明 → LLM 抽取「技术点 + 支撑材料」结构（可选译中文）</td></tr><tr><td><strong>生成协作提示词</strong></td><td>把资料整理成提示词，交给 Cursor/助手人工处理</td></tr><tr><td><strong>解析粘贴结果</strong></td><td>把 Cursor 返回的 JSON 粘贴 → 解析 → 预览</td></tr><tr><td><strong>确认写入</strong></td><td>人工确认后的抽取结果一键写入图谱</td></tr><tr><td><strong>提炼/译中</strong></td><td>对描述做 AI 提炼或中译</td></tr><tr><td><strong>规则/AI 复核</strong></td><td>import_review 支持 rule_check + AI 二次复核（QA 环节，先不写库）</td></tr></tbody></table>
+<h3>F. 系统与运维</h3>
+<table><thead><tr><th>功能</th><th>说明</th></tr></thead><tbody><tr><td><strong>全貌（Overview）</strong></td><td>一屏总览整图，按层预算控制画布规模、保证清晰</td></tr><tr><td><strong>刷新</strong></td><td>重新拉取数据</td></tr><tr><td><strong>API 访问</strong></td><td>页面顶部「API」链接，Swagger 文档（<code>/docs</code>）</td></tr><tr><td><strong>统计条</strong></td><td>顶部显示各层节点数量（领域/子域/技术点/材料）</td></tr><tr><td><strong>MCP 服务</strong></td><td>供 AI Agent（如 Cursor）经 <code>kg_*</code> 工具读写图谱，人机协同同一份数据</td></tr></tbody></table>
+<hr>
+<h2>三、数据模型速查</h2>
+<p><strong>节点 Tag</strong>：<code>domain</code>（领域）、<code>subdomain</code>（板块）、<code>technology</code>（主题/技术点）、<code>material</code>（材料）</p>
+<p><strong>边</strong>：</p>
+<ul><li><code>belongs_to</code>（子→父，层级归属）</li><li><code>supports</code>（材料→技术点，材料支撑）</li><li><code>relates_to</code>（技术点↔技术点，横向/交叉关联）</li></ul>
+<hr>
+<h2>四、能力边界（当前已知）</h2>
+<ul><li><strong>多人协作</strong>：共享数据但<strong>无登录鉴权、无冲突提示</strong>（后写覆盖先写），权限后续补。</li><li><strong>实时同步</strong>：非自动推送，需刷新页面看他人改动。</li><li><strong>材料存储</strong>：元数据在 Nebula；文件本体走共享盘/链接，暂未接入对象存储。</li><li><strong>批量导入</strong>：主要靠脚本（ingest_*.py）+ AI 抽取，页面以增量录入为主。</li></ul>
+<hr>
+<h2>五、一句话总结</h2>
+<blockquote>一个「可视化 + 检索 + 编辑 + AI 抽取 + 多人共享」的底盘技术知识图谱工作台，把资料变成可检索、可推理、可持续生长的知识资产。</blockquote>
+<div style="margin-top:48px;padding-top:18px;border-top:1px solid #e2e8f0;color:#94a3b8;font-size:12px;text-align:center">AI4KnowledgeNet 知识图谱工作台 · 文档</div>
+</div>
+</body>
+</html>

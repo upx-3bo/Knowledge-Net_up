@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI4KnowledgeNet 功能清单 · 使用手册（可编辑）</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft YaHei',system-ui,sans-serif;background:#f5f7fb;color:#2b3443;line-height:1.7;padding:0}
+.wrap{max-width:960px;margin:0 auto;padding:36px 30px 80px;background:#fff;min-height:100vh;box-shadow:0 0 30px rgba(0,0,0,.06)}
+.toolbar{position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid #e2e8f0;padding:12px 0;margin-bottom:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;z-index:20}
+.toolbar .lbl{font-size:13px;color:#64748b}
+.toolbar button{background:#2563eb;border:1px solid #3b82f6;color:#fff;border-radius:6px;padding:6px 14px;font-size:13px;cursor:pointer}
+.toolbar button.ghost{background:#fff;border-color:#cbd5e1;color:#334155}
+.toolbar .status{font-size:12px;color:#16a34a}
+h1{font-size:26px;color:#111827;margin:8px 0 4px}
+h2{font-size:21px;color:#1d4ed8;border-left:5px solid #2563eb;padding-left:12px;margin:30px 0 14px}
+h3{font-size:17px;color:#334155;margin:22px 0 8px}
+p{margin:10px 0;color:#374151}
+code{background:#eef2f7;border:1px solid #dbe2ec;border-radius:4px;padding:1px 6px;font-size:.9em;color:#b91c1c}
+.quote{background:#eff6ff;border-left:4px solid #3b82f6;padding:10px 14px;border-radius:0 6px 6px 0;color:#1e3a8a;margin:10px 0}
+.quote p{margin:0;color:inherit}
+ul{margin:8px 0 8px 22px;color:#374151}
+li{margin:4px 0}
+.func{display:flex;gap:12px;align-items:flex-start;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;margin-bottom:8px;background:#fff}
+.func .name{width:190px;flex-shrink:0;font-weight:600;color:#1e293b}
+.func .body{flex:1}
+.func .desc{color:#475569;font-size:14px}
+.func .note{margin-top:6px;display:none}
+.func .note.show-note{display:block}
+[contenteditable]{outline:none}
+.editing [contenteditable]{background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;padding:4px 6px;cursor:text}
+.func .name[contenteditable], .func .desc[contenteditable]{transition:background .15s}
+.func .note-input{width:100%;background:#fffbeb;border:1px dashed #d97706;border-radius:6px;padding:6px 8px;font-size:12.5px;color:#78350f;resize:vertical;font-family:inherit;min-height:22px}
+.func .edited{font-size:11px;color:#d97706;margin-left:6px;display:none}
+.func[data-edited="1"] .edited{display:inline}
+hr{border:none;border-top:1px solid #e2e8f0;margin:24px 0}
+a{color:#2563eb}
+.tip{color:#94a3b8;font-size:12px}
+</style></head><body><div class="wrap">
+<div class="toolbar">
+  <span class="lbl">使用手册（可编辑）</span>
+  <button id="btnEdit" class="ghost" type="button">✎ 编辑模式</button>
+  <button id="btnExport" class="ghost" type="button">⬇ 导出 JSON</button>
+  <button id="btnReset" class="ghost" type="button">↺ 重置本页</button>
+  <span class="status" id="status">仅查看（改动自动存本机）</span>
+  <span class="tip">编辑模式下可直接改「功能 / 说明」，下方可加「备注」。点击空白添加备注。</span>
+</div>
+<h1>AI4KnowledgeNet 知识图谱工作台 · 功能清单与使用手册</h1><div class="quote"><p>版本：v0.5.0 ｜ 整理日期：2026-08-24</p><p>底层：FastAPI + NebulaGraph 3.8.3 + vis-network + 3d-force-graph（WebGL）</p><p>访问：浏览器打开 <code>http://&lt;服务器IP&gt;:8000</code>（浏览免登录；写入需登录）</p></div><p>---</p><h2>一、总览</h2><p>这个工作台把「散落在文件夹里的底盘/汽车技术资料」组织成一棵 <b>领域 → 板块(subdomain) → 主题/技术点(technology) → 文档(material)</b> 的知识网络，并提供<b>可视化、检索、编辑、AI 辅助入库、多人协作</b>五大能力。所有操作实时写入共享的 NebulaGraph。</p><div class="quote"><p>📌 名词说明：本工具原称「材料(material)」，现统一显示为「文档」；内部数据结构不变。</p></div><p>---</p><h2>二、功能清单（按模块）</h2><h3>A. 可视化与视图</h3><div class="funcs"><div class="func" data-uid="功能|0" data-edited="0">
+  <div class="name" contenteditable="false"><b>2D / 3D 双视图</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">顶部「二维 / 三维」一键切换；3D 用 WebGL 力导向图，2D 用 vis-network</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|1" data-edited="0">
+  <div class="name" contenteditable="false"><b>同心圆布局</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">领域/板块按扇形分区，层次清晰（默认）</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|2" data-edited="0">
+  <div class="name" contenteditable="false"><b>力导向布局</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">关联越多的节点越被斥力推开，适合看清网络结构</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|3" data-edited="0">
+  <div class="name" contenteditable="false"><b>重新撑开</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">力导向下把重叠节点重新推开</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|4" data-edited="0">
+  <div class="name" contenteditable="false"><b>缩放 / 拖拽 / 旋转</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">3D 可旋转视角；2D 拖拽画布；「适应」按钮一键居中</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|5" data-edited="0">
+  <div class="name" contenteditable="false"><b>3D 节点标注</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">可开关；按层级（领域/子域/技术点/文档）选择显示哪些标签</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|6" data-edited="0">
+  <div class="name" contenteditable="false"><b>图例</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">右下角显示各节点类型对应的颜色/大小</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|7" data-edited="0">
+  <div class="name" contenteditable="false"><b>节点大小分级</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">领域最大、文档最小，一眼识别层级</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div></div><h3>B. 检索与定位</h3><div class="funcs"><div class="func" data-uid="功能|0" data-edited="0">
+  <div class="name" contenteditable="false"><b>关键字搜索</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">按技术点/领域/文档名搜索，支持中英文、模糊</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|1" data-edited="0">
+  <div class="name" contenteditable="false"><b>类型筛选</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">搜索时可限定只查技术点/领域/子域/文档</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|2" data-edited="0">
+  <div class="name" contenteditable="false"><b>高亮命中</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">在图上高亮显示搜索命中的节点（2D/3D 通用），未命中变暗</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|3" data-edited="0">
+  <div class="name" contenteditable="false"><b>层级筛选（显示层级）</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">只看某一层：领域 / 子域 / 技术点 / 文档</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|4" data-edited="0">
+  <div class="name" contenteditable="false"><b>层级范围</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">「含上层」或「仅本层」</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|5" data-edited="0">
+  <div class="name" contenteditable="false"><b>领域筛选</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">只看某个领域（子库），多人协作时隔离不同知识域</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|6" data-edited="0">
+  <div class="name" contenteditable="false"><b>节点列表</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">左侧列出当前节点，点击列表中某项即可聚焦</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div></div><h3>C. 聚焦与探索</h3><div class="funcs"><div class="func" data-uid="功能|0" data-edited="0">
+  <div class="name" contenteditable="false"><b>聚焦子图</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">点任意节点 → 显示它一跳/两跳内的邻居（所属层级 + 支撑文档），自动保留文档球体</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|1" data-edited="0">
+  <div class="name" contenteditable="false"><b>只看选中</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">只显示当前选中点及其一跳邻居</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|2" data-edited="0">
+  <div class="name" contenteditable="false"><b>节点详情抽屉</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">右侧弹出：节点标签、属性、邻居分组、来源链接</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|3" data-edited="0">
+  <div class="name" contenteditable="false"><b>打开链接</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">材料节点可跳转到原文 URL / 复制共享盘路径</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|4" data-edited="0">
+  <div class="name" contenteditable="false"><b>查最短路径</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">选起点+终点，<code>FIND SHORTEST PATH</code> 找两点间最短关联网，用于跨技术关联发现</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div></div><h3>D. 图谱编辑（CRUD）</h3><div class="funcs"><div class="func" data-uid="功能|0" data-edited="0">
+  <div class="name" contenteditable="false"><b>添加技术点</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">填名称、上一层技术簇（可多级）、描述、关键词；支持「提炼/译中」AI 辅助</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|1" data-edited="0">
+  <div class="name" contenteditable="false"><b>添加支撑文档</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">填文档名、支撑的技术点、类型（文档/论文/专利/标准/资讯）、标题、摘要、来源链接</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|2" data-edited="0">
+  <div class="name" contenteditable="false"><b>编辑节点/边</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">PATCH 改属性；删除节点（连边级联）、删除单条边</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|3" data-edited="0">
+  <div class="name" contenteditable="false"><b>撤回 / 重做</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">顶栏「↩ 撤回 / ↪ 重做」撤销或重做最近一次操作（按浏览器客户端隔离，只影响自己；需登录）</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|4" data-edited="0">
+  <div class="name" contenteditable="false"><b>操作审计</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">每次写入记录到 SQLite（<code>data/history.db</code>），可查历史；按客户端区分归属</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|5" data-edited="0">
+  <div class="name" contenteditable="false"><b>数据即时落库</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">任何增删改实时写入 Nebula，刷新即最新态；幂等（IF NOT EXISTS）防重复</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div></div><h3>E. AI 协助入库</h3><div class="funcs"><div class="func" data-uid="功能|0" data-edited="0">
+  <div class="name" contenteditable="false"><b>LLM 状态检测</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">AI 面板显示是否已配置可用的大模型服务（后端共享配置，团队免各自配 key）</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|1" data-edited="0">
+  <div class="name" contenteditable="false"><b>网页抓取 + 提炼</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">「网页抓取」：粘贴公开网页 URL → 后端抓取正文（自动读系统代理）→ 填入文本框 → 可继续抽取</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|2" data-edited="0">
+  <div class="name" contenteditable="false"><b>自动抽取</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">粘贴文本/网页正文 → LLM 抽取「技术点 + 支撑文档」结构（可选译中文）</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|3" data-edited="0">
+  <div class="name" contenteditable="false"><b>可编辑抽取结果</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">抽取结果直接渲染成可视化表单：领域/子领域/技术点/文档/支撑勾选/备注全部可编辑，可增删</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|4" data-edited="0">
+  <div class="name" contenteditable="false"><b>同名并入</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">已有同名技术点/文档标注「已存在·复用」，并入已有节点；没有则自动新建</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|5" data-edited="0">
+  <div class="name" contenteditable="false"><b>生成协作提示词</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">把资料整理成提示词，交给 Cursor/助手人工处理</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|6" data-edited="0">
+  <div class="name" contenteditable="false"><b>解析粘贴结果</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">把 Cursor 返回的 JSON 粘贴 → 解析 → 预览</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|7" data-edited="0">
+  <div class="name" contenteditable="false"><b>确认写入</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">人工确认后的抽取结果一键写入图谱（需登录）</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|8" data-edited="0">
+  <div class="name" contenteditable="false"><b>提炼/译中</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">对描述做 AI 提炼或中译</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|9" data-edited="0">
+  <div class="name" contenteditable="false"><b>规则/AI 复核</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">import_review 支持 rule_check + AI 二次复核（QA 环节，先不写库）</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div></div><h3>F. 系统与运维</h3><div class="funcs"><div class="func" data-uid="功能|0" data-edited="0">
+  <div class="name" contenteditable="false"><b>全貌（Overview）</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">一屏总览整图，按层预算控制画布规模、保证清晰</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|1" data-edited="0">
+  <div class="name" contenteditable="false"><b>刷新</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">重新拉取数据</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|2" data-edited="0">
+  <div class="name" contenteditable="false"><b>API 访问</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">页面顶部「API」链接，Swagger 文档（<code>/docs</code>）</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|3" data-edited="0">
+  <div class="name" contenteditable="false"><b>统计条</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">顶部显示各层节点数量（领域/子域/技术点/文档）</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|4" data-edited="0">
+  <div class="name" contenteditable="false"><b>MCP 服务</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">供 AI Agent（如 Cursor）经 <code>kg_*</code> 工具读写图谱，人机协同同一份数据</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|5" data-edited="0">
+  <div class="name" contenteditable="false"><b>登录鉴权（只读/可写）</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false">浏览免登录；写入（增删改、AI 入库）需登录写入口令；口令在 <code>.env</code> 的 <code>WRITE_PASSWORD</code></div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div><div class="func" data-uid="功能|6" data-edited="0">
+  <div class="name" contenteditable="false"><b>开机自启</b></div>
+  <div class="body">
+    <div class="desc" contenteditable="false"><code>scripts/start_service.bat</code> + 启动文件夹快捷方式，登录 Windows 自动拉起 Nebula + 后端</div>
+    <div class="note"><textarea class="note-input" placeholder="＋ 添加备注…（点击输入）"></textarea></div>
+    <span class="edited">已改</span>
+  </div>
+</div></div><p>---</p><h2>三、数据模型速查</h2><p><b>节点 Tag</b>：<code>domain</code>（领域）、<code>subdomain</code>（板块）、<code>technology</code>（主题/技术点）、<code>material</code>（文档）</p><p><b>边</b>：</p><ul><li><code>belongs_to</code>（子→父，层级归属）</li><li><code>supports</code>（文档→技术点，文档支撑）</li><li><code>relates_to</code>（技术点↔技术点，横向/交叉关联）</li></ul><p>---</p><h2>四、能力边界（当前已知）</h2><ul><li><b>登录鉴权（已加）</b>：浏览免登录，写入口令区分读写；按浏览器客户端隔离撤回/重做与操作归属。</li><li><b>无冲突提示（待补）</b>：多人同时改不同数据 OK；同一数据仍"后写覆盖先写"，暂无冲突提醒。</li><li><b>实时同步</b>：非自动推送，需刷新页面看他人改动。</li><li><b>文档存储</b>：元数据在 Nebula；文件本体走共享盘/链接，暂未接入对象存储。</li><li><b>批量导入</b>：主要靠脚本（ingest_*.py）+ AI 抽取，页面以增量录入为主。</li></ul><p>---</p><h2>五、一句话总结</h2><div class="quote"><p>一个「可视化 + 检索 + 编辑 + AI 抽取 + 多人共享」的底盘技术知识图谱工作台，把资料变成可检索、可推理、可持续生长的知识资产。</p></div>
+<div style="margin-top:40px;padding-top:16px;border-top:1px solid #e2e8f0;color:#94a3b8;font-size:12px;text-align:center">
+AI4KnowledgeNet 知识图谱工作台 · 功能清单与使用手册（可编辑版，修改自动存本机浏览器）</div>
+</div>
+
+<script>
+const KEY = "akn_features_v1";
+let edits = {};
+try { edits = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch(e){ edits = {}; }
+let editing = false;
+const $ = (id) => document.getElementById(id);
+
+function clamp(s){ return (s||"").replace(/\s+/g," ").trim(); }
+
+function noteInput(el){ return el.querySelector(".note-input"); }
+
+function syncNote(el){
+  const d = edits[el.dataset.uid] || {};
+  const hasNote = !!(d.note);
+  const noteEl = el.querySelector(".note");
+  // 非编辑模式：有备注才显示；编辑模式：全部显示以添加新备注
+  noteEl.classList.toggle("show-note", editing || hasNote);
+}
+function refreshNotes(){
+  document.querySelectorAll(".func").forEach(syncNote);
+}
+function applyEdits(){
+  document.querySelectorAll(".func").forEach(el=>{
+    const d = edits[el.dataset.uid] || {};
+    if (d.name != null) el.querySelector(".name").textContent = d.name;
+    if (d.desc != null) el.querySelector(".desc").textContent = d.desc;
+    const ta = noteInput(el); ta.value = d.note || "";
+    el.dataset.edited = (d.name||d.desc||d.note) ? "1" : "0";
+  });
+  refreshNotes();
+}
+function markEdited(el){
+  const d = edits[el.dataset.uid] || (edits[el.dataset.uid] = {});
+  d.name = clamp(el.querySelector(".name").textContent);
+  d.desc = clamp(el.querySelector(".desc").textContent);
+  d.note = clamp(noteInput(el).value);
+  el.dataset.edited = (d.name||d.desc||d.note) ? "1" : "0";
+  localStorage.setItem(KEY, JSON.stringify(edits));
+  syncNote(el);
+}
+function toggleEdit(){
+  editing = !editing;
+  document.body.classList.toggle("editing", editing);
+  $("btnEdit").textContent = editing ? "✓ 完成编辑" : "✎ 编辑模式";
+  $("status").textContent = editing ? "编辑中：直接改功能/说明文字；下方备注可加。改动自动保存" : "仅查看（改动自动存本机）";
+  document.querySelectorAll(".func").forEach(el=>{
+    el.querySelector(".name").setAttribute("contenteditable", String(editing));
+    el.querySelector(".desc").setAttribute("contenteditable", String(editing));
+  });
+  refreshNotes();
+}
+$("btnEdit").addEventListener("click", toggleEdit);
+document.addEventListener("input", (e)=>{
+  const el = e.target.closest ? e.target.closest(".func") : null;
+  if (el) markEdited(el);
+});
+document.addEventListener("blur", (e)=>{
+  const el = e.target.closest ? e.target.closest(".func") : null;
+  if (el) markEdited(el);
+}, true);
+$("btnExport").addEventListener("click", ()=>{
+  const out = {};
+  document.querySelectorAll(".func").forEach(el=>{ out[el.dataset.uid] = edits[el.dataset.uid] || {}; });
+  const blob = new Blob([JSON.stringify(out,null,2)], {type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="features_edits.json"; a.click();
+});
+$("btnReset").addEventListener("click", ()=>{
+  if(confirm("重置本页所有修改（恢复为原始功能说明）？")){ localStorage.removeItem(KEY); edits={}; applyEdits(); }
+});
+applyEdits();
+</script>
+</body></html>
