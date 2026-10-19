@@ -3028,42 +3028,44 @@ function renderPendingGroups(groups) {
   if (!el) return;
   const items = groups || [];
   if (!items.length) {
-    el.innerHTML = '<div class="rfield muted">暂无待审入库变更</div>';
+    el.innerHTML = '<div class="rp-empty muted">暂无待审入库变更</div>';
     el.hidden = false;
     return;
   }
-  el.innerHTML =
-    `<div class="rtitle">待审入库变更（${items.length} 组）<span class="muted" style="font-size:11px">勾选后点「确认已审」；不勾 = 全部确认</span></div>` +
-    items
-      .map((g) => {
-        const ops = g.ops || [];
-        const who = formatOpWho(g);
-        const single = ops.length === 1;
-        const rows = ops
-          .map(
-            (o, i) => `
-          <span style="display:flex;gap:6px;align-items:baseline;min-width:0">
-            <span style="flex-shrink:0;color:var(--muted);font-size:11px;width:22px;text-align:right">${i + 1}</span>
-            <span style="flex-shrink:0;color:var(--muted);font-size:11px;max-width:52px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${who}">${who}</span>
-            <span style="flex-shrink:0;color:var(--muted);font-size:11px;white-space:nowrap">${fmtOpClock(o.time || g.time_end)}</span>
-            <span style="flex:1;min-width:0">${escHtml(o.label || o.action.replace(/_/g, " "))}</span>
-          </span>`
-          )
-          .join("");
-        const header = single
-          ? ""
-          : `<span class="muted" style="font-size:11px;margin-bottom:4px">${escHtml(g.label)}</span>`;
-        return `<div class="rfield" style="border:1px solid rgba(148,163,184,.18);border-radius:8px;padding:6px 10px">
-        <label class="rp-grow" style="display:flex;gap:8px;align-items:flex-start;cursor:pointer">
-          <input type="checkbox" class="rp-check" data-mid="${g.max_op_id || 0}" autocomplete="off" style="margin-top:3px" />
-          <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
-            ${header}
-            ${rows}
-          </span>
+  const groupsHtml = items
+    .map((g) => {
+      const ops = g.ops || [];
+      const who = formatOpWho(g);
+      const single = ops.length === 1;
+      const rows = ops
+        .map(
+          (o, i) => {
+            const text = o.label || o.action.replace(/_/g, " ");
+            const time = fmtOpClock(o.time || g.time_end);
+            return `<div class="rp-row">
+              <span class="rp-idx">${single ? "" : i + 1}</span>
+              <span class="rp-time">${time}</span>
+              <span class="rp-text" title="${escHtml(text)}">${escHtml(text)}</span>
+              <span class="rp-who" title="${who}">${who}</span>
+            </div>`;
+          }
+        )
+        .join("");
+      const summary = single
+        ? ""
+        : `<span class="rp-summary" title="${escHtml(g.label)}">${escHtml(g.label)}</span>`;
+      return `<div class="rp-group">
+        <label class="rp-head">
+          <input type="checkbox" class="rp-check" data-mid="${g.max_op_id || 0}" autocomplete="off" />
+          ${summary}
         </label>
-        </div>`;
-      })
-      .join("");
+        <div class="rp-rows">${rows}</div>
+      </div>`;
+    })
+    .join("");
+  el.innerHTML =
+    `<div class="rtitle">待审入库变更（${items.length} 组）<span class="muted rp-hint">勾选后点「确认已审」；不勾 = 全部确认</span></div>` +
+    `<div class="rp-list">${groupsHtml}</div>`;
   el.hidden = false;
 }
 

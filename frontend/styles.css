@@ -880,3 +880,20 @@ button[type="submit"], #btnSearch {
 }
 .tree-count { margin-left: auto; flex: none; color: var(--muted); font-size: 10px; padding-right: 2px; }
 .tree-row.active .tree-count { color: #3b2e12; }
+
+/* ===== 入库审阅（待审入库变更）专用样式 =====
+   不能用 .rfield（.ai-preview .rfield label 会被压成 44px 逐字换行），
+   勾选框也必须覆盖全局 input{width:100%}。 */
+.rp-list { max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+.rp-empty { padding: 6px 2px; }
+.rp-hint { font-size: 11px; margin-left: 6px; }
+.rp-group { border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 8px; padding: 4px 8px; }
+.rp-head { display: flex; align-items: center; gap: 8px; min-width: 0; cursor: pointer; }
+.rp-check { flex: 0 0 auto; width: 16px; height: 16px; padding: 0; margin: 0; }
+.rp-summary { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; color: var(--muted); }
+.rp-rows { max-height: 84px; overflow-y: auto; margin-top: 2px; }
+.rp-row { display: flex; align-items: center; gap: 6px; min-width: 0; height: 30px; line-height: 30px; }
+.rp-idx { flex: 0 0 auto; width: 18px; text-align: right; color: var(--muted); font-size: 11px; }
+.rp-time { flex: 0 0 auto; width: 56px; color: var(--muted); font-size: 11px; }
+.rp-text { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; }
+.rp-who { flex: 0 0 auto; max-width: 64px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--muted); font-size: 11px; }
