@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>底盘信息库 · 目录（新架构·可编辑标签版）</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft YaHei',system-ui,sans-serif;background:#0f1420;color:#e6edf7;padding:24px;line-height:1.6}
+h1{font-size:22px;margin-bottom:6px;color:#fff}
+.sub{color:#8ba3c7;font-size:13px;margin-bottom:16px}
+.wrap{max-width:1180px;margin:0 auto}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px;background:#131b2c;border:1px solid #26324a;border-radius:8px;padding:12px 14px}
+.toolbar input[type=text]{background:#0b1220;border:1px solid #2c3b55;color:#e6edf7;border-radius:6px;padding:7px 10px;font-size:13px;min-width:220px}
+.toolbar select{background:#0b1220;border:1px solid #2c3b55;color:#e6edf7;border-radius:6px;padding:7px 8px;font-size:13px}
+.toolbar button{background:#1d3a5f;border:1px solid #2f5480;color:#dbeafe;border-radius:6px;padding:7px 14px;font-size:13px;cursor:pointer}
+.toolbar button:hover{background:#274d77}
+.stat{color:#8ba3c7;font-size:13px}
+.boardrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.boardbtn{background:#1b2b44;border:1px solid #2c4266;color:#c7d9f5;border-radius:16px;padding:4px 12px;font-size:12px;cursor:pointer}
+.boardbtn.active{background:#2563eb;border-color:#3b82f6;color:#fff}
+.boardbtn .n{color:#7dd3fc;margin-left:3px;font-weight:600}
+details.node{margin-left:18px;border-left:1px solid #26324a;padding-left:14px;margin-top:4px}
+details.top{margin-left:0;margin-top:12px;border-left-color:#3b5a86}
+summary{cursor:pointer;padding:3px 0;color:#dbe7f7;list-style:none;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▸';position:absolute;left:-14px;color:#4a6488;transition:transform .15s;font-size:12px}
+details[open]>summary::before{content:'▾'}
+.cnt{color:#5f7ba0;font-size:12px;margin-left:8px;font-weight:normal}
+.fcnt{color:#5f7ba0;font-size:12px;margin:3px 0 2px;padding-left:4px}
+.file{display:flex;flex-direction:column;padding:4px 6px;border-radius:4px;transition:background .12s}
+.file:hover{background:#1c2740}
+.file .row1{display:flex;align-items:center;gap:8px}
+.icon{font-size:14px;flex-shrink:0;width:18px;text-align:center}
+.fname2{flex:1;color:#c3d2e8;font-size:13px;word-break:break-all}
+.size{color:#5f7ba0;font-size:12px;white-space:nowrap;flex-shrink:0}
+.btn-edit{background:#16304f;border:1px solid #2c4a75;color:#9fc3f0;border-radius:5px;padding:2px 9px;font-size:12px;cursor:pointer;flex-shrink:0}
+.btn-edit:hover{background:#24508a}
+.btn-edit.has-tag{background:#1e4a2b;border-color:#2f6b3e;color:#b9e7c2}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:3px;padding-left:26px}
+.tagchip{font-size:11px;padding:1px 8px;border-radius:10px;background:#1b2b44;border:1px solid #2c4266;color:#c7d9f5}
+.tagchip b{color:#7dd3fc;font-weight:600;margin-right:3px}
+.tagchip .val{color:#e2eefb}
+.hidden{display:none !important}
+.modal-mask{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100}
+.modal-mask.show{display:flex}
+.modal{background:#131b2c;border:1px solid #2f3f5d;border-radius:10px;width:450px;max-width:92vw;padding:20px 22px}
+.modal h3{color:#fff;font-size:16px;margin-bottom:6px;word-break:break-all}
+.modal .fname{color:#8ba3c7;font-size:12px;margin-bottom:14px;word-break:break-all}
+.field{margin-bottom:12px}
+.field label{display:block;color:#9fb3d1;font-size:12px;margin-bottom:4px}
+.field input,.field select,.field textarea{width:100%;background:#0b1220;border:1px solid #2c3b55;color:#e6edf7;border-radius:6px;padding:8px 10px;font-size:13px;font-family:inherit}
+.field textarea{min-height:54px;resize:vertical}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+.modal-actions button{border-radius:6px;padding:8px 16px;font-size:13px;cursor:pointer;border:1px solid}
+.modal-actions .ok{background:#2563eb;border-color:#3b82f6;color:#fff}
+.modal-actions .del{background:#3a1d1d;border-color:#6b2f2f;color:#f0a8a8}
+.modal-actions .cancel{background:#1b2b44;border-color:#31445f;color:#c7d9f5}
+.fm-hint{color:#5f7ba0;font-size:12px;margin-top:8px}
+.legend{margin:16px auto;max-width:1180px;color:#8ba3c7;font-size:12px;display:flex;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📂 底盘信息库 · 目录（新架构 · 可编辑标签版）</h1>
+  <div class="sub">已按新 11 大架构预填板块标签。点「编辑」改，存本机浏览器 localStorage。改好后告诉我，我同步到知识图谱。</div>
+  <div id="boardbar" class="boardrow"></div>
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="🔍 搜索文件名 / 主题 / 技术点 / 联系方…">
+    <select id="filter">
+      <option value="all">全部文件</option>
+      <option value="tagged">已更正标签</option>
+      <option value="untagged">未更正（用预设）</option>
+    </select>
+    <span class="stat" id="stat"></span>
+    <button type="button" id="btnExport" title="把全部文件的最终标签（含你的编辑）合并导出为 JSON，交给 AI 入库">⬇ 导出标签</button>
+  </div>
+  <div id="tree"></div>
+</div>
+<div class="legend">
+  <span>📁 文件夹</span><span>📕 PDF</span><span>📊 PPT/PPTX</span><span>📄 Word</span>
+  <span>📈 Excel</span><span>🗜️ 压缩包</span><span>🎬 视频</span><span>✉️ 邮件</span><span>🧊 3D模型</span>
+</div>
+
+<div class="modal-mask" id="mask">
+  <div class="modal">
+    <h3 id="mTitle">编辑标签</h3>
+    <div class="fname" id="mPath"></div>
+    <div class="field"><label>所属板块 *（技术点上级）</label>
+      <select id="fBoard">
+        <option value="">（待定）</option>
+        <option>驱动技术</option><option>制动技术</option><option>转向技术</option><option>悬架技术</option>
+        <option>下车体设计</option><option>轮胎技术</option><option>传动系统技术</option><option>架构集成技术</option>
+        <option>电子电气集成技术</option><option>跨域特性</option><option>测试验证技术</option>
+        <option>跳过·商用车/混动</option>
+      </select>
+    </div>
+    <div class="field"><label>主题（可选已有，或输入新增）</label>
+      <input type="text" id="fTheme" list="dlTheme" placeholder="▾ 从已填主题里选，或直接输入新值">
+      <datalist id="dlTheme"></datalist>
+    </div>
+    <div class="field"><label>所属技术点（可多选，多个用逗号分隔）</label>
+      <input type="text" id="fTech" list="dlTech" placeholder="如：主动悬架；多个用逗号分隔">
+      <datalist id="dlTech"></datalist>
+    </div>
+    <div class="field"><label>联系方（公司）</label><input type="text" id="fOrg" placeholder="如：意法半导体"></div>
+    <div class="field"><label>联系网址</label><input type="text" id="fSite" placeholder="https://…"></div>
+    <div class="field"><label>联系电话</label><input type="text" id="fPhone" placeholder="如：+86-10-12345678"></div>
+    <div class="field"><label>备注</label><textarea id="fNote" placeholder="补充说明、要点备忘、内部批注…"></textarea></div>
+    <div class="fm-hint" id="fm-hint-opts">板块为技术点归类的顶层；主题/技术点可再细分。预填了大公司官网。</div>
+    <div class="modal-actions">
+      <button type="button" class="del" id="btnDelTag" title="清除此文件所有自定义标签（恢复预设）">清除</button>
+      <button type="button" class="cancel" id="btnCancel">取消</button>
+      <button type="button" class="ok" id="btnSave">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORE_KEY = 'chassis_kg_dir_labels_v2';
+const BOARDS = ["驱动技术","制动技术","转向技术","悬架技术","下车体设计","轮胎技术","传动系统技术","架构集成技术","电子电气集成技术","跨域特性","测试验证技术","其他/待定","跳过·商用车/混动"];
+const TREE = [{"t": "d", "name": "会议", "children": [{"t": "d", "name": "ATC", "children": [{"t": "d", "name": "动力展相关峰会会后公开演讲材料", "children": [{"t": "d", "name": "48V", "children": [{"t": "d", "name": "20260604-48V峰会可分享PPT", "children": [{"t": "d", "name": "20260604-48V峰会可分享PPT", "children": [{"t": "f", "name": "Yole Group-杨宇-车载48V配电网络_Yu YANG_Sharing.pdf", "size": "2.6MB", "icon": "📕", "org": "Yole Group", "site": "https://www.yolegroup.com", "phone": "", "board": "电子电气集成技术", "theme": "配电架构", "tech": "48V配电网络", "note": ""}, {"t": "f", "name": "中汽研-汪春华-48V低压电气标准解析及仿真分析.pdf", "size": "5.9MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "电子电气集成技术", "theme": "配电架构", "tech": "48V配电网络", "note": ""}, {"t": "f", "name": "北汽-路万里-48V电源架构：关键技术突破与行业趋势洞察.pdf", "size": "2.8MB", "icon": "📕", "org": "北汽", "site": "https://www.baicgroup.com.cn", "phone": "", "board": "电子电气集成技术", "theme": "配电架构", "tech": "48V配电网络", "note": ""}, {"t": "f", "name": "埃戈罗-曹姜威-领航 48V 新篇章：Allegro“智驱+感知”全域解决方案战略规划.pdf", "size": "1.7MB", "icon": "📕", "org": "Allegro", "site": "https://www.allegromicro.com", "phone": "", "board": "电子电气集成技术", "theme": "配电架构", "tech": "48V配电网络", "note": ""}, {"t": "f", "name": "意法半导体-陈舒仪-ST Solution for Automotive EEA 48V Power Net [ATC].pdf", "size": "1.9MB", "icon": "📕", "org": "意法半导体", "site": "https://www.st.com", "phone": "", "board": "电子电气集成技术", "theme": "配电架构", "tech": "48V配电网络", "note": ""}, {"t": "f", "name": "捷翼科技-崔其祥-车载48V-12V双向DCDC变换器主要拓扑以及关键参数.pdf", "size": "4.8MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "电子电气集成技术", "theme": "配电架构", "tech": "48V配电网络", "note": ""}, {"t": "f", "name": "矽力杰-白小伟-矽力杰48V全栈国产解决方案，重塑汽车电子电气架构生态.pdf", "size": "2.6MB", "icon": "📕", "org": "矽力杰", "site": "https://www.silergy.com", "phone": "", "board": "电子电气集成技术", "theme": "配电架构", "tech": "48V配电网络", "note": ""}, {"t": "f", "name": "稊米汽车-莫永聪-超级电容在高端智驾48V电源系统的应用0610(1).pdf", "size": "3.4MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "电子电气集成技术", "theme": "配电架构", "tech": "48V配电网络", "note": ""}]}]}]}, {"t": "d", "name": "功率半导体", "children": [{"t": "f", "name": "MCOTI 美科泰电动汽车动力系统解决方案-ATC.pdf", "size": "10.3MB", "icon": "📕", "org": "美科泰", "site": "https://www.mcoti.com", "phone": "", "board": "驱动技术", "theme": "电驱与功率电子", "tech": "功率模块", "note": ""}, {"t": "f", "name": "中晶新源先进功率SGT助力机器人行业高效高质量发展 20260327 V1.pdf", "size": "14.1MB", "icon": "📕", "org": "中晶新源", "site": "https://www.seminew.com", "phone": "", "board": "电子电气集成技术", "theme": "电驱与功率电子", "tech": "SGT", "note": ""}, {"t": "f", "name": "汽车电驱系统和功率器件行业需求与发展趋势公开版.pdf", "size": "3.3MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "驱动技术", "theme": "电驱与功率电子", "tech": "功率器件/功率模块", "note": "汽车电驱系统和功率器件行业需求与发展趋势(行业综述公开版)。"}, {"t": "f", "name": "用于高可靠性功率半导体的氧化可控型铜烧结浆料 - ATC.pdf", "size": "4.0MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "电子电气集成技术", "theme": "电驱与功率电子", "tech": "封装材料", "note": ""}]}, {"t": "d", "name": "商用车&amp;非道路 公开材料", "children": [{"t": "f", "name": "3 潍柴雷沃-新能源拖拉机发展趋势.pdf", "size": "3.7MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "【跳过·商用车/混动】", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "FEV 2026-06-05_ATC_NRMM-electrification-trends-and-solutions_v01.pdf", "size": "3.0MB", "icon": "📕", "org": "FEV", "site": "https://www.fev.com", "phone": "", "board": "【跳过·商用车/混动】", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "丰川动力-陈红旭_20260601.pdf", "size": "7.0MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "【跳过·商用车/混动】", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "吉大王军年团队-商用车多模耦合驱动与转矩矢量分配一体化电驱桥.pdf", "size": "558KB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "【跳过·商用车/混动】", "theme": "电驱传动", "tech": "电驱桥", "note": ""}, {"t": "f", "name": "外发版-SMT商用车电驱系统开发全域解决方案.pdf", "size": "3.7MB", "icon": "📕", "org": "SMT", "site": "https://www.smt.com.cn", "phone": "", "board": "【跳过·商用车/混动】", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "工程机械技术趋势交流-汇川技术V1.1 对外版本.pdf", "size": "5.0MB", "icon": "📕", "org": "汇川", "site": "https://www.inovance.com", "phone": "", "board": "【跳过·商用车/混动】", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "车用800V系統-碳化硅功率模块可靠度的挑战--260603 - 副本.pptx", "size": "57.1MB", "icon": "📊", "org": "", "site": "", "phone": "", "board": "【跳过·商用车/混动】", "theme": "配电架构", "tech": "48V配电网络", "note": ""}, {"t": "f", "name": "非道路车辆动力总成系统关键技术综述_20260605_简版.pdf", "size": "8.2MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "【跳过·商用车/混动】", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "驱动桥系统先进仿真助力产品正向开发.pdf", "size": "3.0MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "【跳过·商用车/混动】", "theme": "测试验证", "tech": "建模仿真", "note": ""}]}, {"t": "d", "name": "混动公开演讲材料", "children": [{"t": "f", "name": "APL--EU7 Powertrain Essentials for Chinese OEMs Entering the European Market_2026.pdf", "size": "5.0MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "【跳过·商用车/混动】", "theme": "混动系统", "tech": "排放法规", "note": ""}, {"t": "f", "name": "东风日产--ATC宣讲资料.pdf", "size": "4.6MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "【跳过·商用车/混动】", "theme": "混动系统", "tech": "混动架构", "note": ""}, {"t": "f", "name": "东风汽车集团--马赫动力高品质混动系统创新实践 发布-对外.pdf", "size": "9.7MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "【跳过·商用车/混动】", "theme": "混动系统", "tech": "混动架构", "note": ""}, {"t": "f", "name": "广汽动力BU李钰怀--面向双碳目标的广汽高效发动机关键技术开发-【对外】.pdf", "size": "7.8MB", "icon": "📕", "org": "广汽", "site": "https://www.gac.com.cn", "phone": "", "board": "【跳过·商用车/混动】", "theme": "混动系统", "tech": "高效发动机", "note": ""}, {"t": "f", "name": "油冷电机流热系统开发流程--陈建树.pdf", "size": "2.1MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "【跳过·商用车/混动】", "theme": "整车热管理", "tech": "油冷电机", "note": ""}]}, {"t": "d", "name": "电驱动公开演讲材料", "children": [{"t": "f", "name": "Dauch集团（原美桥）--电驱系统开发技术与应用.pdf", "size": "4.0MB", "icon": "📕", "org": "Dauch", "site": "https://www.dauch.com", "phone": "", "board": "驱动技术", "theme": "电驱系统", "tech": "电驱系统", "note": ""}, {"t": "f", "name": "上海交大--镁合金材料及工艺的研究进展--曾小勤教授团队.pdf", "size": "5.8MB", "icon": "📕", "org": "上海交大", "site": "https://www.sjtu.edu.cn", "phone": "", "board": "下车体设计", "theme": "轻量化材料", "tech": "镁合金", "note": ""}, {"t": "f", "name": "和骋科技--EV先锋论坛20260601.pdf", "size": "8.3MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "驱动技术", "theme": "电驱系统", "tech": "电驱系统", "note": ""}, {"t": "f", "name": "大众汽车-2026ATC_Dr. Holger Opfer_PowertrainArchitecturesandStrategies-HO-short-distrib.pdf", "size": "6.6MB", "icon": "📕", "org": "大众", "site": "https://www.volkswagen.com", "phone": "", "board": "传动系统技术", "theme": "混动系统", "tech": "动力总成架构", "note": ""}, {"t": "f", "name": "宁德时代智能--CAIT_AMDS轴向磁通电驱介绍- ATC.pdf", "size": "6.1MB", "icon": "📕", "org": "宁德时代", "site": "https://www.catl.com", "phone": "", "board": "驱动技术", "theme": "驱动电机", "tech": "轴向磁通电机", "note": ""}, {"t": "f", "name": "数匙科技--大数据仿真与AI工程师-让工业生产力实现阶跃！.pdf", "size": "6.1MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "测试验证技术", "theme": "开发工具", "tech": "大数据仿真", "note": ""}, {"t": "f", "name": "舜云科技--全球首个PJLSMPS粒子法软件助力油冷电驱动流热仿真.pdf", "size": "11.0MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "驱动技术", "theme": "流热仿真", "tech": "油冷电驱流热仿真", "note": ""}, {"t": "f", "name": "长城--下一代高压化电驱动架构发展趋势和挑战（外发）.pdf", "size": "10.1MB", "icon": "📕", "org": "长城", "site": "https://www.gwm.com.cn", "phone": "", "board": "驱动技术", "theme": "电驱系统", "tech": "高压电驱", "note": ""}]}]}, {"t": "d", "name": "可外发演讲材料-26ATC底盘", "children": [{"t": "d", "name": "26ATC第五届智能底盘", "children": [{"t": "f", "name": "北汇--从虚拟ECU到HiL到实车测试的底盘全链路测试解决方案 - 外发.pdf", "size": "3.9MB", "icon": "📕", "org": "北汇", "site": "https://www.saibao.com", "phone": "", "board": "下车体设计", "theme": "测试验证", "tech": "硬件在环", "note": ""}, {"t": "f", "name": "恩骅力material selection for advanced chassis &amp; suspension and lightweight.pdf", "size": "5.0MB", "icon": "📕", "org": "恩骅力", "site": "https://www.envalior.com", "phone": "", "board": "下车体设计", "theme": "轻量化材料", "tech": "轻量化材料", "note": ""}, {"t": "f", "name": "长城汽车 智能底盘在高性能车上的应用思考.pdf", "size": "2.9MB", "icon": "📕", "org": "长城", "site": "https://www.gwm.com.cn", "phone": "", "board": "下车体设计", "theme": "智能底盘", "tech": "智能底盘集成", "note": ""}]}, {"t": "d", "name": "26ATC第八届悬架", "children": [{"t": "f", "name": "20260603-Speech in ATC show_哈金森智能底盘解决方案_Xin Yanxia.pdf", "size": "8.1MB", "icon": "📕", "org": "哈金森", "site": "https://www.hutchinson.com", "phone": "", "board": "下车体设计", "theme": "悬架", "tech": "电液悬架", "note": "智能底盘解决方案：流体传输/热管理/密封/减振；电液悬架管路及配套；轻量化减振件。亚洲业务拓展VP辛艳霞。C1内部资料"}, {"t": "f", "name": "ATC China 2026_TENNECO.pdf", "size": "3.1MB", "icon": "📕", "org": "天纳克(TENNECO)", "site": "https://www.tenneco.com", "phone": "", "board": "悬架技术", "theme": "悬架", "tech": "智能悬架/减振器", "note": "Intelligent Suspension Systems；Monroe/DRiV 驾驶悬架板块；60000员工139技术中心。仅供ATC会场演示"}, {"t": "f", "name": "中科擎邦主动悬架介绍(1).pdf", "size": "7.0MB", "icon": "📕", "org": "中科擎邦科技(安徽)", "site": "http://www.zhongkeqingbang.com", "phone": "", "board": "悬架技术", "theme": "悬架", "tech": "混合全主动悬架", "note": "混合全主动悬架的开发应用(2026ATC)；技术总监阮晓辉。官网来自PDF尾页"}, {"t": "f", "name": "江苏大学 直线式电磁悬架.pdf", "size": "14.0MB", "icon": "📕", "org": "江苏大学", "site": "https://www.ujs.edu.cn", "phone": "", "board": "悬架技术", "theme": "悬架", "tech": "直线式电磁悬架", "note": "2026ATC上海汽车底盘展；内容含线控底盘发展现状、电磁悬架工作原理、项目团队研究成果。汇报人孙东"}]}, {"t": "d", "name": "26ATC第十届转向", "children": [{"t": "f", "name": "勇克集团用于电动助力转向和电动刹车滚珠丝杠副的精密磨削方案_公开版.pdf", "size": "17.9MB", "icon": "📕", "org": "勇克集团JUNKER", "site": "https://www.junker.com", "phone": "", "board": "制动技术", "theme": "转向系统", "tech": "滚珠丝杠精密磨削", "note": "勇克集团用于电动助力转向EPS和电动刹车滚珠丝杠副的精密磨削方案(公开版)；滚珠丝杠磨削工艺。"}, {"t": "f", "name": "北汽-重型商用车智能转向系统关键技术及产业化外发版.pdf", "size": "5.0MB", "icon": "📕", "org": "北汽集团", "site": "https://www.baicgroup.com.cn", "phone": "", "board": "转向技术", "theme": "转向系统", "tech": "智能转向", "note": "北汽重卡(重型商用车)智能转向系统关键技术及产业化。"}, {"t": "f", "name": "同驭--【外部】线控转向核心技术：研发到量产的跨越.pdf", "size": "3.2MB", "icon": "📕", "org": "同驭汽车", "site": "https://www.tongyu-tech.com", "phone": "", "board": "转向技术", "theme": "转向系统", "tech": "线控转向SbW", "note": "同驭线控转向核心技术：从研发到量产的跨越(对外)。"}, {"t": "f", "name": "基于转向与制动协同的智能汽车漂移运动控制--江苏大学.pdf", "size": "6.2MB", "icon": "📕", "org": "江苏大学", "site": "https://www.ujs.edu.cn", "phone": "", "board": "制动技术", "theme": "转向制动协同", "tech": "漂移运动控制", "note": "基于转向与制动协同的智能汽车漂移运动控制(江苏大学)。"}]}, {"t": "d", "name": "26ChinaBrake制动年会", "children": [{"t": "f", "name": "珠海华粤 驱制一体解决方案-湿式制动器20260601.pdf", "size": "41.2MB", "icon": "📕", "org": "珠海华粤传动科技", "site": "https://www.huayueclutch.com", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "湿式制动器(驱制一体)", "note": "珠海华粤驱制一体解决方案-湿式制动器(驱制动机械/控制一体化)；L4级自动驾驶核心架构；欧七制动颗粒物3mg/km；详见整理文档。"}, {"t": "d", "name": "EMB会场", "children": [{"t": "f", "name": "ATC - 坐标系首发量产经验分享(分享版).pdf", "size": "5.1MB", "icon": "📕", "org": "(EMB会场)", "site": "", "phone": "", "board": "测试验证技术", "theme": "制动系统", "tech": "EMB量产经验", "note": "EMB坐标系首发量产经验分享(EMB会场,分享版)。"}, {"t": "f", "name": "上海同驭--智能驾驶关键执行器_20260603 - ATC(1).pdf", "size": "9.2MB", "icon": "📕", "org": "同驭汽车", "site": "https://www.tongyu-tech.com", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "线控制动/智能执行器", "note": "上海同驭智能驾驶关键执行器(20260603, ATC)。"}, {"t": "f", "name": "北汇--实车底盘功能安全测试解决方案(1).pdf", "size": "4.4MB", "icon": "📕", "org": "北汇", "site": "https://www.saibao.com", "phone": "", "board": "下车体设计", "theme": "测试验证", "tech": "实车功能安全测试", "note": "北汇实车底盘功能安全测试解决方案(EMB会场)。"}, {"t": "f", "name": "恒创智行-商用车EMB功能安全与全链路冗余设计.pdf", "size": "7.7MB", "icon": "📕", "org": "恒创智行", "site": "", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "EMB功能安全/冗余", "note": "恒创智行商用车EMB功能安全与全链路冗余设计(EMB会场)。"}, {"t": "f", "name": "珠海华粤 驱制一体解决方案-湿式制动器20260601.pdf", "size": "62.9MB", "icon": "📕", "org": "珠海华粤传动科技", "site": "https://www.huayueclutch.com", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "湿式制动器(驱制一体)", "note": "珠海华粤驱制一体解决方案-湿式制动器(驱制动机械/控制一体化)；L4级自动驾驶核心架构；欧七制动颗粒物3mg/km；详见整理文档。"}, {"t": "f", "name": "角模块打造智能行驶机器人.pdf", "size": "1.2MB", "icon": "📕", "org": "(EMB会场)", "site": "", "phone": "", "board": "架构集成技术", "theme": "角模块", "tech": "角模块智能行驶机器人", "note": "角模块打造智能行驶机器人(EMB会场)：轮端集成驱动/制动/转向/悬架执行器。"}]}, {"t": "d", "name": "制动主会场", "children": [{"t": "f", "name": "分布式电子踏板线控制动系统_欧摩威_分享版.pdf", "size": "1.6MB", "icon": "📕", "org": "欧摩威", "site": "", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "分布式电子踏板线控制动", "note": "分布式电子踏板线控制动系统(欧摩威,制动主会场,分享版)。"}, {"t": "f", "name": "德昌电机适配48V低压电气架构全套电机解决方案(ATC2026) 20260601.pdf", "size": "5.3MB", "icon": "📕", "org": "德昌电机", "site": "https://www.johnsonelectric.com", "phone": "", "board": "驱动技术", "theme": "配电架构", "tech": "48V电机方案", "note": "德昌电机适配48V低压电气架构全套电机解决方案(ATC2026)20260601；Life is Better in Motion。"}]}, {"t": "d", "name": "制动排放&amp;盘片会场", "children": [{"t": "f", "name": "Höganäs 汽车制动盘涂层系统性解决方案-(外发).pdf", "size": "3.2MB", "icon": "📕", "org": "Höganäs赫格纳斯", "site": "https://www.hoganas.com", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "制动盘涂层", "note": "Höganäs汽车制动盘涂层系统性解决方案(制动排放&盘片会场,外发)。"}, {"t": "f", "name": "欧7制动排放法规下摩擦材料配方调整策略与影响分析6.9(1).pdf", "size": "3.9MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "摩擦材料配方(欧7)", "note": "欧7制动排放法规下摩擦材料配方调整策略与影响分析(制动排放&盘片会场)。"}, {"t": "f", "name": "海天 制动盘激光熔覆（外发版）.pdf", "size": "24.6MB", "icon": "📕", "org": "海天", "site": "", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "制动盘激光熔覆", "note": "海天制动盘激光熔覆技术(制动排放&盘片会场,外发版)。"}, {"t": "f", "name": "碳陶摩擦副在汽车领域的应用202606.pdf", "size": "11.5MB", "icon": "📕", "org": "", "site": "", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "碳陶摩擦材料", "note": "碳陶摩擦副在汽车领域的应用(制动排放&盘片会场)。"}]}]}]}]}, {"t": "d", "name": "TMC", "children": [{"t": "f", "name": "2026TMC国际汽车动力系统参会总结.pptx", "size": "153.9MB", "icon": "📊", "org": "TMC技术年会", "site": "", "phone": "", "board": "传动系统技术", "theme": "动力系统", "tech": "电驱/动力底盘综述", "note": "2026TMC国际汽车动力系统参会快报(技术规划部周洋)：高压电驱动(轮毂电机Protean/轴向磁通/分布式电驱/功率模组GaN1200V/SiC)、动力底盘架构、传动技术综述。"}, {"t": "d", "name": "会场B-电驱动系统专题论坛", "children": [{"t": "f", "name": "10-赫格纳斯-高性能粉末冶金同轴减速器齿圈.pdf", "size": "3.7MB", "icon": "📕", "org": "赫格纳斯Höganäs", "site": "https://www.hoganas.com", "phone": "", "board": "传动系统技术", "theme": "传动系统", "tech": "粉末冶金齿圈/减速器", "note": "高性能粉末冶金同轴减速器齿圈；汇报人Walter Xu徐信(南通2026-07-10)。官方社交+www.hoganas.com。"}, {"t": "f", "name": "13-苏州舜云-全球首个PJLSMPS粒子法软件助力油冷电驱动流热仿真.pdf", "size": "2.7MB", "icon": "📕", "org": "苏州舜云工程软件", "site": "https://www.shoncloud.com", "phone": "刘新艳14706268026", "board": "驱动技术", "theme": "流热仿真", "tech": "油冷电驱流热仿真", "note": "PJLSMPS粒子法油冷电驱动流热仿真软件；汇报人缪增辉。官网www.shoncloud.com。"}, {"t": "f", "name": "14-人本-汽车行业用轴承长寿命解决方案.pdf", "size": "3.8MB", "icon": "📕", "org": "人本股份", "site": "https://www.cugroup.com", "phone": "", "board": "驱动技术", "theme": "驱动传动轴承", "tech": "轴承长寿命", "note": "汽车行业轴承长寿命解决方案；报告人李杰。"}, {"t": "f", "name": "16-贺尔碧格-智能电磁爪式离合器-感知-控制-执行一体化系统解决方案.pdf", "size": "2.5MB", "icon": "📕", "org": "贺尔碧格HOERBIGER", "site": "https://www.hoerbiger.com", "phone": "", "board": "传动系统技术", "theme": "传动系统", "tech": "电磁爪式离合器", "note": "智能电磁爪式离合器：感知-控制-执行一体化系统方案；R&D Supervisor濮柯(Kepu)；展位4006。"}, {"t": "f", "name": "17-博格华纳-一种带锁止功能的电子限滑差速器.pdf", "size": "1.5MB", "icon": "📕", "org": "博格华纳BorgWarner", "site": "https://www.borgwarner.com", "phone": "", "board": "传动系统技术", "theme": "差速与限滑", "tech": "电子限滑差速器(带锁止)", "note": "Electric Cross Differential & Locker 带锁止功能电子限滑差速器；汇报人王洪涛。"}, {"t": "f", "name": "2-青山工业-对中小型下一代电驱的思考.pdf", "size": "5.2MB", "icon": "📕", "org": "青山工业", "site": "", "phone": "", "board": "驱动技术", "theme": "驱动电机", "tech": "下一代电驱", "note": "对中小型下一代电驱的思考(会场B电驱动系统专题论坛)。"}, {"t": "f", "name": "4-鲲腾泰克-鲲腾泰克智能多相电驱动系统技术及产业化实现.pdf", "size": "8.2MB", "icon": "📕", "org": "鲲腾泰克Quanten", "site": "https://www.quantentech.com", "phone": "", "board": "驱动技术", "theme": "驱动电机", "tech": "多相电驱动系统", "note": "智能多相电驱动系统技术及产业化实现；编制人曹君(2026年7月)。官网www.quantentech.com。"}, {"t": "f", "name": "5-哈尔滨工业大学-电动汽车电驱系统轴承电腐蚀问题.pdf", "size": "12.7MB", "icon": "📕", "org": "哈尔滨工业大学", "site": "https://www.hit.edu.cn", "phone": "程远18345149350", "board": "驱动技术", "theme": "驱动电机轴承", "tech": "轴承电腐蚀", "note": "电驱系统轴承电腐蚀问题研究进展；汇报人程远(哈工大)，邮件chengyuan@hit.edu.cn，微信cy_hit；合作方苏州沃尔兴电子。"}, {"t": "f", "name": "9-SMT-高速电驱系统的核心设计挑战与分析要点.pdf", "size": "6.3MB", "icon": "📕", "org": "SMT", "site": "https://www.smt.com.cn", "phone": "", "board": "驱动技术", "theme": "驱动电机", "tech": "高速电驱", "note": "高速电驱系统的核心设计挑战与分析要点(会场B电驱动系统专题论坛)。"}]}, {"t": "d", "name": "会场C-电驱动系统&amp;流体专题论坛", "children": [{"t": "f", "name": "13-清华大学-驱制动一体化系统关键技术.pdf", "size": "6.1MB", "icon": "📕", "org": "清华大学智能底盘团队", "site": "https://www.tsinghua.edu.cn", "phone": "", "board": "制动技术", "theme": "驱制动一体化", "tech": "驱制动一体化", "note": "驱制动一体化系统关键技术(清华大学智能底盘团队)；末页附联系方式。"}, {"t": "f", "name": "15-长安汽车-长安太行分布式驱动技术研究成果分享.pdf", "size": "14.2MB", "icon": "📕", "org": "长安汽车", "site": "https://www.changan.com.cn", "phone": "", "board": "驱动技术", "theme": "分布式驱动", "tech": "分布式驱动/电驱桥", "note": "长安太行分布式驱动技术研究成果分享；汇报人苏继才(重庆长安汽车) 2026-7。"}, {"t": "f", "name": "17-深蓝汽车-电驱先进控制实践.pdf", "size": "2.1MB", "icon": "📕", "org": "长安汽车/深蓝", "site": "https://www.deepalauto.com", "phone": "", "board": "驱动技术", "theme": "电机控制", "tech": "电驱先进控制", "note": "电驱先进控制实践；长安汽车陈卓2026.07。分布式驱动(三电机四驱/四轮独立/角模块)+运动域融合，扭矩矢量/动态扭矩分配，麋鹿测试车速提升15%。"}, {"t": "f", "name": "5-世索科-汽车行业电气化转型期的特种聚合物基础研究与测试.pdf", "size": "8.0MB", "icon": "📕", "org": "世索科SYENSQO", "site": "https://www.sclg.com", "phone": "", "board": "测试验证技术", "theme": "轻量化材料", "tech": "特种聚合物", "note": "汽车行业电气化转型期特种聚合物基础研究与测试；TMC2026南通。关注SYENSQO获取技术资料。"}, {"t": "f", "name": "6-龙蟠-第四代低电导率冷却液.pdf", "size": "2.4MB", "icon": "📕", "org": "江苏龙蟠新材料", "site": "https://www.jslopal.com", "phone": "", "board": "驱动技术", "theme": "热管理", "tech": "冷却液", "note": "第四代低电导率冷却液——耐钎焊剂和抗腐蚀(2026年7月)。"}, {"t": "f", "name": "7-道达尔-为电动车热管理开发的单一流体架构.pdf", "size": "2.7MB", "icon": "📕", "org": "道达尔能源TotalEnergies", "site": "https://www.totalenergies.com", "phone": "张鸿龄18522829141", "board": "驱动技术", "theme": "热管理", "tech": "单一流体热管理架构", "note": "一体化流体技术，为电动车热管理开发的单一流体架构；张鸿龄/Flavio SARTI；道达尔能源张鸿龄18522829141，Hong-ling.zhang@totalenergies.com。"}]}, {"t": "d", "name": "会场D-驱动电机专题论坛", "children": [{"t": "f", "name": "10-人本-基于PHM技术的驱动电机轴承优化研究.pdf", "size": "4.4MB", "icon": "📕", "org": "人本股份", "site": "https://www.cugroup.com", "phone": "", "board": "驱动技术", "theme": "驱动电机轴承", "tech": "轴承PHM", "note": "基于PHM技术的新能源汽车电驱轴承优化研究；报告人李浩琪(人本股份产品研发经理) 2026-7-10。"}, {"t": "f", "name": "13-中国科学院-高推重比智能化涵道风扇电推进系统研究.pdf", "size": "4.7MB", "icon": "📕", "org": "中国科学院电工研究所", "site": "https://www.cas.cn", "phone": "", "board": "驱动技术", "theme": "电机/电推进", "tech": "涵道风扇电推进", "note": "高推重比智能化涵道风扇电推进系统研究；李琦、范涛，中科院电工所&高密度电磁动力与系统全国重点实验室。"}, {"t": "f", "name": "2-广汽-高效高功率密度非晶-碳纤维电驱关键技术.pdf", "size": "6.3MB", "icon": "📕", "org": "广汽集团", "site": "https://www.gac.com.cn", "phone": "", "board": "驱动技术", "theme": "驱动电机", "tech": "非晶碳纤维电驱", "note": "高效高功率密度非晶-碳纤维电驱关键技术研究(2026年6月)。"}, {"t": "f", "name": "3-武汉新耐视-新能源汽车动力系统铜排焊接质量控制解决方案.pdf", "size": "6.2MB", "icon": "📕", "org": "武汉新耐视智能科技", "site": "https://www.newlas.com", "phone": "13114391656/18627768125", "board": "测试验证技术", "theme": "制造工艺", "tech": "铜排焊接质量", "note": "新能源汽车动力系统铜排焊接质量控制解决方案；吴泽锋。官网www.newlas.com(纠错)，地址武汉东湖高新区佛祖岭三路9号。"}, {"t": "f", "name": "5-盘毂-轴向磁通电机的产业化应用实践.pdf", "size": "6.5MB", "icon": "📕", "org": "盘毂动力", "site": "https://www.inhubmotor.com", "phone": "", "board": "驱动技术", "theme": "驱动电机", "tech": "轴向磁通电机", "note": "轴向磁通电机产业化应用实践(拜访盘毂动力轮毂电机)；求真创变共生。"}, {"t": "f", "name": "6-宁波科田-高性能烧结钕铁硼拼接磁钢：从径向电机到轴向磁通电机.pdf", "size": "4.0MB", "icon": "📕", "org": "宁波科田磁业", "site": "https://www.ktmagnet.com", "phone": "", "board": "驱动技术", "theme": "电机材料", "tech": "磁性材料/拼接磁钢", "note": "高性能烧结钕铁硼磁钢：从径向电机到轴向磁通电机；严长江博士(宁波科田磁业)。官网www.ktmagnet.com(纠错)。"}, {"t": "f", "name": "8-中车-1000V电压平台的挑战与电机绝缘优化.pdf", "size": "1.7MB", "icon": "📕", "org": "中车株洲电力机车研究所", "site": "https://www.crrcgc.cc", "phone": "", "board": "驱动技术", "theme": "配电架构", "tech": "1000V高压平台/电机绝缘", "note": "1000V电压平台的挑战与电机绝缘优化；中车株洲电力机车研究所，官网www.crrcgc.cc。"}]}, {"t": "d", "name": "全体大会", "children": [{"t": "f", "name": "2-浩思动力-AI赋能浩思动力研发与制造的思考与实践.pdf", "size": "3.3MB", "icon": "📕", "org": "浩思动力/极光湾科技", "site": "https://horse-powertrain.com", "phone": "", "board": "测试验证技术", "theme": "开发工具", "tech": "AI赋能研发制造", "note": "AI赋能研发与制造实践；CTO赵福成(浩思动力CTO/极光湾科技CEO动力研究院院长)。官网来自末页horse-powertrain.com。"}, {"t": "f", "name": "3-采埃孚-Localization Strategies of Global Electrified Powertrain Leader — ZF in China.pdf", "size": "2.2MB", "icon": "📕", "org": "采埃孚ZF", "site": "https://www.zf.com", "phone": "", "board": "传动系统技术", "theme": "传动系统", "tech": "电驱传动本土化", "note": "全球电驱传动领军者中国本土化策略(ZF in China)；汇报人WANG Yue。TECHNOLOGY/SYSTEM/INTELLIGENCE三支柱。"}, {"t": "f", "name": "3-采埃孚-全球领先电驱传动系统供应商本土化之路.pdf", "size": "2.4MB", "icon": "📕", "org": "采埃孚ZF", "site": "https://www.zf.com", "phone": "", "board": "传动系统技术", "theme": "传动系统", "tech": "电驱传动本土化", "note": "采埃孚在中国本土化之路；汇报人王岳。创新型电驱技术/高度集成架构/软件定义动力总成。"}]}]}]}, {"t": "d", "name": "拜访", "children": [{"t": "d", "name": "上富轮胎", "children": [{"t": "f", "name": "上富智能轮胎交流_0702.pptx", "size": "76.8MB", "icon": "📊", "org": "上富智能轮胎", "site": "https://www.shenzhen-higher.com", "phone": "", "board": "轮胎技术", "theme": "轮胎", "tech": "智能轮胎传感器", "note": "上富智能轮胎交流(0702)：三向力90%估算精度；清华危银涛教授团队；摩擦发电自供电(张立群院士团队)。官网待确认。"}, {"t": "f", "name": "新建 Microsoft Word 文档.docx", "size": "71KB", "icon": "📄", "org": "上富", "site": "", "phone": "", "board": "其他/待定", "theme": "轮胎", "tech": "智能轮胎传感器", "note": "上富轮胎交流记录(Word)。"}, {"t": "f", "name": "智能轮胎传感器产品介绍2026.pdf", "size": "13.7MB", "icon": "📕", "org": "上富智能轮胎", "site": "", "phone": "", "board": "轮胎技术", "theme": "轮胎", "tech": "智能轮胎传感器", "note": "上富智能轮胎传感器产品介绍2026：智能轮胎、力学估算。"}]}, {"t": "d", "name": "珠海华粤科技", "children": [{"t": "f", "name": "问题清单.docx", "size": "68KB", "icon": "📄", "org": "珠海华粤传动科技", "site": "https://www.huayueclutch.com", "phone": "", "board": "其他/待定", "theme": "制动系统", "tech": "湿式制动器(问题清单)", "note": "珠海华粤湿式制动器待解决问题清单(见整理文档四：颗粒物/散热/油路/半轴/ABS/控制精度等)。"}, {"t": "f", "name": "驱制一体解决方案-湿式制动器（珠海华粤）20260601(1).pdf", "size": "19.8MB", "icon": "📕", "org": "珠海华粤传动科技", "site": "https://www.huayueclutch.com", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "湿式制动器(驱制一体)", "note": "珠海华粤驱制一体湿式制动器方案；详见整理文档(3.2原理/3.3性能优势/3.6未来方向)。"}]}, {"t": "d", "name": "盘毂动力轮毂电机", "children": [{"t": "f", "name": "5-盘毂-轴向磁通电机的产业化应用实践.pdf", "size": "6.5MB", "icon": "📕", "org": "盘毂动力", "site": "https://www.inhubmotor.com", "phone": "", "board": "驱动技术", "theme": "驱动电机", "tech": "轴向磁通电机", "note": "盘毂轴向磁通电机的产业化应用实践。"}]}, {"t": "d", "name": "舍弗勒", "children": [{"t": "d", "name": "Huawei&amp;Schaeffler 技术交流PPT_20260327", "children": [{"t": "d", "name": "Huawei&amp;Schaeffler 技术交流PPT_20260327", "children": [{"t": "f", "name": "01_Schaeffler Wetbrakereport_to Huawei_20260327.pdf", "size": "1.9MB", "icon": "📕", "org": "舍弗勒Schaeffler", "site": "https://www.schaeffler.cn", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "湿式制动器", "note": "Schaeffler湿式制动器报告(Wetbrake report)。"}, {"t": "f", "name": "02_Schaeffler Coaxial GBX introduction_to Huawei_20260327.pdf", "size": "945KB", "icon": "📕", "org": "舍弗勒Schaeffler", "site": "https://www.schaeffler.cn", "phone": "", "board": "传动系统技术", "theme": "传动系统", "tech": "同轴减速器GBX", "note": "Schaeffler同轴减速器Coaxial GBX介绍。"}, {"t": "f", "name": "03_Schaeffler AFM introduction_to Huawei_20260327.pdf", "size": "415KB", "icon": "📕", "org": "舍弗勒Schaeffler", "site": "https://www.schaeffler.cn", "phone": "", "board": "传动系统技术", "theme": "传动系统", "tech": "变速传动AFM", "note": "Schaeffler AFM简介(自动变速模块/传动)。"}, {"t": "f", "name": "04_Schaeffler Future DHT Platform Introduction_to Huawei_20260327.pdf", "size": "1.0MB", "icon": "📕", "org": "舍弗勒Schaeffler", "site": "https://www.schaeffler.cn", "phone": "", "board": "传动系统技术", "theme": "混动传动", "tech": "DHT平台", "note": "Schaeffler未来DHT平台介绍(混动专用变速箱)。"}, {"t": "f", "name": "05_Schaeffler EMB Reducer and 2in1 report_to Huawei_20260327.pdf", "size": "2.1MB", "icon": "📕", "org": "舍弗勒Schaeffler", "site": "https://www.schaeffler.cn", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "EMB减速器", "note": "Schaeffler EMB减速器和2in1报告(EMB执行器减速)。"}, {"t": "f", "name": "06_Schaeffler E-Pedal introduction_to Huawei_20260327.pdf", "size": "1.8MB", "icon": "📕", "org": "舍弗勒Schaeffler", "site": "https://www.schaeffler.cn", "phone": "", "board": "制动技术", "theme": "制动系统", "tech": "电子踏板E-Pedal", "note": "Schaeffler电子线控踏板E-Pedal介绍。"}, {"t": "f", "name": "07_Schaeffler SbW Introduction_to Huawei_20260327.pdf", "size": "1.4MB", "icon": "📕", "org": "舍弗勒Schaeffler", "site": "https://www.schaeffler.cn", "phone": "", "board": "转向技术", "theme": "转向系统", "tech": "线控转向SbW", "note": "Schaeffler线控转向SbW介绍。"}, {"t": "f", "name": "08_Schaeffler i-Corner introductgion_to Huawei_20260327.pdf", "size": "1.1MB", "icon": "📕", "org": "舍弗勒Schaeffler", "site": "https://www.schaeffler.cn", "phone": "", "board": "架构集成技术", "theme": "角模块", "tech": "智能角模块i-Corner", "note": "Schaeffler智能角模块i-Corner介绍(轮端高度集成)。"}, {"t": "f", "name": "09_Schaeffler LV PowerNet Topology and Product Solutions_to Huawei_20260327.pdf", "size": "2.7MB", "icon": "📕", "org": "舍弗勒Schaeffler", "site": "https://www.schaeffler.cn", "phone": "", "board": "电子电气集成技术", "theme": "配电架构", "tech": "48V电源网络LV PowerNet", "note": "Schaeffler低压电源网络LV PowerNet拓扑与产品方案。"}, {"t": "f", "name": "10_Schaeffler Sensors and ASCS introduction_to Huawei_20260327.pdf", "size": "813KB", "icon": "📕", "org": "舍弗勒Schaeffler", "site": "https://www.schaeffler.cn", "phone": "", "board": "驱动技术", "theme": "传感器", "tech": "传感器/ASCS", "note": "Schaeffler传感器和ASCS(主动悬架控制系统/传感器)介绍。"}]}]}]}]}, {"t": "d", "name": "新技术洞察", "children": [{"t": "f", "name": "2026ISNVH国际汽车NVH技术会议-解决方案参会快报.pptx", "size": "204.2MB", "icon": "📊", "org": "技术规划部/解决方案设计部", "site": "", "phone": "", "board": "跨域特性", "theme": "NVH", "tech": "整车NVH快速开发(HME)", "note": "2026 ISNVH国际汽车NVH技术会议参会快报(作者谈成)：基于HME混合模块化工程(Hybrid Modular Engineering)的整车NVH快速开发范式与整车声学品质设计。"}, {"t": "f", "name": "preprints202605.0939.v1.pdf", "size": "4.1MB", "icon": "📕", "org": "(论文)", "site": "", "phone": "", "board": "其他/待定", "theme": "整车热管理", "tech": "整车热管理系统控制策略", "note": "预印本论文(2026-05-14,doi:10.20944/preprints202605.0939.v1)：面向能耗优化的纯电动车整车热管理系统控制策略(Control Strategy of Vehicle Thermal Management for BEV)。作者Guangyu Yang等。"}, {"t": "f", "name": "动力底盘技术洞察202607.pptx", "size": "10.2MB", "icon": "📊", "org": "精进电动", "site": "https://www.jing-jin.com", "phone": "", "board": "下车体设计", "theme": "动力底盘", "tech": "直磁型电子离合器/底盘技术洞察", "note": "动力底盘技术洞察202607：精进电动双稳态直磁型电磁离合器，构建差速锁/差速器/断开器传动矩阵。"}, {"t": "f", "name": "议题1：解决方案技术洞察26年3月(1).pptx", "size": "9.7MB", "icon": "📊", "org": "解决方案设计部/技术规划部", "site": "", "phone": "", "board": "其他/待定", "theme": "技术洞察精选", "tech": "创新技术动态综述", "note": "2026年3月智能车方案领域技术洞察：高维优化/马勒热回收/BANF轮胎传感/MPA材料/调光玻璃/柔性光伏等。"}, {"t": "d", "name": "Brake in Drive", "children": [{"t": "f", "name": "解决方案技术洞察26年5月—AAW.pptx", "size": "5.9MB", "icon": "📊", "org": "解决方案设计部", "site": "", "phone": "", "board": "下车体设计", "theme": "车轮/空气动力", "tech": "主动气动轮毂AAW洞察", "note": "技术洞察(2026年5月)：热驱动主动气动轮毂AAW，解决低风阻续航与制动散热矛盾；70-90%制动靠能量回收，需实车验证。"}, {"t": "f", "name": "解决方案技术洞察26年6月—湿式制动器和智能轮胎传感器.pptx", "size": "8.8MB", "icon": "📊", "org": "华奥传动/上富智能轮胎", "site": "", "phone": "", "board": "制动技术", "theme": "湿式制动/智能轮胎", "tech": "湿式制动器+智能轮胎传感器", "note": "洞察(2026年6月)：华奥湿式制动器(拖曳扭矩/流量20L/ABS挑战)；上富智能轮胎传感器(三向力90%精度/摩擦发电自供电，清华危银涛团队、张立群院士团队)。"}]}, {"t": "d", "name": "DeepDrive", "children": [{"t": "f", "name": "260526_Presentation DeepDrive.pdf", "size": "4.5MB", "icon": "📕", "org": "DeepDrive GmbH(德国)", "site": "https://www.deepdrive.tech", "phone": "", "board": "驱动技术", "theme": "驱动电机", "tech": "双转子电机/DeepDrive公司介绍", "note": "DeepDrive《The motor of electric mobility》公司介绍；德国Garching(Carl-von-Linde-Str.)；联系sales@deepdrive.tech。"}, {"t": "f", "name": "Datasheet_DeepDrive_CD600.pdf", "size": "589KB", "icon": "📕", "org": "DeepDrive GmbH", "site": "https://www.deepdrive.tech", "phone": "", "board": "驱动技术", "theme": "驱动电机", "tech": "双转子径向磁通电驱单元CD600", "note": "CD600 EDU电驱单元：永磁同步机基于Dual Rotor Radial Flux结构；650V；www.deepdrive.tech，sales@deepdrive.tech。"}, {"t": "f", "name": "Datasheet_DeepDrive_IW2000.pdf", "size": "517KB", "icon": "📕", "org": "DeepDrive GmbH", "site": "https://www.deepdrive.tech", "phone": "", "board": "驱动技术", "theme": "轮毂电机", "tech": "19寸轮毂电机IW2000", "note": "IW2000(19”轮毂)推进中型电动车；集成SiC MOSFET逆变器；380V；sales@deepdrive.tech。"}, {"t": "f", "name": "Generator_Mesurements.7z", "size": "7.7MB", "icon": "🗜️", "org": "DeepDrive GmbH", "site": "https://www.deepdrive.tech", "phone": "", "board": "传动系统技术", "theme": "发电机测量", "tech": "发电机测量数据", "note": "发电机测量包(7z)或效率图等测试数据。"}, {"t": "f", "name": "Non-Disclosure Agreement Template(Only For Technical Communication Technical Cooperation) Paper Signing.docx", "size": "50KB", "icon": "📄", "org": "", "site": "", "phone": "", "board": "其他/待定", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "Non-Disclosure Agreement Template(Only For Technical Communication Technical Cooperation)_Redline - YWlegal260729.docx", "size": "64KB", "icon": "📄", "org": "", "site": "", "phone": "", "board": "其他/待定", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "Non-Disclosure Agreement Template_Clean20260810.docx", "size": "57KB", "icon": "📄", "org": "", "site": "", "phone": "", "board": "其他/待定", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "回复_ 【会议通知】 DeepDrive上海交流会，时间：05_26(周二) 09_30-11_30(UTC+08_00)Beijing ，地点：4号楼1001R.msg", "size": "95KB", "icon": "✉️", "org": "", "site": "", "phone": "", "board": "其他/待定", "theme": "", "tech": "", "note": ""}, {"t": "d", "name": "NDA", "children": [{"t": "f", "name": "Non-Disclosure Agreement Template(Only For Technical Communication Technical Cooperation) Paper Signing.docx", "size": "50KB", "icon": "📄", "org": "", "site": "", "phone": "", "board": "其他/待定", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "Non-Disclosure Agreement Template(Only For Technical Communication Technical Cooperation)_Redline.docx", "size": "61KB", "icon": "📄", "org": "", "site": "", "phone": "", "board": "其他/待定", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "Procurement Non-Disclosure Agreement Template Electronic Signing.docx", "size": "85KB", "icon": "📄", "org": "", "site": "", "phone": "", "board": "其他/待定", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "《研发NDA签署操作指导书》.docx", "size": "8.9MB", "icon": "📄", "org": "", "site": "", "phone": "", "board": "其他/待定", "theme": "", "tech": "", "note": ""}]}, {"t": "d", "name": "WC Generator Assembly Customer AV1_ENVELOPE_SHELL_202600713", "children": [{"t": "f", "name": "WC Generator Assembly Customer AV1_ENVELOPE_SHELL_202600713.stp", "size": "11.3MB", "icon": "🧊", "org": "DeepDrive GmbH", "site": "https://www.deepdrive.tech", "phone": "", "board": "传动系统技术", "theme": "发电机", "tech": "发电机总成(3D)", "note": "WC发电机总成3D模型(STP)及壳型。"}]}, {"t": "d", "name": "文件", "children": [{"t": "d", "name": "DeepDrive_Technology", "children": [{"t": "f", "name": "260417_DeepDrive_DualRotorTechnology.pdf", "size": "3.2MB", "icon": "📕", "org": "DeepDrive GmbH", "site": "https://www.deepdrive.tech", "phone": "", "board": "驱动技术", "theme": "驱动电机", "tech": "双转子电驱技术", "note": "Highly Efficient Dual-Rotor Electric Drives：双转子电驱设定新标准。"}, {"t": "f", "name": "Datasheet_DeepDrive_MG250.pdf", "size": "561KB", "icon": "📕", "org": "DeepDrive GmbH", "site": "https://www.deepdrive.tech", "phone": "", "board": "驱动技术", "theme": "增程发电机", "tech": "增程发电机MG250", "note": "MG250增程发电机：超高功率密度效率、超紧凑；集成SiC逆变器；650V。"}]}, {"t": "d", "name": "Generator_BOM", "children": [{"t": "f", "name": "260316_BOM DeepDrive_Generator.pdf", "size": "1.5MB", "icon": "📕", "org": "DeepDrive GmbH", "site": "https://www.deepdrive.tech", "phone": "", "board": "传动系统技术", "theme": "增程发电机", "tech": "DeepDrive发电机BOM", "note": "DeepDrive Generator BOM物料清单(保密)：S2000转子/磁体等部件清单。"}]}, {"t": "d", "name": "Generator_Mesurements", "children": [{"t": "f", "name": "Generator_A1Sample_MG220_TestReport_OEMVersion.pdf", "size": "9.1MB", "icon": "📕", "org": "DeepDrive GmbH", "site": "https://www.deepdrive.tech", "phone": "", "board": "传动系统技术", "theme": "电机测试", "tech": "发电机A1样件MG220测试报告", "note": "DeepDrive A1样件MG220测试报告(保密REV6,2026-04-08)；Creator A.Rosen。"}, {"t": "f", "name": "MG_AV1_GS1002_EffMap_20260219_450Vdc.xlsx", "size": "58KB", "icon": "📈", "org": "DeepDrive GmbH", "site": "https://www.deepdrive.tech", "phone": "", "board": "传动系统技术", "theme": "电机测试", "tech": "发电机效率图(450V)", "note": "DeepDrive AV1样件发电机效率图MG_AV1_GS1002(450Vdc,2026-02-19)。"}, {"t": "f", "name": "MG_AV1_GS1002_EffMap_20260318_590Vdc.xlsx", "size": "38KB", "icon": "📈", "org": "DeepDrive GmbH", "site": "https://www.deepdrive.tech", "phone": "", "board": "传动系统技术", "theme": "电机测试", "tech": "发电机效率图(590V)", "note": "DeepDrive AV1样件发电机效率图MG_AV1_GS1002(590Vdc,2026-03-18)。"}]}]}]}, {"t": "d", "name": "主动加热技术", "children": [{"t": "f", "name": "CN202310200862.8_电机发热方法和装置电机控制器电动汽车及存储介质 (1).pdf", "size": "611KB", "icon": "📕", "org": "苏州汇川联合动力系统有限公司", "site": "https://www.inovance.com", "phone": "", "board": "驱动技术", "theme": "电机热管理", "tech": "电机主动加热", "note": "发明专利CN116208048A：电机发热方法和装置/电机控制器/电动汽车/存储介质；苏州汇川联合动力(吴中越溪天鹅荡路52号)；发明人刘李勃等。"}, {"t": "f", "name": "CN202310200862.8_电机发热方法和装置电机控制器电动汽车及存储介质.pdf", "size": "611KB", "icon": "📕", "org": "苏州汇川联合动力系统有限公司", "site": "https://www.inovance.com", "phone": "", "board": "驱动技术", "theme": "电机热管理", "tech": "电机主动加热", "note": "发明专利CN116208048A：电机发热方法和装置/电机控制器/电动汽车/存储介质；苏州汇川联合动力(吴中越溪天鹅荡路52号)；发明人刘李勃等。"}, {"t": "f", "name": "CN202510714861.4_一种三相高低频复合旋转磁场感应加热装置及方法.pdf", "size": "449KB", "icon": "📕", "org": "洛阳申耐电力设备有限公司", "site": "", "phone": "", "board": "驱动技术", "theme": "电机热管理", "tech": "感应加热装置", "note": "发明专利CN120239130A：三相高低频复合旋转磁场感应加热装置及方法；洛阳申耐电力设备(洛阳老城区王城大道56号)；发明人杨五建等。"}, {"t": "f", "name": "解决方案技术洞察26年5月—AAW.pptx", "size": "5.9MB", "icon": "📊", "org": "解决方案设计部", "site": "", "phone": "", "board": "下车体设计", "theme": "车轮/空气动力", "tech": "主动气动轮毂AAW洞察", "note": "技术洞察(2026年5月)：热驱动主动气动轮毂AAW，解决低风阻续航与制动散热矛盾；70-90%制动靠能量回收，需实车验证。"}]}, {"t": "d", "name": "主动气动轮毂", "children": [{"t": "f", "name": "25-5 Active Aero Wheel_CompActive.pdf", "size": "5.2MB", "icon": "📕", "org": "CompActive GmbH(德国)", "site": "", "phone": "+49 6321 600 90 15", "board": "下车体设计", "theme": "车轮/空气动力", "tech": "主动气动轮毂AAW", "note": "Active Aero Wheel；联系Moritz Hübler moritz.huebler@compactive.de；德国Neustadt地址。"}, {"t": "f", "name": "26-1 Aero Wheel Findings_CompActive.pdf", "size": "2.8MB", "icon": "📕", "org": "CompActive GmbH(德国)", "site": "", "phone": "+49 6321 600 90 15", "board": "下车体设计", "theme": "车轮/空气动力", "tech": "主动气动轮毂AAW冷却效应", "note": "AAW冷却效应研究(Cooling effects investigation)。"}, {"t": "f", "name": "26-2 Active Aero Wheel_Ready_Value.pdf", "size": "3.9MB", "icon": "📕", "org": "CompActive GmbH(德国)", "site": "", "phone": "+49 6321 600 90 15", "board": "下车体设计", "theme": "车轮/空气动力", "tech": "主动气动轮毂AAW量产价值", "note": "AAW高风速续航/快充节省的Road-ready量产价值方案。"}, {"t": "f", "name": "解决方案技术洞察26年5月—AAW.pptx", "size": "5.9MB", "icon": "📊", "org": "解决方案设计部", "site": "", "phone": "", "board": "下车体设计", "theme": "车轮/空气动力", "tech": "主动气动轮毂AAW洞察", "note": "技术洞察(2026年5月)：热驱动主动气动轮毂AAW，解决低风阻续航与制动散热矛盾；70-90%制动靠能量回收，需实车验证。"}]}, {"t": "d", "name": "恒润RCP技术", "children": [{"t": "f", "name": "RCP简介和预研项目解决方案-Hirain-E.pdf", "size": "3.1MB", "icon": "📕", "org": "恒润科技Hirain", "site": "http://www.hirain.com", "phone": "", "board": "测试验证技术", "theme": "开发工具", "tech": "快速控制原型RCP", "note": "RCP简介和预研项目解决方案(2026.05.14)；官网www.hirain.com，market_dept@hirain.com。"}, {"t": "f", "name": "分布式电驱通信延时.pptx", "size": "2.1MB", "icon": "📊", "org": "恒润科技Hirain", "site": "http://www.hirain.com", "phone": "", "board": "电子电气集成技术", "theme": "电驱通信", "tech": "分布式电驱通信延时", "note": "TV400架构分析：控制器/模组融合降低CAN延时(4ms→0ms)与成本，左右扭矩一致性与功能安全提升。"}, {"t": "f", "name": "恒润RCP技术洞察分析.pptx", "size": "1.2MB", "icon": "📊", "org": "恒润科技Hirain", "site": "http://www.hirain.com", "phone": "", "board": "测试验证技术", "theme": "开发工具", "tech": "快速控制原型RCP", "note": "恒润RCP技术洞察：传感器/通讯/执行驱动/功能安全未达标；芯片供应商ADI(AD3301/AD331X 24-48GPIO)与Microchip(样机阶段)。"}]}, {"t": "d", "name": "悬架技术", "children": [{"t": "f", "name": "20260521_1356-VIDEO-知远 · 月度洞察及竞争力研讨会.mp4", "size": "919.4MB", "icon": "🎬", "org": "", "site": "", "phone": "", "board": "其他/待定", "theme": "", "tech": "", "note": ""}, {"t": "f", "name": "京西重工主动悬架 2023.pdf", "size": "1.5MB", "icon": "📕", "org": "京西重工BWI Group", "site": "https://www.bwv.com", "phone": "", "board": "悬架技术", "theme": "悬架", "tech": "主动悬架", "note": "京西重工主动悬架技术(2023年12月)；成就智能出行EMPOWERING SMART MOBILITY。"}, {"t": "f", "name": "线控底盘学习笔记.pdf", "size": "228KB", "icon": "📕", "org": "内部学习笔记", "site": "", "phone": "", "board": "下车体设计", "theme": "全主动悬架", "tech": "全主动悬架对比", "note": "全主动核心指标对比：直线电机(比亚迪12.5kW/6000-8000N)/电液式(蔚来/奔驰RAPA)/电磁式35Hz；100ms响应；线控制动参数。"}]}, {"t": "d", "name": "日本声音防晕", "children": [{"t": "f", "name": "可嵌入汽车座椅头枕防晕车音响设备.pdf", "size": "212KB", "icon": "📕", "org": "名古屋大学(毛利雅弘教授团队)", "site": "", "phone": "", "board": "跨域特性", "theme": "防晕车", "tech": "头枕防晕音响", "note": "Motion Sickness Care音响设备缓解自动驾驶晕车/视觉晕眩；基于Sound Spice®技术；计划2026-2027成立公司，未开设官网。"}, {"t": "f", "name": "防晕车技术.pptx", "size": "4.6MB", "icon": "📊", "org": "名古屋大学", "site": "", "phone": "", "board": "跨域特性", "theme": "防晕车", "tech": "防晕车音响(洞察)", "note": "洞察(2026年6月,丁立等)：Motion Sickness Care音响缓解晕车；零副作用/低装车成本优势；教授保守核心信息保密。"}]}, {"t": "d", "name": "智能防晕", "children": [{"t": "f", "name": "智能座舱防晕控制_武汉理工大学.pdf", "size": "9.8MB", "icon": "📕", "org": "武汉理工大学汽车工程学院", "site": "https://www.whut.edu.cn", "phone": "", "board": "跨域特性", "theme": "防晕控制", "tech": "智能座舱防晕(多模态)", "note": "智能座舱防晕控制(2026年4月汇报)。"}, {"t": "f", "name": "智能座舱防晕控制_武汉理工大学.pdf审核结果-0515-0910.docx", "size": "13KB", "icon": "📄", "org": "武汉理工大学汽车工程学院", "site": "https://www.whut.edu.cn", "phone": "", "board": "跨域特性", "theme": "防晕控制", "tech": "智能座舱防晕(多模态)", "note": "智能座舱防晕控制(2026年4月汇报)。"}, {"t": "f", "name": "解决方案技术洞察26年5月—智能座舱防晕控制.pptx", "size": "5.0MB", "icon": "📊", "org": "解决方案设计部", "site": "", "phone": "", "board": "跨域特性", "theme": "防晕控制", "tech": "多模态防晕识别(洞察)", "note": "洞察(2026年5月)：多模态(脑电EEG+外周生理)防晕识别准确率高但商用价值低；建议华为手表+红外+车辆运动参数低成本方案。"}]}, {"t": "d", "name": "洞察工具", "children": [{"t": "f", "name": "【2025年总表】智能车技术.xlsx", "size": "1.5MB", "icon": "📈", "org": "", "site": "", "phone": "", "board": "其他/待定", "theme": "技术总览", "tech": "智能车技术", "note": ""}]}, {"t": "d", "name": "混合全主动悬架技术", "children": [{"t": "f", "name": "ATC参会快报——悬架.pptx", "size": "46.1MB", "icon": "📊", "org": "", "site": "", "phone": "", "board": "悬架技术", "theme": "悬架", "tech": "悬架", "note": ""}, {"t": "f", "name": "中科擎邦 -2 - 客户.pptx", "size": "486.6MB", "icon": "📊", "org": "中科擎邦科技(安徽)", "site": "http://www.zhongkeqingbang.com", "phone": "", "board": "其他/待定", "theme": "悬架", "tech": "混合全主动悬架", "note": "中科擎邦客户版简介(37页)：公司/解决方案/项目优势/市场分析/未来规划。"}, {"t": "f", "name": "全主动悬架方案介绍-中科擎邦(8).pptx", "size": "19.5MB", "icon": "📊", "org": "中科擎邦科技(安徽)", "site": "http://www.zhongkeqingbang.com", "phone": "", "board": "悬架技术", "theme": "悬架", "tech": "混合全主动悬架系统", "note": "混合主动悬架系统技术开发方案：底盘ECU+MR阻尼器+永磁直线电机，磁流变+小直线电机混合全主动。"}]}, {"t": "d", "name": "直磁型电磁离合器", "children": [{"t": "f", "name": "新建 Microsoft PowerPoint 演示文稿.pptx", "size": "6.5MB", "icon": "📊", "org": "精进电动", "site": "https://www.jing-jin.com", "phone": "", "board": "其他/待定", "theme": "电磁离合器", "tech": "直磁型电子离合器", "note": "动力底盘技术洞察：精进电动双稳态直磁型电磁离合器，差速锁/差速器/断开器传动矩阵。"}, {"t": "f", "name": "精进电动差速器及动力管理产品技术 - V03.pdf", "size": "7.3MB", "icon": "📕", "org": "精进电动JJE", "site": "https://www.jing-jin.com", "phone": "", "board": "传动系统技术", "theme": "差速与传力", "tech": "差速器/差速锁", "note": "精进电动差速器及动力管理产品技术(保密)；更快响应更优性能。"}]}, {"t": "d", "name": "直线电机", "children": [{"t": "f", "name": "CN224401366U.pdf", "size": "902KB", "icon": "📕", "org": "中研赢创智能科技有限公司", "site": "", "phone": "", "board": "悬架技术", "theme": "直线电机", "tech": "悬架直线电机线圈背靠结构", "note": "实用新型CN224401366U：一种应用在汽车悬架的直线电机线圈背靠结构；专利人中研赢创(成都郫都区德源北路优易数据大厦)；发明人石江铃。"}]}, {"t": "d", "name": "矽力杰半导体", "children": [{"t": "f", "name": "SA32D系列电机解决方案.pdf", "size": "2.4MB", "icon": "📕", "org": "矽力杰Silergy", "site": "https://www.silergy.com", "phone": "", "board": "驱动技术", "theme": "电机控制芯片", "tech": "高速电驱MCU(SA32D)", "note": "SA32D系列：迅联架构+6核RISC-V，面向高速电驱的实时控制MCU；旋变解码方案。"}, {"t": "f", "name": "矽力杰半导体.pptx", "size": "8.1MB", "icon": "📊", "org": "矽力杰Silergy", "site": "https://www.silergy.com", "phone": "", "board": "电子电气集成技术", "theme": "电机控制芯片", "tech": "矽力杰迅联架构(洞察)", "note": "洞察(2026年6月)：迅联架构MIU硬件互联+MAU数学加速构建FOC电流环；为角模块多路电机统一管控。"}]}, {"t": "d", "name": "高性能轮胎", "children": [{"t": "f", "name": "解决方案技术洞察26年5月—UUHP夏季轮胎.pptx", "size": "5.1MB", "icon": "📊", "org": "大陆集团(Continental)", "site": "https://www.continental-tires.com", "phone": "", "board": "轮胎技术", "theme": "轮胎", "tech": "UUHP夏季轮胎", "note": "洞察：SportContact 7 Force UUHP夏季轮胎——自适应锁止花纹+混合配方(第三代Harmonized BlackChili)，兼顾日常通勤与赛道极限。"}]}]}];
+const OPTIONS = {"电子电气集成技术": {"theme": ["电机控制芯片", "电驱与功率电子", "电驱通信", "配电架构"], "tech": ["48V电源网络LV PowerNet", "48V配电网络", "SGT", "分布式电驱通信延时", "封装材料", "矽力杰迅联架构(洞察)"]}, "驱动技术": {"theme": ["传感器", "分布式驱动", "增程发电机", "流热仿真", "热管理", "电机/电推进", "电机控制", "电机控制芯片", "电机材料", "电机热管理", "电驱与功率电子", "电驱系统", "轮毂电机", "配电架构", "驱动传动轴承", "驱动电机", "驱动电机轴承"], "tech": ["1000V高压平台/电机绝缘", "19寸轮毂电机IW2000", "48V电机方案", "下一代电驱", "传感器/ASCS", "冷却液", "分布式驱动/电驱桥", "功率器件/功率模块", "功率模块", "单一流体热管理架构", "双转子径向磁通电驱单元CD600", "双转子电机/DeepDrive公司介绍", "双转子电驱技术", "增程发电机MG250", "多相电驱动系统", "感应加热装置", "油冷电驱流热仿真", "涵道风扇电推进", "电机主动加热", "电驱先进控制", "电驱系统", "磁性材料/拼接磁钢", "轴向磁通电机", "轴承PHM", "轴承电腐蚀", "轴承长寿命", "非晶碳纤维电驱", "高压电驱", "高速电驱", "高速电驱MCU(SA32D)"]}, "【跳过·商用车/混动】": {"theme": ["整车热管理", "测试验证", "混动系统", "电驱传动", "配电架构"], "tech": ["48V配电网络", "建模仿真", "排放法规", "油冷电机", "混动架构", "电驱桥", "高效发动机"]}, "下车体设计": {"theme": ["全主动悬架", "动力底盘", "悬架", "智能底盘", "测试验证", "车轮/空气动力", "轻量化材料"], "tech": ["主动气动轮毂AAW", "主动气动轮毂AAW冷却效应", "主动气动轮毂AAW洞察", "主动气动轮毂AAW量产价值", "全主动悬架对比", "实车功能安全测试", "智能底盘集成", "电液悬架", "直磁型电子离合器/底盘技术洞察", "硬件在环", "轻量化材料", "镁合金"]}, "传动系统技术": {"theme": ["传动系统", "动力系统", "发电机", "发电机测量", "增程发电机", "差速与传力", "差速与限滑", "混动传动", "混动系统", "电机测试"], "tech": ["DHT平台", "DeepDrive发电机BOM", "动力总成架构", "发电机A1样件MG220测试报告", "发电机总成(3D)", "发电机效率图(450V)", "发电机效率图(590V)", "发电机测量数据", "变速传动AFM", "同轴减速器GBX", "差速器/差速锁", "电子限滑差速器(带锁止)", "电磁爪式离合器", "电驱/动力底盘综述", "电驱传动本土化", "粉末冶金齿圈/减速器"]}, "测试验证技术": {"theme": ["制动系统", "制造工艺", "开发工具", "轻量化材料"], "tech": ["AI赋能研发制造", "EMB量产经验", "大数据仿真", "快速控制原型RCP", "特种聚合物", "铜排焊接质量"]}, "悬架技术": {"theme": ["悬架", "直线电机"], "tech": ["主动悬架", "悬架", "悬架直线电机线圈背靠结构", "智能悬架/减振器", "混合全主动悬架", "混合全主动悬架系统", "直线式电磁悬架"]}, "制动技术": {"theme": ["制动系统", "湿式制动/智能轮胎", "转向制动协同", "转向系统", "驱制动一体化"], "tech": ["EMB减速器", "EMB功能安全/冗余", "分布式电子踏板线控制动", "制动盘涂层", "制动盘激光熔覆", "摩擦材料配方(欧7)", "湿式制动器", "湿式制动器(驱制一体)", "湿式制动器+智能轮胎传感器", "滚珠丝杠精密磨削", "漂移运动控制", "电子踏板E-Pedal", "碳陶摩擦材料", "线控制动/智能执行器", "驱制动一体化"]}, "转向技术": {"theme": ["转向系统"], "tech": ["智能转向", "线控转向SbW"]}, "架构集成技术": {"theme": ["角模块"], "tech": ["智能角模块i-Corner", "角模块智能行驶机器人"]}, "轮胎技术": {"theme": ["轮胎"], "tech": ["UUHP夏季轮胎", "智能轮胎传感器"]}, "其他/待定": {"theme": ["制动系统", "悬架", "技术总览", "技术洞察精选", "整车热管理", "电磁离合器", "轮胎"], "tech": ["创新技术动态综述", "整车热管理系统控制策略", "智能车技术", "智能轮胎传感器", "混合全主动悬架", "湿式制动器(问题清单)", "直磁型电子离合器"]}, "跨域特性": {"theme": ["NVH", "防晕控制", "防晕车"], "tech": ["多模态防晕识别(洞察)", "头枕防晕音响", "整车NVH快速开发(HME)", "智能座舱防晕(多模态)", "防晕车音响(洞察)"]}};   // {板块: {theme:[...], tech:[...]}} 可选池（预设+已填）
+
+let labels = {};      // 用户修正（覆盖预设）
+let currentBoard = ''; // 板块筛选
+let currentKey = null;
+
+function load(){ try{ labels = JSON.parse(localStorage.getItem(STORE_KEY)||'{}')||{}; }catch(e){ labels={}; } mergeUserOptions(); }
+// 把用户 localStorage 里已填的主题/技术点并入选项池（保证新保存的值立即可选）
+function mergeUserOptions(){
+  for(const k in labels){
+    const v = labels[k]||{}; const b = v.board;
+    if(!b) continue;
+    const o = OPTIONS[b] || (OPTIONS[b]={theme:[],tech:[]});
+    if(v.theme && !o.theme.includes(v.theme)) o.theme.push(String(v.theme).trim());
+    String(v.tech||'').split(/[，,]/).forEach(t=>{ t=t.trim(); if(t && !o.tech.includes(t)) o.tech.push(t); });
+  }
+  for(const b in OPTIONS){ OPTIONS[b].theme.sort(); OPTIONS[b].tech.sort(); }
+}
+function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(labels)); }
+function fileKey(path, name){ return path.concat([name]).join(' / '); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function lbFor(node, path){
+  const k = fileKey(path, node.name);
+  const usr = labels[k] || {};
+  // 合并：用户字段 > 预设（board/theme/tech/org/site 来自预填）
+  return {
+    key: k,
+    board: usr.board != null ? usr.board : (node.board || ''),
+    theme: usr.theme != null ? usr.theme : (node.theme || ''),
+    tech: usr.tech != null ? usr.tech : (node.tech || ''),
+    org: usr.org != null ? usr.org : (node.org || ''),
+    site: usr.site != null ? usr.site : (node.site || ''),
+    phone: usr.phone != null ? usr.phone : (node.phone || ''),
+    note: usr.note != null ? usr.note : (node.note || ''),
+    corrected: !!labels[k],
+  };
+}
+function chip(label, val){ if(!val) return ''; return `<span class="tagchip"><b>${label}</b><span class="val">${esc(val)}</span></span>`; }
+
+function countAll(nodes, cb, path){
+  (nodes||[]).forEach(n=>{ if(n.t==='f') cb(n, path||[]); else countAll(n.children, cb, (path||[]).concat([n.name])); });
+}
+
+function renderBoards(){
+  const counts={};
+  countAll(TREE,(n,p)=>{ const b=lbFor(n,p).board||'其他/待定'; counts[b]=(counts[b]||0)+1; });
+  let html='<button class="boardbtn'+(currentBoard===''?' active':'')+'" data-b="">全部<span class="n"></span></button>';
+  for(const b of BOARDS){
+    if(counts[b]) html+=`<button class="boardbtn${currentBoard===b?' active':''}" data-b="${esc(b)}">${esc(b)}<span class="n">${counts[b]}</span></button>`;
+  }
+  $('boardbar').innerHTML=html;
+  $('boardbar').querySelectorAll('.boardbtn').forEach(b=>{
+    b.onclick=()=>{ currentBoard=b.dataset.b; render(); };
+  });
+}
+
+function render(){
+  renderBoards();
+  const q=($('search').value||'').trim().toLowerCase();
+  const filter=$('filter').value;
+  const root=$('tree');
+  root.innerHTML=buildTree(TREE,[]);
+  let total=0,tagged=0;
+  root.querySelectorAll('.file').forEach(el=>{
+    const k=el.dataset.key, nm=el.dataset.name;
+    const lb=getLbByKey(k);
+    total++;
+    if(lb.corrected) tagged++;
+    const lbTxt=[lb.board,lb.theme,lb.tech,lb.org,lb.site,lb.phone].join(' ').toLowerCase();
+    const hitB = !currentBoard || lb.board===currentBoard;
+    const hitQ = !q || nm.toLowerCase().includes(q) || lbTxt.includes(q);
+    const hitF = filter==='all' || (filter==='tagged'?lb.corrected:!lb.corrected);
+    el.classList.toggle('hidden', !(hitB&&hitQ&&hitF));
+  });
+  $('stat').textContent=`共 ${total} 文件 · 已更正 ${tagged}`;
+  root.querySelectorAll('details').forEach(d=>d.open=true);
+  // 隐藏全空文件夹（仅当当前筛选中没有可见文件）
+  root.querySelectorAll('details').forEach(d=>{
+    const hid=[...d.querySelectorAll(':scope > div.file')].every(f=>f.classList.contains('hidden'));
+    const subHid=[...d.querySelectorAll(':scope > details > summary')].length;
+    if(hid && subHid===0 && !d.querySelector(':scope > div.file:not(.hidden)')) { /* nothing */ }
+  });
+}
+
+function getLbByKey(k){
+  let found={board:'',theme:'',tech:'',org:'',site:'',phone:'',note:'',corrected:false};
+  countAll(TREE,(n,p)=>{ const lb=lbFor(n,p); if(lb.key===k) found=lb; });
+  return found;
+}
+function buildTree(children, path){
+  if(!children) return '';
+  let html='';
+  for(const node of children){
+    if(node.t==='d'){
+      const cnt=countFile(node);
+      html+=`<details class="node${path.length?'':' top'}" open><summary><span class="fold">📁 ${esc(node.name)}</span><span class="cnt">(${cnt} 文件)</span></summary>${buildTree(node.children, path.concat([node.name]))}</details>`;
+    } else {
+      const lb=lbFor(node,path);
+      const hasChip = lb.board||lb.theme||lb.tech||lb.org||lb.site||lb.phone||lb.note;
+      const correctedMark = lb.corrected ? '<span class="tagchip" style="border-color:#4b7a4b;color:#9fe0a0">改</span>' : '';
+      html+=`<div class="file" data-key="${esc(lb.key)}" data-name="${esc(node.name)}">
+        <div class="row1">
+          <span class="icon">${esc(node.icon||'')}</span>
+          <span class="fname2">${esc(node.name)}</span>
+          <span class="size">${esc(node.size||'')}</span>
+          <button class="btn-edit${hasChip?' has-tag':''}" data-key="${esc(lb.key)}" title="编辑">${lb.corrected?'✓改':'✎编辑'}</button>
+        </div>
+        <div class="tags">${correctedMark}${chip('板块',lb.board)}${chip('主题',lb.theme)}${chip('技术点',lb.tech)}${chip('联系方',lb.org)}${chip('网站',lb.site)}${chip('电话',lb.phone)}${chip('备注',lb.note)}</div>
+      </div>`;
+    }
+  }
+  return html;
+}
+function countFile(node){ let c=0; (node.children||[]).forEach(n=>{ c+=n.t==='f'?1:countFile(n); }); return c; }
+
+function $(id){return document.getElementById(id);}
+const BOARD_SELECT='<option value="">(待定)</option>'+BOARDS.map(b=>`<option>${esc(b)}</option>`).join('');
+
+function updateDatalists(board){
+  const o = OPTIONS[board] || {theme:[], tech:[]};
+  $('dlTheme').innerHTML = o.theme.map(t=>`<option value="${esc(t)}">`).join('');
+  $('dlTech').innerHTML = o.tech.map(t=>`<option value="${esc(t)}">`).join('');
+  $('fm-hint-opts').textContent = `可选池：主题 ${o.theme.length} 项 / 技术点 ${o.tech.length} 项（来自已填文件）。可用新值会自动加入。`;
+}
+function openModal(key){
+  currentKey=key;
+  const lb=getLbByKey(key);
+  $('mPath').textContent=key;
+  $('fBoard').innerHTML=BOARD_SELECT;
+  $('fBoard').value=lb.board||'';
+  $('fTheme').value=lb.theme||'';
+  $('fTech').value=lb.tech||'';
+  $('fOrg').value=lb.org||'';
+  $('fSite').value=lb.site||'';
+  $('fPhone').value=lb.phone||'';
+  $('fNote').value=lb.note||'';
+  updateDatalists(lb.board||'');
+  $('mask').classList.add('show');
+}
+function closeModal(){ $('mask').classList.remove('show'); currentKey=null; }
+
+$('btnSave').onclick=()=>{
+  const lb={ board:$('fBoard').value, theme:$('fTheme').value.trim(), tech:$('fTech').value.trim(), org:$('fOrg').value.trim(), site:$('fSite').value.trim(), phone:$('fPhone').value.trim(), note:$('fNote').value.trim() };
+  // 新值并入选项池，便于后续直接选取
+  if(lb.board){
+    const o=OPTIONS[lb.board] || (OPTIONS[lb.board]={theme:[],tech:[]});
+    if(lb.theme && !o.theme.includes(lb.theme)) o.theme.push(lb.theme);
+    (lb.tech.split(/[，,]/)).forEach(t=>{ t=t.trim(); if(t && !o.tech.includes(t)) o.tech.push(t); });
+    o.theme.sort(); o.tech.sort();
+  }
+  if(lb.board||lb.theme||lb.tech||lb.org||lb.site||lb.phone||lb.note) labels[currentKey]=lb; else delete labels[currentKey];
+  save(); closeModal(); render();
+};
+$('btnDelTag').onclick=()=>{ if(confirm('清除此文件自定义标签（恢复预设板块）？')){ delete labels[currentKey]; save(); closeModal(); render(); } };
+$('btnCancel').onclick=closeModal;
+$('fBoard').addEventListener('change',()=>{ updateDatalists($('fBoard').value); });
+$('mask').addEventListener('click',e=>{ if(e.target.id==='mask') closeModal(); });
+$('search').addEventListener('input',render);
+$('filter').addEventListener('change',render);
+$('tree').addEventListener('click',e=>{ const b=e.target.closest('.btn-edit'); if(b) openModal(b.dataset.key); });
+
+// ---- 导出：合并预设 + 用户编辑，生成每个文件的最终标签 ----
+function exportLabels(){
+  const out=[];
+  countAll(TREE,(n,p)=>{
+    const lb=lbFor(n,p);
+    out.push({ file: n.name, path:p, board:lb.board, theme:lb.theme, tech:lb.tech,
+               org:lb.org, site:lb.site, phone:lb.phone, note:lb.note });
+  });
+  const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='chassis_labels.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  alert('已导出 '+out.length+' 条标签到 chassis_labels.json。请把该文件保存后交给 AI 入库。');
+}
+$('btnExport').onclick=exportLabels;
+
+load(); render();
+</script>
+</body>
+</html>

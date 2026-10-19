@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI4KnowledgeNet 搭建说明与维护工作流</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Microsoft YaHei','PingFang SC',system-ui,sans-serif;background:#f5f7fb;color:#2b3443;line-height:1.8;padding:0}
+.wrap{max-width:920px;margin:0 auto;padding:40px 36px 80px;background:#fff;min-height:100vh;box-shadow:0 0 30px rgba(0,0,0,.05)}
+h1{font-size:28px;color:#111827;border-bottom:3px solid #2563eb;padding-bottom:12px;margin-bottom:6px}
+h2{font-size:22px;color:#1d4ed8;margin:36px 0 14px;padding-left:12px;border-left:5px solid #2563eb}
+h3{font-size:17px;color:#111827;margin:24px 0 10px}
+p{margin:10px 0;color:#374151}
+ul,ol{margin:10px 0 10px 24px;color:#374151}
+li{margin:5px 0}
+code{background:#eef2f7;border:1px solid #dbe2ec;border-radius:4px;padding:1px 6px;font-family:Consolas,'Courier New',monospace;font-size:.88em;color:#b91c1c}
+pre{background:#0f172a;color:#e2e8f0;border-radius:8px;padding:16px 18px;overflow:auto;margin:12px 0;font-size:13px;line-height:1.6}
+pre code{background:none;border:none;color:inherit;padding:0}
+blockquote{margin:12px 0;padding:10px 16px;background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 6px 6px 0;color:#1e3a8a}
+blockquote p{margin:0;color:inherit}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}
+th,td{border:1px solid #dbe2ec;padding:9px 12px;text-align:left;vertical-align:top}
+th{background:#f1f5f9;color:#1e293b;font-weight:600}
+tr:nth-child(even) td{background:#f8fafc}
+strong{color:#111827}
+a{color:#2563eb;text-decoration:none}
+a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #e2e8f0;margin:24px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>知识图谱工作台 · 搭建说明 + 维护 &amp; 更新工作流</h1>
+<blockquote><p>此文档说明：① 这套系统是怎么搭建起来的（先做什么、再做什么）；② 后续如何维护、更新，包含具体操作和必要步骤。<br>适用对象：AI 助手 + 维护者。</p></blockquote>
+<hr>
+<h2>第一部分：系统是怎么搭建起来的（搭建顺序）</h2>
+<p>按下面的顺序做，每一步都是下一步的前提，缺一步后面都跑不起来。</p>
+<h3>第 1 步：装好数据库 —— 先有&quot;能存知识的地方&quot;</h3>
+<ul><li>技术是「多分支向下发散、可交叉汇合」的 <b>DAG</b> 结构，选<b>图数据库</b>承载最合适；选定 <b>NebulaGraph</b>，空间名 <code>auto_innovation_kg</code>。</li><li>宿主机是 <b>OpenStack 虚拟机（不支持嵌套虚拟化）</b>，装不了 Docker/WSL2，所以 Nebula 用 <b>WSL1 原生方式</b>安装运行。</li><li>完成标志：能用 <code>nebula_health.py</code> 或 <code>python -c &quot;import nebula3&quot;</code> 连上、能建 Space。</li></ul>
+<h3>第 2 步：定好知识结构 —— 固定 6 层架构（全库唯一口径）</h3>
+<ul><li>全库固定 6 层：<b>vehicle → domain → subdomain → module → technology → material</b>。</li></ul>
+<p>- <code>vehicle</code> 是唯一根（无父）。 - 正常每层向下挂 1 层，<code>belongs_to</code> 严格单父树。 - <code>material</code> 不用 <code>belongs_to</code>，只通过 <code>supports</code> 挂到 module / technology（多对多）。 - 层不必填满（某子树最高只到 module 也合法，兼容旧数据）。 - <code>relates_to</code> 是平级交叉关联，不限层级。</p>
+<ul><li><b>所有规则只写一份</b>：<code>backend/architecture.py</code>。前端表单、导入导出、写库校验都读它，避免各模块口径不一致。</li><li>完成标志：<code>scripts/audit_architecture.py</code> 全库审计 0 error。</li></ul>
+<h3>第 3 步：搭后端 —— 让浏览器能读写数据库</h3>
+<ul><li>后端用 <b>FastAPI + uvicorn</b>（Python），分层：<code>routers（接口） → store.py（图读写业务） → nebula_client.py（连接 Nebula）</code>。</li><li>提供接口：列表/搜索/详情/子图/全貌/最短路径（读），增删改节点与边（写），统计 <code>/stats</code>、健康 <code>/health</code>。</li><li>完成标志：<code>http://&lt;IP&gt;:8000/stats</code> 返回各层节点数。</li></ul>
+<h3>第 4 步：做前端 —— 让人能看、能点</h3>
+<ul><li>前端用 <b>vis-network(2D) + 3d-force-graph(3D, WebGL)</b>，静态文件由后端同源托管（访问 <code>/</code> 即打开页面）。</li><li>图上有：全貌/子图切换、2D/3D、同心圆/力导向/树状布局、层级与领域筛选、节点详情、添加/编辑/删除、级联删除预告。</li><li>完成标志：浏览器打开页面能看图、能点节点、增删改走通。</li></ul>
+<h3>第 5 步：加数据管理 —— 登录留痕、导出导入、批量入库</h3>
+<ul><li><b>写入口令</b>：增删改需口令换 token（12h 有效），浏览开放。</li><li><b>操作历史</b>：每次写操作记入 <code>data/history.db</code>（SQLite），支持撤回/重做，并作为「最近修改记录」数据源（最近 10 条：谁、何时、改了什么，新增节点可图内高亮）。</li><li><b>选择导出 / 同构批量导入</b>：<code>/export/knowledge</code>（任意根→某层级/节点，JSON/MD）、<code>/import/template</code>（自说明模板）、<code>/import/knowledge</code>（按 vid 更新、缺失新建、先校验后写）。</li></ul>
+<h3>第 6 步：接入 AI（按需）—— 自动抽取、网页抓取、自动采集</h3>
+<ul><li><b>AI 入库</b>：粘贴资料 → 自动抽取 → 确认写入；复核、提炼/译中。</li><li><b>网页抓取</b>：输入 URL 抓正文，再走 AI 抽取。</li><li><b>自动采集（可选）</b>：从 arXiv/资讯/供应商专栏定期抓取 → 抽取 → 待人工确认入库（后台服务）。</li><li>完成标志：AI 面板可用或明确提示未配置。</li></ul>
+<h3>第 7 步：定运维 —— 备份与巡检</h3>
+<ul><li>每日快照：<code>scripts/backup_daily.py</code>（有变更才导出，写入 <code>scripts/snapshots/</code>）。</li><li>常规巡检：<code>nebula_health.py</code>（连接/统计）、<code>audit_architecture.py</code>（结构合规）。</li><li>一键重启：<code>scripts/restart_backend.bat</code>（停旧→等端口→起新→自检）。</li></ul>
+<blockquote><p>这套顺序同时也说明「先做什么、后做什么」：数据库 → 结构 → 后端 → 前端 → 数据管理 →（可选）AI → 运维。每一层都建立在前一层的可运行验证之上。</p></blockquote>
+<hr>
+<h2>第二部分：后续维护 &amp; 更新工作流</h2>
+<h3>每日/常规操作</h3>
+<h4>1. 启动服务（若 VM 重启后）</h4>
+<pre><code># ① 启动 Nebula（WSL1）
+wsl -d Ubuntu -u root -- bash /mnt/c/Users/&lt;user&gt;/Desktop/up_X/AI4KnowledgeNet/scripts/start_nebula_wsl1.sh
+
+# ② 启动后端（新旧脚本二选一，推荐一键脚本）
+# 一键（停旧→等端口→起新→自检）：
+#   双击  scripts/restart_backend.bat
+# 或手动：
+cd C:\Users\&lt;user&gt;\Desktop\up_X\AI4KnowledgeNet
+Start-Process &quot;&lt;...&gt;\ai-knowledge-base\venv\Scripts\python.exe&quot; -ArgumentList &quot;-m&quot;,&quot;uvicorn&quot;,&quot;backend.main:app&quot;,&quot;--host&quot;,&quot;0.0.0.0&quot;,&quot;--port&quot;,&quot;8000&quot; -WorkingDirectory &quot;C:\Users\&lt;user&gt;\Desktop\up_X\AI4KnowledgeNet&quot; -WindowStyle Hidden</code></pre>
+<blockquote><p>绑定 <code>0.0.0.0:8000</code>，同内网机器浏览器访问 <code>http://&lt;服务器IP&gt;:8000</code>。<br>备注：本机自动化/其他会话可能看不到、杀不掉占用 8000 的进程；遇到旧进程卡死时，<b>要在服务器桌面的任务管理器里结束占用 8000 的 python 进程</b>后再启动（bat 脚本里也做了这件事）。</p></blockquote>
+<h4>2. 健康检查</h4>
+<pre><code>Invoke-RestMethod http://127.0.0.1:8000/health   # 期望 {&quot;status&quot;:&quot;ok&quot;}
+Invoke-RestMethod http://127.0.0.1:8000/stats    # 各层节点数</code></pre>
+<h3>3. 日常录入新资料（四种方式）</h3>
+<ul><li><b>页面手工录入</b>：左侧「添加技术点 / 添加支撑材料」表单（父层固定按 6 层架构约束）。</li><li><b>页面 AI 录入</b>：粘贴资料 → 自动抽取 → 确认写入；或 AI 复核（review-import）。</li><li><b>批量 AI 入库</b>：粘贴多份资料 JSON →「加载到入库预览」→ 确认写入。</li><li><b>脚本/同构文件批量导入</b>：导出 JSON → 修改/补全 → <code>/import/knowledge</code> 校验后入库（带 vid 走指主更新，缺失自动新建）。</li></ul>
+<h3>4. 修改前端/后端后的更新流程（重要）</h3>
+<pre><code># ① 改代码（前端 app.js / 后端 store.py 等）
+# ② 改前端时【必须】更新 index.html 里的版本号，否则浏览器缓存旧代码看不到改动：
+#    &lt;script src=&quot;/static/app.js?v=旧号&quot;&gt;&lt;/script&gt;  →  改成新号（如 v=20261014b）
+#    &lt;link rel=&quot;stylesheet&quot; href=&quot;/static/styles.css?v=…&quot; &gt; 同理
+# ③ 只改后端（store.py 等 Python）需重启后端进程
+# ④ 只改前端（app.js）无需重启后端，改版本号 + 刷新即可</code></pre>
+<h3>5. 数据备份 &amp; 快照</h3>
+<pre><code># 变更检测 + 快照（写入 scripts/snapshots/）
+python scripts/backup_daily.py            # 每日；有变更才导出
+python scripts/backup_daily.py --force    # 强制导出
+python scripts/backup_daily.py --check    # 只检测不导出
+# 架构合规巡检
+python scripts/audit_architecture.py       # 0=通过 / 2=有 error
+python scripts/nebula_health.py            # 连接 + stats
+# 关键数据源（底盘标签）在 知识库-refs\_脚本\ 下，注意备份</code></pre>
+<hr>
+<h2>第三部分：维护的「必要检查清单」</h2>
+<p>每次改动后对照：</p>
+<table><thead><tr><th>检查项</th><th>命令/操作</th><th>通过标准</th></tr></thead><tbody><tr><td>后端存活</td><td><code>/health</code> <code>/stats</code></td><td>返回 JSON，数值正常</td></tr><tr><td>前端加载</td><td>浏览器打开首页 + Ctrl+F5</td><td>界面正常，无控制台报错</td></tr><tr><td>读写闭环</td><td>登录后新增/删除一个测试节点再撤掉</td><td>通过，操作历史正确记录</td></tr><tr><td>节点/边一致性</td><td><code>/overview</code></td><td>各层数量与预期一致，无孤立材料</td></tr><tr><td>领域隔离</td><td>切换领域筛选</td><td>各领域互不串数据</td></tr><tr><td>材料显示</td><td>全貌切「材料」层</td><td>材料球体出现，不缺失</td></tr><tr><td>架构合规</td><td><code>scripts/audit_architecture.py</code></td><td>无 error（warn 可后处理）</td></tr><tr><td>AI 可用</td><td>AI 面板状态</td><td>显示已配置或明确提示未配置</td></tr><tr><td>最近修改记录</td><td>侧栏面板</td><td>显示最近写操作，新增节点可高亮</td></tr></tbody></table>
+<hr>
+<h2>第四部分：多人协作（当前状态 + 后续要做的）</h2>
+<p><b>当前</b>：</p>
+<ul><li>读写分离：<b>浏览开放</b>（任何人内网可看、可查、可导出）；<b>写入需口令登录</b>（token 12h）。</li><li>每次写操作记入操作历史（SQLite），支持撤回/重做、最近修改记录展示「谁何时改了什么」。</li><li>无冲突提示、无细粒度角色权限。</li></ul>
+<p><b>后续建议（按需落地）</b>： 1. <b>角色权限</b>：区分「只读 / 编辑 / 管理员」，口令分发给不同组。 2. <b>冲突提示</b>：编辑前读版本号，保存时若被他人改过则提示覆盖。 3. <b>审计面板</b>：把操作历史升级为可筛选的完整审计日志（按人/按时间/按动作）。 4. <b>重复合并</b>：同名技术点/材料检测与合并。 5. <b>订阅/消息</b>：写操作实时通知（当前是刷新面板看最近记录）。</p>
+<hr>
+<h2>第五部分：常用命令速查</h2>
+<table><thead><tr><th>用途</th><th>命令</th></tr></thead><tbody><tr><td>前端改后强制刷新</td><td>浏览器 Ctrl+F5；改 <code>index.html</code> 的 <code>app.js?v=</code> 版本号</td></tr><tr><td>重启后端</td><td><code>scripts\restart_backend.bat</code>（停旧→等端口→起新→自检）</td></tr><tr><td>启动 Nebula</td><td><code>wsl -d Ubuntu -u root -- bash .../scripts/start_nebula_wsl1.sh</code></td></tr><tr><td>停止 Nebula</td><td><code>wsl -d Ubuntu -u root -- bash /usr/local/nebula/scripts/nebula.service stop all</code></td></tr><tr><td>重置 Schema</td><td><code>wsl -d Ubuntu -u root -- python3 .../scripts/nebula_wait_and_init.py</code></td></tr><tr><td>数据健康</td><td><code>python scripts/nebula_health.py</code></td></tr><tr><td>快照备份</td><td><code>python scripts/backup_daily.py [--force]</code></td></tr><tr><td>架构审计</td><td><code>python scripts/audit_architecture.py [--detail]</code></td></tr></tbody></table>
+<hr>
+<h2>关键路径速查</h2>
+<table><thead><tr><th>路径</th><th>说明</th></tr></thead><tbody><tr><td><code>AI4KnowledgeNet\backend\</code></td><td>后端（main.py / store.py / nebula_client.py / architecture.py / history.py / routers / services）</td></tr><tr><td><code>AI4KnowledgeNet\frontend\</code></td><td>前端（index.html / app.js / styles.css / radar.html / vendor）</td></tr><tr><td><code>AI4KnowledgeNet\docs\</code></td><td>架构/功能/运维文档（同 <code>/wiki/</code> 网页可见）</td></tr><tr><td><code>AI4KnowledgeNet\scripts\</code></td><td>初始化、导入、健康检查、快照脚本</td></tr><tr><td><code>AI4KnowledgeNet\mcp_server\</code></td><td>MCP，供 AI Agent 调用（kg_* 工具）</td></tr><tr><td><code>AI4KnowledgeNet\data\</code></td><td>SQLite 旁路数据：history.db（操作历史）/ radar.db（情报雷达）/ collector.db（自动采集）</td></tr><tr><td><code>知识库-refs\_脚本\</code></td><td>底盘目录标签数据源 + 生成脚本</td></tr></tbody></table>
+<div style="margin-top:48px;padding-top:18px;border-top:1px solid #e2e8f0;color:#94a3b8;font-size:12px;text-align:center">AI4KnowledgeNet 知识图谱工作台 · 文档</div>
+</div>
+</body>
+</html>
