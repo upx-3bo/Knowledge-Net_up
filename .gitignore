@@ -1,33 +1,53 @@
-# 环境配置（含 API Key，不要提交）
+# ===== 本地环境 / 密钥（绝不上传）=====
 .env
-
-__pycache__/
-*.pyc
-*.pyo
+.env.local
+.venv/
 venv/
-*.egg-info/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# 数据库文件（可选：如果想让别人看到数据就注释掉这行）
-# data/knowledge_graph.db
+# ===== 运行时数据 / 知识节点内容（绝不上传）=====
+# 审计/雷达/采集数据库
+*.db
+*.db-journal
+*_db.gz
+*.gz.part*
+# 运行数据目录
+data/
+data_2026.json*
+# 知识图谱快照与导入批次（属知识内容，不随工具代码上传）
+scripts/snapshots/
+research/import_runs/
+research/import_batches/
+research/c2_*.json
 
-# 临时文件
-*.tmp
-*.bak
-out.txt
+# ===== Nebula 运行时（二进制/数据/日志，绝不上传）=====
+infra/nebula/native/
+infra/nebula/data/
+infra/nebula/logs/
+infra/nebula/meta/
+infra/nebula/storage/
+
+# ===== 构建产物 / 发布包 / 报告 =====
+dist/
+*.zip
+1022汇报PPT/
+frontend_backup_*/
+frontend_release_*/
+
+# ===== 日志 =====
 err.txt
-build_log.txt
-check_*.py
-test_*.py
-debug_*.py
-gen_doc.py
+out.txt
+*.log
 
-# IDE
-.vscode/
+# ===== IDE / OS =====
 .idea/
-
-# OS
-Thumbs.db
+.vscode/
 .DS_Store
+Thumbs.db
 
-# Excel 源数据（可选保留）
-# *.xlsx
+# ===== 本地参考克隆 =====
+reference/

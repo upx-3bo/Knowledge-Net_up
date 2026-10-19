@@ -1,0 +1,12 @@
+{
+  "sources": [
+    { "kind": "论文", "site": "arXiv", "type": "arxiv", "query": "cat:cs.RO AND all:vehicle electrification", "max": 5 },
+    { "kind": "论文", "site": "arXiv", "type": "arxiv", "query": "cat:cs.RO AND all:battery thermal management", "max": 5 },
+    { "kind": "论文", "site": "arXiv", "type": "arxiv", "query": "cat:cs.RO AND all:steer-by-wire", "max": 5 },
+    { "kind": "论文", "site": "arXiv", "type": "arxiv", "query": "cat:cs.RO AND all:autonomous vehicle actuator", "max": 5 },
+    { "kind": "资讯", "site": "36氪", "type": "feed", "url": "https://36kr.com/feed" },
+    { "kind": "资讯", "site": "盖世汽车", "type": "page", "url": "https://auto.gasgoo.com/news/b-1-0.html" },
+    { "kind": "供应商", "site": "舍弗勒技术专栏", "type": "page", "url": "https://www.schaeffler.cn/technology/" },
+    { "kind": "内网", "site": "(示例，请替换为您的内网地址)", "type": "page", "url": "" }
+  ]
+}

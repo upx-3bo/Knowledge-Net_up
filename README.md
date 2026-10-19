@@ -1,222 +1,120 @@
-# AI 辅助多维技术信息库 — 驱制一体 / 角模块
+# AI4KnowledgeNet · 汽车创新技术点网络工作台
 
-基于知识图谱（NebulaGraph / SQLite）构建的汽车创新技术知识库，用于：
+一个自包含的「技术点知识图谱 + 可视化工作台 + API + AI 协助入库」工具。
+本仓库只包含**工具功能本身的代码、脚本与文档**；知识节点数据、运行时数据库、
+本地环境与密钥均**不随仓库上传**（见文末「不随仓库上传的内容」）。
 
-- **技术分类**：驱制一体 / 角模块领域的技术体系
-- **标准化分析**：技术-标准关联矩阵
-- **资源池挂载**：人 / 设备 / 工具 / 文档关联到技术
-- **情报获取与动态更新**：专利、新闻自动采集 + AI 分析入库
+## 功能概览
 
-架构遵循公司标准范式：**知识图谱 → API → MCP tools → AI 应用（Skill）**。
+- **知识图谱工作台**（`frontend/`）：二维/三维视图、树状/同心圆/力导向布局、
+  节点检索、编辑、级联删除、撤回/重做、标注开关、入库审阅（分批确认）。
+- **图存储与 API**（`backend/`）：FastAPI 应用，对接 NebulaGraph，提供图谱查询、
+  导入、导出、AI 抽取、雷达采集等接口。
+- **AI 协助入库**：通过 OpenAI 兼容接口把文档/URL 抽取为结构化技术点草稿再入库。
+- **MCP 服务**（`mcp_server/`）：把知识库能力暴露给支持 MCP 的 AI 工具。
+- **运维脚本**（`scripts/`）：Nebula 初始化/健康检查、快照备份/恢复、批量导入、
+  发布打包等。
+- **基础设施**（`infra/nebula/`）：NebulaGraph 3.8 的 Docker Compose 与说明。
 
----
-
-## 一、整体架构
-
-```
-┌─────────────────────────────────────────────────────────┐
-│  AI 应用层  (Streamlit 前端 / MCP 客户端 / opencode)     │
-├─────────────────────────────────────────────────────────┤
-│  FastAPI 后端  (REST API)  +  MCP Server                │
-├─────────────────────────────────────────────────────────┤
-│  引擎抽象层  get_store() ── 按 KNOWLEDGE_ENGINE 切换     │
-│    ├─ NebulaGraph  (生产/团队环境)                       │
-│    └─ SQLite       (本地零依赖原型)                      │
-└─────────────────────────────────────────────────────────┘
-```
-
-- **数据投喂**：手动录入（API / 前端）、上传文档后 **LLM 自动抽取**实体关系
-- **存储**：图结构（技术、分类、标准、专利、资源、文档 6 类实体 + 关系）
-- **消费**：全文搜索、子图查询、技术-标准对照、资源池查询、情报更新
-
----
-
-## 二、目录结构
+## 目录结构
 
 ```
-ai-knowledge-base/
-├── backend/                       # FastAPI 后端
-│   ├── main.py                    # 应用入口（API 文档 /docs）
-│   ├── config.py                  # 配置
-│   ├── database/                  # （Nebula 客户端，备用）
-│   ├── models/schemas.py          # Pydantic 数据模型
-│   ├── routers/                   # 路由
-│   │   ├── knowledge.py           # 知识 CRUD
-│   │   ├── search.py              # 搜索
-│   │   └── classification.py      # 分类/标准/资源池
-│   └── services/
-│       ├── knowledge_base.py      # SQLite 图引擎
-│       ├── nebula_store.py        # NebulaGraph 图引擎
-│       ├── graph_store.py         # 引擎工厂（切换）
-│       ├── extractor.py           # LLM 知识抽取
-│       └── intelligence.py        # 情报自动获取
-├── frontend/                      # Streamlit 前端
-│   ├── app.py                     # 首页仪表盘
-│   └── pages/                     # 投喂 / 图谱 / 查询
-├── mcp-server/main.py             # MCP Server
-├── data/seed/                     # 种子数据 + 导入脚本
-├── nebula_init.py                 # Nebula 初始化（建库+建Schema+导数据）
-├── docker-compose.nebula.yml      # NebulaGraph 集群
-├── docker-compose.yml             # 全栈容器（备用）
-├── requirements.txt               # Python 依赖
-└── .env.example                   # 环境变量模板
+.
+├─ backend/          FastAPI 后端（routers/services/store/history/auth/config）
+├─ frontend/         静态前端（index.html / app.js / styles.css / vendor 第三方库）
+├─ mcp_server/       MCP 服务
+├─ scripts/          运维与导入脚本（Nebula 初始化、快照、备份、打包等）
+├─ infra/nebula/     NebulaGraph 部署（docker-compose + README）
+├─ docs/             架构/数据模型/功能/工作流等文档
+├─ research/         抽取模板（templates/）
+├─ requirements.txt  Python 依赖
+├─ .env.example      配置示例（复制为 .env 后填写）
+├─ run.bat           一键启动（Windows，默认端口 8001）
+└─ setup.bat         首次/重建 venv（Windows）
 ```
 
----
+## 快速开始
 
-## 三、环境准备
+1. **Python 环境**（推荐 3.11）
 
-| 依赖 | 版本 | 用途 |
+   ```bash
+   python -m venv venv
+   # Windows
+   venv\Scripts\activate
+   # Linux / WSL / macOS
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+   > 关键依赖：`nebula3-python==3.8.3`（版本已固定，勿随意改动）。
+
+2. **配置**：复制 `.env.example` 为 `.env`，按需填写 Nebula 连接、AI 接口、写入
+   口令（`WRITE_PASSWORD`）。
+
+3. **启动 NebulaGraph**（三选一）：
+
+   - **A. Docker（推荐）**：`cd infra/nebula && docker compose up -d`，
+     首次进入 graphd 控制台执行 `ADD HOSTS "storaged0":9779;`。
+   - **B. 原生二进制**：自行安装 NebulaGraph 3.8（参考 `scripts/nebul*` 脚本）；
+     仓库不包含 240MB 原生二进制。
+   - **C. 连接已有图库**：把 `.env` 的 `NEBULA_HOST` 指向已有 Nebula 即可。
+
+4. **初始化 Schema**：
+
+   ```bash
+   # 项目根目录下
+   set PYTHONPATH=%CD%          # Windows
+   export PYTHONPATH=$PWD       # Linux/WSL
+   python scripts/nebula_init.py
+   ```
+
+5. **启动服务**：
+
+   ```bash
+   venv\Scripts\python.exe -m uvicorn backend.main:app --host 0.0.0.0 --port 8001
+   # 或 Windows 直接运行 run.bat
+   ```
+
+   - 本机：<http://127.0.0.1:8001/>
+   - 局域网：`http://<本机IP>:8001/`
+   - 接口文档：<http://127.0.0.1:8001/docs>
+   - 健康检查：`GET /health`
+
+## 迁移到新机器（复制完整功能）
+
+请参阅 [`REPLICATE.md`](REPLICATE.md) 的分布部署手册。要点：
+
+- 源码（本仓库）+ `requirements.txt` + 新机 Python 3.11；
+- 自行安装 NebulaGraph（Docker 或原生）；
+- 知识图谱数据需用**快照**单独迁移（见下节，快照不在仓库内）；
+- 新建 `.env` 并填写与源机一致的 Nebula / LLM / 写入配置。
+
+## 不随仓库上传的内容（需在迁移时另行处理）
+
+| 内容 | 位置 | 说明 |
 |------|------|------|
-| Python | 3.11+ | 后端/前端/MCP |
-| Docker Desktop + WSL2 | 最新 | 运行 NebulaGraph（可选，SQLite 模式不需要） |
+| Python 虚拟环境 | `venv/` | 依赖体积大且与平台相关；用 `pip install -r requirements.txt` 重建 |
+| 本地配置与密钥 | `.env` | 含 Nebula 口令、LLM API Key、写入口令；复制 `.env.example` 后自填，**切勿提交** |
+| 知识节点数据（图谱快照） | `scripts/snapshots/` | 属业务数据；用 `python scripts/snapshot.py export/import` 单独迁移 |
+| 导入批次 / 研究中间件 | `research/import_batches/`、`research/import_runs/`、`research/c2_*.json` | 属业务内容，不入库工具仓库 |
+| 运行时数据库 | `data/*.db`（history/radar/collector） | 本机审计与审阅记录，随实例变化，不迁移 |
+| Nebula 原生二进制 | `infra/nebula/native/` | 约 240MB；按需单独安装/拷贝 |
+| 发布包 / 报告 | `dist/`、`1022汇报PPT/` | 构建产物与汇报材料 |
 
-安装依赖：
+> 契约：**代码/脚本/文档 = 仓库；数据/环境/密钥 = 本地 + 单独迁移**。
 
-```bash
-python -m venv venv
-# Windows:
-venv\Scripts\activate
-# Linux/macOS:
-source venv/bin/activate
+## 开发与维护
 
-pip install -r requirements.txt
-```
+- 改后端 `.py` 后需重启服务（uvicorn 未开 `--reload`）。
+- 改前端后更新版本号（`frontend/index.html` 的 `?v=` 与徽标）。
+- 依赖变更后更新 `requirements.txt` 并重装。
 
-复制环境变量模板并填写（至少填 LLM API Key）：
+## 文档
 
-```bash
-cp .env.example .env
-```
-
----
-
-## 四、快速启动（两种模式）
-
-### 模式 A：SQLite 本地模式（零依赖，推荐先跑通）
-
-**无需 Docker**，只在本机跑后端 + 前端：
-
-```bash
-# 1. 导入种子数据（写入 data/knowledge.db）
-python data/seed/seed_loader.py
-
-# 2. 启动后端 (http://localhost:8000/docs)
-uvicorn backend.main:app --host 0.0.0.0 --port 8000
-
-# 3.（可选）启动前端 (http://localhost:8501)
-streamlit run frontend/app.py
-```
-
-> 默认引擎即 SQLite，无需配置。验证：访问 `http://localhost:8000/stats`，应看到各类实体数量。
-
-### 模式 B：NebulaGraph 模式（生产 / 团队）
-
-**前置**：已安装 Docker Desktop + WSL2 并启动。
-
-```bash
-# 1. 启动 NebulaGraph 集群
-docker compose -f docker-compose.nebula.yml up -d
-
-# 2. 初始化图库（建 Space + Schema + 导种子数据）
-python nebula_init.py
-
-# 3. 配置环境变量指向 Nebula
-#    .env 中设置:
-#    KNOWLEDGE_ENGINE=nebula
-#    NEBULA_HOST=127.0.0.1
-#    NEBULA_PORT=9669
-
-# 4. 启动后端（自动连 Nebula）
-uvicorn backend.main:app --host 0.0.0.0 --port 8000
-```
-
-- 图谱可视化 Studio：`http://localhost:7001`
-- 验证：访问 `http://localhost:8000/stats`
-
----
-
-## 五、关键步骤与流程
-
-### 1. 投喂数据（三种方式）
-
-| 方式 | 入口 | 说明 |
-|------|------|------|
-| 手动录入 | `POST /knowledge/technology` 等 | 逐条添加技术/标准/专利/资源 |
-| 文档 AI 抽取 | `POST /knowledge/document` + LLM | 粘贴文档文本 → LLM 抽取实体关系入库 |
-| 情报自动采集 | `POST /intelligence/update` | 抓取专利/新闻 → LLM 分析 → 入图 |
-
-### 2. 数据模型（Schema）
-
-**实体（Tag）**：`technology`、`category`、`standard`、`patent`、`resource`、`component`、`document`
-
-**关系（Edge）**：
-| 关系 | 含义 |
-|------|------|
-| `belongs_to` | 技术 → 分类 |
-| `contains`   | 分类 → 子分类（树） |
-| `relates_to` | 技术 ↔ 技术 |
-| `has_standard` | 技术 → 标准 |
-| `has_patent`  | 技术 → 专利 |
-| `references`  | 技术 → 资源（资源池挂载）|
-| `derived_from`| 文档 → 源实体 |
-
-### 3. 常用查询 API
-
-| API | 说明 |
-|-----|------|
-| `GET /knowledge/technology` | 列出技术 |
-| `GET /search/full-text?query=` | 全文搜索 |
-| `GET /search/graph?keyword=&depth=` | 子图查询 |
-| `GET /classification/tree` | 分类树 |
-| `GET /classification/technology-standards?tech_name=` | 技术-标准对照 |
-| `GET /classification/resource-pool?tech_name=` | 资源池查询 |
-| `GET /stats` | 实体统计 |
-
-### 4. MCP Server（AI 可调用）
-
-```bash
-python mcp-server/main.py
-```
-
-暴露 6 个工具（`query_technology`、`query_subgraph`、`query_standards_for_technology`、`query_resource_pool`、`query_category_tree`、`run_intelligence`），对接 opencode 等支持 MCP 的客户端后可用自然语言查图库。
-
----
-
-## 六、在新电脑上重新部署（clone 后三步）
-
-```bash
-# 1. clone
-git clone <your-repo> ai-knowledge-base
-cd ai-knowledge-base
-
-# 2. 起环境
-python -m venv venv && venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env   # 填 LLM Key
-
-# 3. 起库 + 起服务（选 A 或 B）
-python data/seed/seed_loader.py          # A: SQLite 重建数据
-uvicorn backend.main:app --port 8000     # 起后端
-```
-
-> 数据全部可从 `data/seed/init_data.json` 重建，`data/knowledge.db` 已 gitignore，不同机器的本地文件不影响 clone 与一致性。
-
----
-
-## 七、Docker/WSL2 安装（仅 NebulaGraph 模式需要）
-
-见 [INSTALL_DOCKER.md](INSTALL_DOCKER.md)。
-
-要点：
-1. 管理员终端 `wsl --install` → **重启**
-2. 安装 Docker Desktop（勾选 WSL2）→ **重启**
-3. Docker Desktop 配置代理 `http://proxy.huawei.com:8080`（公司网络）
-4. `docker pull hello-world` 验证
-
----
-
-## 八、安全与合规
-
-- `.env` 存放 LLM API Key，已在 `.gitignore` 中忽略，**勿提交**。
-- 团队生产环境建议接入公司统一 LLM 网关与知识图谱平台，而非外部 API / 自建 Docker。
+- `docs/ARCHITECTURE.md` — 架构说明
+- `docs/SCHEMA.md` — 数据模型 / 图 Schema
+- `docs/FEATURES.md` — 功能清单
+- `docs/DATA_IMPORT.md` — 数据导入
+- `docs/MCP.md` — MCP 使用
+- `docs/RADAR.md` — 雷达采集
+- `docs/ROADMAP.md` — 演进与维护

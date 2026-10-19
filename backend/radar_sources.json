@@ -1,0 +1,24 @@
+{
+  "sources": [
+    { "id": "arxiv_ev", "kind": "论文", "site": "arXiv", "type": "arxiv_query", "query": "cat:cs.RO AND all:vehicle electrification", "max": 5 },
+    { "id": "arxiv_battery", "kind": "论文", "site": "arXiv", "type": "arxiv_query", "query": "cat:cs.RO AND all:battery thermal management", "max": 5 },
+    { "id": "arxiv_sbw", "kind": "论文", "site": "arXiv", "type": "arxiv_query", "query": "cat:cs.RO AND all:steer-by-wire", "max": 5 },
+    { "id": "arxiv_ad", "kind": "论文", "site": "arXiv", "type": "arxiv_query", "query": "cat:cs.RO AND all:autonomous driving vehicle", "max": 5 },
+    { "id": "ss_thermal", "kind": "论文", "site": "SemanticScholar", "type": "semanticscholar", "query": "vehicle battery thermal management electric drive", "max": 5 },
+    { "id": "ss_brake", "kind": "论文", "site": "SemanticScholar", "type": "semanticscholar", "query": "brake by wire EMB automotive", "max": 5 },
+    { "id": "cr_steering", "kind": "论文", "site": "Crossref", "type": "crossref", "query": "steer-by-wire vehicle chassis", "max": 5 },
+    { "id": "cr_suspension", "kind": "论文", "site": "Crossref", "type": "crossref", "query": "active suspension vehicle control", "max": 5 },
+    { "id": "rss_36kr", "kind": "资讯", "site": "36氪", "type": "rss", "url": "https://36kr.com/feed" },
+    { "id": "rss_cnbeta", "kind": "资讯", "site": "cnBeta(科技)", "type": "rss", "url": "https://www.cnbeta.com.tw/backend.php" },
+    { "id": "rss_bbc_zh", "kind": "资讯", "site": "BBC中文", "type": "rss", "url": "https://feeds.bbci.co.uk/zhongwen/simp/rss.xml" },
+    { "id": "rss_autonews", "kind": "资讯", "site": "AutoNews", "type": "rss", "url": "https://www.autonews.com/rss.xml" },
+    { "id": "rss_carscoops", "kind": "资讯", "site": "Carscoops", "type": "rss", "url": "https://www.carscoops.com/feed/" },
+    { "id": "sitemap_gasoo", "kind": "资讯", "site": "盖世汽车", "type": "sitemap", "url": "https://auto.gasgoo.com" },
+    { "id": "sitemap_cnbeta", "kind": "资讯", "site": "cnBeta", "type": "sitemap", "url": "https://www.cnbeta.com.tw" },
+    { "id": "page_schaeffler", "kind": "供应商", "site": "舍弗勒技术专栏", "type": "page", "url": "https://www.schaeffler.cn/technology/" },
+    { "id": "page_bosch_chassis", "kind": "供应商", "site": "博世底盘", "type": "page", "url": "https://www.bosch-mobility.com/en/solutions/chassis/" },
+    { "id": "page_continental", "kind": "供应商", "site": "大陆集团制动", "type": "page", "url": "https://www.continental.com/en/industry-solutions/mobility/" },
+    { "id": "page_it168", "kind": "资讯", "site": "IT之家·汽车", "type": "page", "url": "https://www.ithome.com/tag/qiche/" },
+    { "id": "urls_manual", "kind": "自定义", "site": "手工URL清单(示例)", "type": "urls", "urls": ["https://arxiv.org/abs/2609.02605v2"] }
+  ]
+}
