@@ -197,6 +197,39 @@ function $(id) {
   return document.getElementById(id);
 }
 
+function isLightTheme() {
+  return document.documentElement.getAttribute("data-theme") === "light";
+}
+
+function applyTheme(theme) {
+  const t = theme === "light" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", t);
+  try { localStorage.setItem("akn_theme", t); } catch (_) {}
+  const b = $("btnTheme");
+  if (b) {
+    b.textContent = t === "light" ? "深色" : "浅色";
+    b.title = t === "light" ? "切换到深色" : "切换到浅色";
+  }
+  // 画布/三维背景与 JS 侧颜色随主题重绘
+  try { redrawCurrentGraph(); } catch (_) {}
+  try { if (graph3d) graph3d.backgroundColor(t === "light" ? "#f7f9fc" : "#0b0f14"); } catch (_) {}
+}
+
+function initTheme() {
+  let saved = "dark";
+  try {
+    const s = localStorage.getItem("akn_theme");
+    if (s === "light" || s === "dark") saved = s;
+  } catch (_) {}
+  const cur = document.documentElement.getAttribute("data-theme") || saved;
+  document.documentElement.setAttribute("data-theme", cur);
+  const b = $("btnTheme");
+  if (b) {
+    b.textContent = cur === "light" ? "深色" : "浅色";
+    b.title = cur === "light" ? "切换到深色" : "切换到浅色";
+  }
+}
+
 function escHtml(s) {
   return String(s ?? "").replace(/[&<>"']/g, (c) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
@@ -2086,6 +2119,7 @@ function drawGraph2d(data, centerVid) {
     : null;
   const degrees = weightByDegree ? computeDegrees(data.edges || []) : null;
   const isTree = layoutMode === "tree";
+  const lightTheme = isLightTheme();
   // 树状模式：层级边反向成「父→子」用于布局辅助（种子坐标已含层级关系）
   const displayEdges = isTree ? treeEdgesFor(data.edges || []) : data.edges || [];
 
@@ -2146,13 +2180,14 @@ function drawGraph2d(data, centerVid) {
           hover: { background: isReview ? REVIEW_HL : base, border: "#fbbf24" },
         },
         font: {
-          color: centerLabel ? "#ffffff" : isNear ? "#e2e8f0" : "#64748b",
+          color: centerLabel ? "#ffffff" : lightTheme ? "#1f2937" : isNear ? "#e2e8f0" : "#64748b",
           face: "Segoe UI",
           size: fontSize,
           strokeWidth: 3,
-          strokeColor: "#0b1220",
+          strokeColor: centerLabel ? "#0b1220" : lightTheme ? "#ffffff" : "#0b1220",
           align: "middle",
-          background: "rgba(11,18,32,0.55)",
+          // 同心圆压在彩色圆上的标签：两主题都白字深描边、不要底矩形
+          background: centerLabel ? "rgba(0,0,0,0)" : "rgba(11,18,32,0.55)",
           ...(centerLabel ? { vadjust: labelVadjust } : {}),
         },
         borderWidth: isReview ? 4 : isSel ? 4 : isSearchHit ? 4 : isNear ? 2 : 1,
@@ -2195,7 +2230,7 @@ function drawGraph2d(data, centerVid) {
         label: isEdgeSel || hot ? label : e.edge_type === "relates_to" || count > 1 ? label : "",
         arrows: { to: { enabled: true, scaleFactor: isEdgeSel ? 1 : 0.7 } },
         color: {
-          color: isReviewEdge ? REVIEW_HL : near || isEdgeSel ? col : "#1e293b",
+          color: isReviewEdge ? REVIEW_HL : near || isEdgeSel ? col : lightTheme ? "#cbd5e1" : "#1e293b",
           highlight: "#f59e0b",
           opacity: isEdgeSel ? 1 : isReviewEdge ? 1 : near ? 0.85 : 0.12,
         },
@@ -2203,7 +2238,7 @@ function drawGraph2d(data, centerVid) {
         // longer springs around hubs so leaves (materials) get pushed farther
         length: layoutMode === "force" ? edgeSpringLength(e, degrees) : undefined,
         font: {
-          color: isEdgeSel ? "#fde68a" : "#94a3b8",
+          color: isEdgeSel ? (lightTheme ? "#b45309" : "#fde68a") : lightTheme ? "#475569" : "#94a3b8",
           size: isEdgeSel ? 12 : 10,
           strokeWidth: 0,
           face: "Segoe UI",
@@ -2621,6 +2656,7 @@ function drawGraph3d(data, centerVid) {
   }
 
   graph3d.width(w).height(h);
+  try { graph3d.backgroundColor(isLightTheme() ? "#f7f9fc" : "#0b0f14"); } catch (_) {}
   try {
     graph3d.graphData(gData);
     graph3d.resumeAnimation?.();
@@ -4420,6 +4456,7 @@ async function boot() {
   $("loginPwd")?.addEventListener("keydown", (e) => { if (e.key === "Enter") doLogin(); });
   $("btnUndo")?.addEventListener("click", () => doUndoRedo("/history/undo"));
   $("btnRedo")?.addEventListener("click", () => doUndoRedo("/history/redo"));
+  $("btnTheme")?.addEventListener("click", () => applyTheme(isLightTheme() ? "dark" : "light"));
   $("btnAssistRefine").addEventListener("click", () => runFormAssist("refine"));
   $("btnAssistTranslate").addEventListener("click", () => runFormAssist("translate"));
   $("drawerBody").addEventListener("click", (e) => {
@@ -4483,6 +4520,7 @@ async function boot() {
   await Promise.all([refreshAll(), loadAiStatus(), refreshClusterOptions().catch(() => {})]);
   refreshClassificationTree().catch(() => {});
   syncAddNodeFields();
+  initTheme();
   updateLoginButtons();
   if (document.activeElement && typeof document.activeElement.blur === "function") {
     document.activeElement.blur();

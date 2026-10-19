@@ -4,6 +4,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>技术情报雷达 · Radar</title>
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem("akn_theme");
+      document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+    } catch (e) {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  })();
+</script>
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; background: #0b0f14; color: #e6edf7; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; }
@@ -30,6 +40,25 @@
   .empty { color: #64748b; padding: 20px; text-align: center; }
   .split { display: flex; align-items: center; gap: 8px; }
   input[type=text] { flex: 1; background: #0b1220; border: 1px solid #2c3b55; color: #e6edf7; border-radius: 6px; padding: 7px 10px; font-size: 13px; }
+
+  [data-theme="light"] body { background: #f3f5f8; color: #1b2430; }
+  [data-theme="light"] header { border-bottom-color: #d7dde5; }
+  [data-theme="light"] header .sub { color: #5b6776; }
+  [data-theme="light"] button { background: #eef1f5; color: #1b2430; border-color: #cfd6e0; }
+  [data-theme="light"] button.primary { background: #2563eb; border-color: #3b82f6; color: #fff; }
+  [data-theme="light"] .panel { background: #ffffff; border-color: #d7dde5; }
+  [data-theme="light"] th, [data-theme="light"] td { border-bottom-color: #e5e9ef; }
+  [data-theme="light"] th { color: #5b6776; }
+  [data-theme="light"] .badge { background: #eef1f5; color: #334155; }
+  [data-theme="light"] a { color: #1d4ed8; }
+  [data-theme="light"] .msg { color: #5b6776; }
+  [data-theme="light"] .summary b { color: #b45309; }
+  [data-theme="light"] .empty { color: #8a94a3; }
+  [data-theme="light"] input[type=text] { background: #ffffff; border-color: #cfd6e0; color: #1b2430; }
+  [data-theme="light"] .status-ok { color: #15803d; }
+  [data-theme="light"] .status-blocked { color: #b45309; }
+  [data-theme="light"] .status-error { color: #b91c1c; }
+  [data-theme="light"] .status-skip { color: #64748b; }
 </style>
 </head>
 <body>

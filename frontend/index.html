@@ -6,8 +6,18 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <title>AI4KnowledgeNet · 技术点工作台</title>
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("akn_theme");
+        document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="/static/vendor/vis-network.min.css" />
-  <link rel="stylesheet" href="/static/styles.css?v=202610c" />
+  <link rel="stylesheet" href="/static/styles.css?v=202610d" />
 </head>
 <body>
   <div class="app">
@@ -16,7 +26,7 @@
         <span class="mark">AiX</span>
         <div>
           <h1>KnowledgeNet</h1>
-          <p>汽车创新技术点网络 · 工作台 <span id="verBadge" class="ver-badge" title="前端版本号">v202610c</span></p>
+          <p>汽车创新技术点网络 · 工作台 <span id="verBadge" class="ver-badge" title="前端版本号">v202610d</span></p>
         </div>
       </div>
       <div class="top-actions">
@@ -26,6 +36,7 @@
         <button id="btnLogin" class="ghost" type="button" title="登录后可编辑/写入图谱">登录</button>
         <button id="btnUndo" class="ghost" type="button" title="撤回最近一次操作（需登录）">↩ 撤回</button>
         <button id="btnRedo" class="ghost" type="button" title="重做最近一次撤回的操作（需登录）">↪ 重做</button>
+        <button id="btnTheme" class="ghost" type="button" title="切换到浅色">浅色</button>
       </div>
     </header>
 
@@ -481,7 +492,7 @@
 
   <script src="/static/vendor/vis-network.min.js"></script>
   <script src="/static/vendor/3d-force-graph.min.js"></script>
-  <script src="/static/app.js?v=202610c"></script>
+  <script src="/static/app.js?v=202610d"></script>
 </body>
 </html>
 
