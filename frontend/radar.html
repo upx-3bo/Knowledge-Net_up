@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>技术情报雷达 · Radar</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0b0f14; color: #e6edf7; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; }
+  header { display: flex; align-items: center; gap: 16px; padding: 14px 22px; border-bottom: 1px solid #1e2a3a; }
+  header h1 { font-size: 18px; margin: 0; }
+  header .sub { color: #8ba3c7; font-size: 12px; }
+  .toolbar { margin-left: auto; display: flex; gap: 8px; }
+  button { background: #1b2b44; color: #e6edf7; border: 1px solid #31445f; border-radius: 6px; padding: 7px 14px; cursor: pointer; font-size: 13px; }
+  button.primary { background: #2563eb; border-color: #3b82f6; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  main { display: grid; grid-template-columns: 340px 1fr; gap: 16px; padding: 16px 22px; align-items: start; }
+  .panel { background: #10161f; border: 1px solid #1e2a3a; border-radius: 10px; padding: 12px; }
+  .panel h2 { font-size: 14px; margin: 0 0 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid #16202e; vertical-align: top; }
+  th { color: #8ba3c7; font-weight: 500; }
+  .status-ok { color: #4ade80; } .status-blocked { color: #fbbf24; } .status-error { color: #f87171; } .status-skip { color: #94a3b8; }
+  .badge { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 8px; background: #1e2a3a; color: #c7d9f5; }
+  a { color: #60a5fa; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .msg { min-height: 20px; font-size: 13px; margin: 8px 0 0; color: #94a3b8; }
+  .summary { display: flex; gap: 18px; margin-bottom: 10px; font-size: 13px; }
+  .summary b { color: #fde68a; }
+  .empty { color: #64748b; padding: 20px; text-align: center; }
+  .split { display: flex; align-items: center; gap: 8px; }
+  input[type=text] { flex: 1; background: #0b1220; border: 1px solid #2c3b55; color: #e6edf7; border-radius: 6px; padding: 7px 10px; font-size: 13px; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>技术情报雷达 <span class="badge">独立模块·不入图谱</span></h1>
+    <div class="sub">全网/多源自动搜集最新资讯与前沿资料 · 整理后暂存独立库，后续再与图谱集成</div>
+  </div>
+  <div class="toolbar">
+    <button id="btnProbe">探测来源</button>
+    <button id="btnRun" class="primary">立即采集</button>
+    <button id="btnExportCsv">导出CSV</button>
+    <button id="btnExportJson">导出JSON</button>
+  </div>
+</header>
+<main>
+  <section class="panel">
+    <h2>来源监控</h2>
+    <div class="summary" id="summaryBox">—</div>
+    <table>
+      <thead><tr><th>来源 / 检索词</th><th>类型</th><th>可用性</th><th>条数</th></tr></thead>
+      <tbody id="srcBody"><tr><td colspan="4" class="empty">加载中…</td></tr></tbody>
+    </table>
+  </section>
+  <section class="panel">
+    <h2>搜集结果（暂存·不写图谱）</h2>
+    <div class="split" style="margin-bottom:8px">
+      <input id="kw" type="text" placeholder="按标题/摘要/链接过滤…" />
+      <button id="btnFilter">筛选</button>
+    </div>
+    <table>
+      <thead><tr><th>时间</th><th>来源</th><th>类型</th><th>标题</th><th>链接</th><th>摘要</th></tr></thead>
+      <tbody id="itemBody"><tr><td colspan="6" class="empty">暂无结果</td></tr></tbody>
+    </table>
+  </section>
+</main>
+<script>
+const API = "";
+async function api(path, options = {}) {
+  const res = await fetch(API + path, { ...options, headers: { "Content-Type": "application/json", ...(options.headers || {}) } });
+  return await res.json().catch(() => ({}));
+}
+function esc(s){ return String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c])); }
+function short(s, n=120){ s = String(s||""); return s.length>n ? s.slice(0,n)+"…" : s; }
+function statusClass(s){ if(!s) return "status-skip"; if(s.startsWith("ok")||s.startsWith("items")) return "status-ok"; if(s.startsWith("blocked")||s.startsWith("HTTP 4")) return "status-blocked"; return "status-error"; }
+async function loadSources(){
+  const d = await api("/radar/sources");
+  const body = document.getElementById("srcBody");
+  const st = await api("/radar/status");
+  document.getElementById("summaryBox").innerHTML =
+    `<span>总条数 <b>${st.counts.total}</b></span>` +
+    Object.entries(st.counts.by_site || {}).map(([k,v])=>`<span>${esc(k)} <b>${v}</b></span>`).join("");
+  if(!d.items || !d.items.length){ body.innerHTML = '<tr><td colspan="4" class="empty">暂无来源（检查雷达配置文件）</td></tr>'; return; }
+  body.innerHTML = d.items.map(s => `<tr>
+    <td>${esc(s.site)}${s.filter ? `<br/><span class="badge" style="max-width:180px;overflow:hidden;display:inline-block;text-overflow:ellipsis;vertical-align:bottom">${esc(s.filter)}</span>` : ""}<br/><span class="badge">${s.enabled ? "启用":"停用"}</span></td>
+    <td>${esc(s.type)}</td>
+    <td class="${statusClass(s.last_probe)}">${esc(s.last_probe || "未探测")}</td>
+    <td>${s.last_count ?? 0}</td>
+  </tr>`).join("");
+}
+async function loadItems(){
+  const kw = document.getElementById("kw").value.trim();
+  const d = await api("/radar/items?keyword="+encodeURIComponent(kw)+"&limit=300");
+  const b = document.getElementById("itemBody");
+  if(!d.items || !d.items.length){ b.innerHTML = '<tr><td colspan="6" class="empty">暂无结果，点「立即采集」或等待抓取</td></tr>'; return; }
+  b.innerHTML = d.items.map(it => `<tr>
+    <td>${new Date((it.collected_at||0)*1000).toLocaleString("zh-CN",{hour12:false})}</td>
+    <td>${esc(it.site)}</td>
+    <td><span class="badge">${esc(it.kind)}</span></td>
+    <td>${esc(it.title)}</td>
+    <td><a href="${esc(it.url)}" target="_blank" rel="noreferrer">原链</a></td>
+    <td>${esc(short(it.summary))}</td>
+  </tr>`).join("");
+}
+let timer=null;
+async function runRadar(){
+  const btn=document.getElementById("btnRun"); btn.disabled=true; btn.textContent="采集中…";
+  const r = await api("/radar/run", {method:"POST", body:"{}"});
+  timer=setInterval(async ()=>{
+    const st = await api("/radar/status");
+    if(!st.running){
+      clearInterval(timer);
+      btn.disabled=false; btn.textContent="立即采集";
+      await loadSources(); await loadItems();
+    }
+  },5000);
+  await loadSources(); await loadItems();
+}
+document.getElementById("btnRun").onclick = runRadar;
+document.getElementById("btnProbe").onclick = async ()=>{
+  const btn=document.getElementById("btnProbe"); btn.disabled=true; btn.textContent="探测中…";
+  await api("/radar/probe",{method:"POST",body:"{}"});
+  await loadSources();
+  btn.disabled=false; btn.textContent="探测来源";
+};
+document.getElementById("btnFilter").onclick = loadItems;
+document.getElementById("kw").addEventListener("keydown", e=>{ if(e.key==="Enter") loadItems(); });
+document.getElementById("btnExportCsv").onclick = ()=> window.open("/radar/export?fmt=csv","_blank");
+document.getElementById("btnExportJson").onclick = ()=> window.open("/radar/export?fmt=json","_blank");
+loadSources(); loadItems();
+</script>
+</body>
+</html>

@@ -1,0 +1,502 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <title>AI4KnowledgeNet · 技术点工作台</title>
+  <link rel="stylesheet" href="/static/vendor/vis-network.min.css" />
+  <link rel="stylesheet" href="/static/styles.css?v=202610" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="brand">
+        <span class="mark">AiX</span>
+        <div>
+          <h1>KnowledgeNet</h1>
+          <p>汽车创新技术点网络 · 工作台 <span id="verBadge" class="ver-badge" title="前端版本号">v202610</span></p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button id="btnExpandPanelTop" class="ghost" type="button" title="展开左侧检索栏" hidden>展开侧栏</button>
+        <button id="btnOverview" class="ghost" type="button">全貌</button>
+        <button id="btnRefresh" class="ghost" type="button">刷新</button>
+        <button id="btnLogin" class="ghost" type="button" title="登录后可编辑/写入图谱">登录</button>
+        <button id="btnUndo" class="ghost" type="button" title="撤回最近一次操作（需登录）">↩ 撤回</button>
+        <button id="btnRedo" class="ghost" type="button" title="重做最近一次撤回的操作（需登录）">↪ 重做</button>
+      </div>
+    </header>
+
+    <main class="layout" id="mainLayout" style="--panel-w: 380px">
+      <aside class="panel" id="sidePanel">
+        <div class="panel-toolbar">
+          <span class="lbl">功能区</span>
+          <button id="btnCollapsePanel" class="ghost" type="button" title="收起左侧栏">收起</button>
+        </div>
+
+        <div class="acc open">
+          <button class="acc-toggle" type="button" title="展开/收起">
+            <span class="acc-title">知识库总览</span><span class="acc-arrow">▸</span>
+          </button>
+          <div class="acc-body">
+            <section class="stats" id="statsBar"></section>
+          </div>
+        </div>
+
+        <div class="acc open">
+          <button class="acc-toggle" type="button" title="展开/收起">
+            <span class="acc-title">视图与布局</span><span class="acc-arrow">▸</span>
+          </button>
+          <div class="acc-body">
+            <div class="view-toggle" role="group" aria-label="画布视图">
+              <button id="btnView2d" type="button" class="tog active">二维</button>
+              <button id="btnView3d" type="button" class="tog">三维</button>
+            </div>
+            <div class="view-toggle" role="group" aria-label="布局">
+              <button id="btnLayoutTree" type="button" class="tog" title="树状分层：领域→子域→模块→技术点→文档（二维从左往右，三维上下分层）">树状</button>
+              <button id="btnLayoutRadial" type="button" class="tog active" title="同心圆初始排布，可再拖动">同心圆</button>
+              <button id="btnLayoutForce" type="button" class="tog" title="力导向：关联越多斥力越大">力导向</button>
+            </div>
+            <div class="row" id="btnTreeResetRow">
+              <button id="btnTreeReset" type="button" class="tog" title="复位：恢复树状初始布局（拖动后可点此复位）" hidden>复位</button>
+              <button id="btnTreeCenter" type="button" class="tog" title="居中/顶部：切换二维树状初始展开方式（居中=子层围绕父节点居中展开）" hidden>居中</button>
+              <button id="btnTree3dMode" type="button" class="tog" title="三维树状布局：分层 / 环形 二选一" hidden>分层</button>
+            </div>
+            <div class="row" id="btnReheatRow">
+              <button id="btnReheat" type="button" class="tog" title="力导向下把重叠节点重新撑开" hidden>重新撑开</button>
+              <button id="btnIsolate" type="button" class="tog" title="仅显示当前选中点及其一跳邻居">只看选中</button>
+            </div>
+            <div id="label3dControls" class="label3d-controls" hidden>
+              <button id="btnLabels3d" type="button" class="tog active" title="显示/隐藏三维节点名称">标注</button>
+              <div class="view-toggle label3d-layers" role="group" aria-label="标注哪些层级">
+                <button type="button" class="tog active" data-label3d-tag="vehicle" title="车辆">车辆</button>
+                <button type="button" class="tog active" data-label3d-tag="domain" title="领域">领域</button>
+                <button type="button" class="tog active" data-label3d-tag="subdomain" title="子域/系统">子域</button>
+                <button type="button" class="tog" data-label3d-tag="module" title="模块">模块</button>
+                <button type="button" class="tog" data-label3d-tag="technology" title="技术点">技术点</button>
+                <button type="button" class="tog" data-label3d-tag="material" title="文档">文档</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc">
+          <button class="acc-toggle" type="button" title="展开/收起">
+            <span class="acc-title">检索</span><span class="acc-arrow">▸</span>
+          </button>
+          <div class="acc-body">
+            <div class="block">
+              <label class="lbl">搜索</label>
+              <div class="row">
+                <input id="keyword" type="search" placeholder="技术点 / 领域 / 文档…" autocomplete="off" />
+                <select id="tagFilter">
+                  <option value="">全部</option>
+                  <option value="vehicle">车辆</option>
+                  <option value="domain">领域</option>
+                  <option value="subdomain">子域</option>
+                  <option value="module">模块</option>
+                  <option value="technology">技术点</option>
+                  <option value="material">文档</option>
+                </select>
+                <button id="btnSearch" type="button">查</button>
+                <button id="btnHighlightSearch" type="button" class="tog" title="在图中高亮查找命中的节点（二维/三维均可）">高亮命中</button>
+              </div>
+            </div>
+            <div class="block grow">
+              <div class="block-head">
+                <label class="lbl">节点列表</label>
+                <span id="listCount" class="muted"></span>
+              </div>
+              <ul id="nodeList" class="list"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc">
+          <button class="acc-toggle" type="button" title="展开/收起">
+            <span class="acc-title">分类树</span><span class="acc-arrow">▸</span>
+          </button>
+          <div class="acc-body">
+            <div class="block">
+              <p class="hint">
+                领域 → 子域 → 模块 → 技术点 → 文档 的完整层级。点击节点在图中定位查看；「只看子树」可在上方领域筛选中选择某个领域后点「全貌」。
+              </p>
+              <div class="row">
+                <button id="btnTreeExpandAll" class="ghost" type="button" title="展开全部层级">全部展开</button>
+                <button id="btnTreeCollapseAll" class="ghost" type="button" title="只保留领域一级">折叠</button>
+                <button id="btnTreeRefresh" class="ghost" type="button" title="重新拉取最新分类树">刷新</button>
+              </div>
+              <div id="treePanel" class="tree-panel"><span class="muted">加载中…</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc">
+          <button class="acc-toggle" type="button" title="展开/收起">
+            <span class="acc-title">路径查询</span><span class="acc-arrow">▸</span>
+          </button>
+          <div class="acc-body">
+            <div class="block">
+              <div class="form">
+                <input id="pathSrc" list="pathNodeList" placeholder="起点（搜索选择）" autocomplete="off" />
+                <input id="pathDst" list="pathNodeList" placeholder="终点（搜索选择）" autocomplete="off" />
+                <datalist id="pathNodeList"></datalist>
+                <button id="btnPath" type="button">查最短路径</button>
+                <p id="pathMsg" class="msg" hidden></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc">
+          <button class="acc-toggle" type="button" title="展开/收起">
+            <span class="acc-title">添加节点</span><span class="acc-arrow">▸</span>
+          </button>
+          <div class="acc-body">
+            <div class="block">
+              <form id="addForm" class="form" autocomplete="off">
+                <div class="row">
+                  <select id="addLevel" name="level" title="要新增节点的所属层级">
+                    <option value="domain">领域</option>
+                    <option value="subdomain">子域</option>
+                    <option value="module">模块</option>
+                    <option value="technology" selected>技术点</option>
+                    <option value="material">文档</option>
+                  </select>
+                  <select id="addMatType" name="material_type" hidden>
+                    <option value="doc">文档</option>
+                    <option value="paper">论文</option>
+                    <option value="patent">专利</option>
+                    <option value="standard">标准</option>
+                    <option value="news">资讯</option>
+                  </select>
+                </div>
+                <input name="name" required maxlength="48" placeholder="节点名称 *" autocomplete="off" />
+                <input
+                  name="parent_name"
+                  list="addParentList"
+                  maxlength="48"
+                  placeholder="上节点：所属上层（文档为支撑对象），可留空"
+                  autocomplete="off"
+                />
+                <datalist id="addParentList"></datalist>
+                <input
+                  name="child_name"
+                  list="addChildList"
+                  maxlength="48"
+                  placeholder="下节点：直接挂在本节点之下的已有节点，可留空"
+                  autocomplete="off"
+                />
+                <datalist id="addChildList"></datalist>
+                <div id="addDocFields" class="add-doc-fields" hidden>
+                  <input name="title" maxlength="120" placeholder="原始标题" autocomplete="off" />
+                  <textarea name="summary" rows="2" maxlength="200" placeholder="摘要"></textarea>
+                  <input name="source_url" maxlength="300" placeholder="来源链接 / 共享盘路径" autocomplete="off" />
+                </div>
+                <div id="addCommonFields">
+                  <div class="row">
+                    <textarea name="description" rows="2" maxlength="300" placeholder="一句话描述"></textarea>
+                    <input name="keywords" maxlength="80" placeholder="关键词，逗号分隔" autocomplete="off" />
+                  </div>
+                  <div class="row">
+                    <button id="btnAssistRefine" class="ghost" type="button" title="AI 提炼描述">提炼</button>
+                    <button id="btnAssistTranslate" class="ghost" type="button" title="AI 译中">译中</button>
+                  </div>
+                </div>
+                <button type="submit">写入图谱</button>
+              </form>
+              <p id="formMsg" class="msg" hidden></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc">
+          <button class="acc-toggle" type="button" title="展开/收起">
+            <span class="acc-title">导出知识架构</span><span class="acc-arrow">▸</span>
+          </button>
+          <div class="acc-body">
+            <div class="block">
+              <p class="hint">
+                自定义导出：选起点节点，向下导到某层级（或到某终点节点）。
+                JSON 含 vid 与来源链接（可回传再入库），Markdown 为层级大纲。
+              </p>
+              <input
+                id="exportStart"
+                list="exportNodeList"
+                maxlength="48"
+                placeholder="起点节点（任意层，如：整车 / 底盘技术 / 减速器）"
+                autocomplete="off"
+              />
+              <input
+                id="exportEndNode"
+                list="exportNodeList"
+                maxlength="48"
+                placeholder="终点节点（取其所在层级作为导出深度）"
+                autocomplete="off"
+                hidden
+              />
+              <datalist id="exportNodeList"></datalist>
+              <div class="row">
+                <select id="exportEndMode" title="导出终点方式">
+                  <option value="level" selected>导到某层级</option>
+                  <option value="node">导到某终点节点</option>
+                </select>
+                <select id="exportToLevel" title="导到（终点为某层级时的深度）"></select>
+                <select id="exportFormat" title="导出格式">
+                  <option value="json">JSON（含 vid）</option>
+                  <option value="md">Markdown（大纲）</option>
+                </select>
+                <button id="btnExport" type="button">导出并下载</button>
+              </div>
+              <p id="exportMeta" class="muted" hidden></p>
+              <p id="exportMsg" class="msg" hidden></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc">
+          <button class="acc-toggle" type="button" title="展开/收起">
+            <span class="acc-title">入库审阅</span><span id="recentStatus" class="acc-status"></span><span class="acc-arrow">▸</span>
+          </button>
+          <div class="acc-body">
+            <div class="block">
+              <p class="hint">
+                展示自上次「确认已审」以来新写入的节点/关联；同一次批量写入（一次请求加多个点/线）合并为一组。
+                记录永久累积，可用下方时间区间导出；新增节点可「高亮新增」在图中标出。
+                操作人显示其在登录时填写的标识（也可用 IP 判断）。
+              </p>
+              <div class="row">
+                <button id="btnRecentRefresh" type="button">刷新</button>
+                <button id="btnReviewConfirm" type="button" title="勾选了部分组则只确认这些；未勾选则确认全部">确认已审</button>
+                <button id="btnRecentHighlight" type="button">高亮新增节点</button>
+              </div>
+              <label class="check">
+                <input id="chkRecentHighlight" type="checkbox" autocomplete="off" checked />在视图中高亮未审阅中的新增节点
+              </label>
+              <p id="reviewMsg" class="msg" hidden></p>
+              <div id="recentList" class="ai-preview" hidden></div>
+              <div class="row" style="margin-top:8px">
+                <input id="historyStart" type="date" title="导出起始日期（不含当天凌晨前）" />
+                <input id="historyEnd" type="date" title="导出结束日期" />
+                <button id="btnHistoryExport" type="button" title="按所选日期范围导出操作记录 JSON">导出记录</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc">
+          <button class="acc-toggle" type="button" title="展开/收起">
+            <span class="acc-title">导入知识架构</span><span class="acc-arrow">▸</span>
+          </button>
+          <div class="acc-body">
+            <div class="block">
+              <p class="hint">
+                使用「导出知识架构」的 JSON（或同样式的新文件）批量入库：
+                带 vid 已存在 → 按 vid 指主更新；缺失 → 自动新建；先「校验」看计划，再「确认写入」。
+              </p>
+              <div class="row">
+                <button id="btnImportTemplate" type="button" title="下载自说明模板，交给本地 Agent 协助编辑后回传导入">下载模板文件</button>
+                <input id="importFile" type="file" accept=".json,application/json" />
+                <button id="btnImportLoadFile" class="ghost" type="button">载入文件</button>
+                <button id="btnImportCheck" type="button">校验（预览计划）</button>
+              </div>
+              <textarea id="importInput" rows="4" placeholder="或直接粘贴导出 JSON…" autocomplete="off"></textarea>
+              <div class="row">
+                <button id="btnImportCommit" type="button">确认写入</button>
+                <span id="importStatus" class="muted"></span>
+              </div>
+              <p id="importMsg" class="msg" hidden></p>
+              <div id="importPlan" class="ai-preview" hidden></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc">
+          <button class="acc-toggle" type="button" title="展开/收起">
+            <span class="acc-title">AI 协助入库</span><span id="aiStatus" class="acc-status">检测中…</span><span class="acc-arrow">▸</span>
+          </button>
+          <div class="acc-body">
+            <p id="aiPathHint" class="hint">
+              从技术资料中抽取技术点 / 支撑文档结构，经确认后写入图谱。
+              单份资料用「手动填写」，多份批量用「批量导入」；抽取 / 导入后都会进入「入库预览」核对，再「确认写入」。
+            </p>
+            <div class="acc acc-sub open">
+              <button class="acc-toggle" type="button" title="展开/收起">
+                <span class="acc-title">手动填写</span><span class="acc-arrow">▸</span>
+              </button>
+              <div class="acc-body">
+                <form id="aiForm" class="form" autocomplete="off">
+                  <input id="aiTitle" name="title" maxlength="120" placeholder="资料标题（可选）" autocomplete="off" />
+                  <textarea id="aiText" name="text" rows="4" required placeholder="粘贴论文摘要 / 资讯 / 专利说明…"></textarea>
+                  <label class="check">
+                    <input id="aiTranslate" type="checkbox" checked />
+                    抽取结果译为中文
+                  </label>
+                  <div class="row">
+                    <button id="btnClearAi" class="ghost" type="button" title="一键清空标题和文本">清空</button>
+                    <button id="btnAiExtract" class="ghost" type="button">自动抽取</button>
+                    <button id="btnAiCommit" type="button" disabled>确认写入</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="acc acc-sub">
+              <button class="acc-toggle" type="button" title="展开/收起">
+                <span class="acc-title">网页抓取</span><span id="fetchStatus" class="acc-status"></span><span class="acc-arrow">▸</span>
+              </button>
+              <div class="acc-body">
+                <div class="block block-sub">
+                  <p class="hint">粘贴一个公开网页 URL（论文/资讯/技术博客），抓取正文后填入「手动填写」文本框，即可继续「自动抽取」入库。</p>
+                  <div class="row">
+                    <input id="fetchUrl" type="text" placeholder="https://…" autocomplete="off" />
+                    <button id="btnFetch" type="button">抓取正文</button>
+                  </div>
+                  <p id="fetchMsg" class="msg" hidden></p>
+                </div>
+              </div>
+            </div>
+            <div class="acc acc-sub">
+              <button class="acc-toggle" type="button" title="展开/收起">
+                <span class="acc-title">批量导入</span><span id="batchStatus" class="acc-status"></span><span class="acc-arrow">▸</span>
+              </button>
+              <div class="acc-body">
+                <div class="block block-sub">
+                  <p class="hint">
+                    多份资料批量入库：先点「生成入库格式模板」拿到格式，交给本地 AI 按此把资料处理好（JSON）；
+                    然后粘贴结果，或点「导入 .md 文档」读取文件（.md 里的 JSON 代码块也可以）。
+                    支持一次粘贴 / 导入多份，随后「加载到入库预览」逐份核对，再确认写入。
+                  </p>
+                  <div class="row">
+                    <button id="btnBatchTemplate" type="button">生成入库格式模板</button>
+                    <button id="btnImportMd" class="ghost" type="button">导入 .md 文档</button>
+                    <input id="mdFile" type="file" accept=".md,.markdown,.json,.txt" hidden />
+                  </div>
+                  <p id="batchTemplateArea" class="ai-preview" hidden></p>
+                  <textarea id="batchInput" rows="5" placeholder="粘贴本地 AI 生成的 JSON（可含多份）…" autocomplete="off"></textarea>
+                  <div class="row">
+                    <button id="btnLoadPreview" type="button">加载到入库预览</button>
+                  </div>
+                  <p id="batchMsg" class="msg" hidden></p>
+                  <div id="batchList" class="ai-preview" hidden></div>
+                </div>
+              </div>
+            </div>
+            <div id="aiPreview" class="ai-preview" hidden></div>
+            <p id="aiMsg" class="msg" hidden></p>
+          </div>
+        </div>
+
+        <div class="acc">
+          <button class="acc-toggle" type="button" title="展开/收起">
+            <span class="acc-title">自动采集</span><span id="collectStatus" class="acc-status">—</span><span class="acc-arrow">▸</span>
+          </button>
+          <div class="acc-body">
+            <p class="hint">
+              从 arXiv / 行业资讯 / 供应商专栏等来源自动抓取 → AI 抽取成「入库格式」→
+              进入下方待入库清单，人工确认后写入图谱。来源增删在
+              <code>backend/collector_sources.json</code>；周期由 <code>COLLECT_INTERVAL_HOURS</code> 控制（默认 24h）。
+            </p>
+            <div class="row">
+              <button id="btnCollectRun" type="button">立即采集</button>
+              <button id="btnCollectRefresh" class="ghost" type="button">刷新清单</button>
+            </div>
+            <p id="collectMsg" class="msg" hidden></p>
+            <div id="collectList" class="ai-preview" hidden></div>
+          </div>
+        </div>
+      </aside>
+      <div class="splitter" id="panelSplitter" title="拖动调节左侧宽度" role="separator" aria-orientation="vertical"></div>
+
+      <section class="canvas-wrap">
+        <div class="canvas-head">
+          <div class="canvas-head-main">
+            <h2 id="focusTitle">选择节点查看子图</h2>
+            <p id="focusMeta" class="muted">点击左侧列表或图中球体查看详情</p>
+          </div>
+          <div class="canvas-head-actions">
+            <span id="canvasBudget" class="canvas-budget" title="当前画布节点/边数量">0 / 0</span>
+            <button id="btnFitGraph" type="button" class="tog" title="适应画布">适应</button>
+            <button id="btnToggleFilters" class="tog" type="button" title="展开/收起层级筛选">筛选 ▸</button>
+          </div>
+        </div>
+        <div id="canvasFilters" class="canvas-filters collapsed">
+          <div class="row canvas-controls">
+            <span class="lbl">显示层级</span>
+            <select id="layerCap" title="选择看到哪一层">
+              <option value="vehicle">车辆</option>
+              <option value="domain">领域</option>
+              <option value="subdomain">子域/系统</option>
+              <option value="module">模块</option>
+              <option value="technology" selected>技术点</option>
+              <option value="material">文档</option>
+            </select>
+            <select id="layerScope" title="仅本层，或本层及其所有上层">
+              <option value="with_upper" selected>含上层</option>
+              <option value="only">仅本层</option>
+            </select>
+          </div>
+          <div class="row canvas-controls">
+            <span class="lbl">领域筛选</span>
+            <select id="domainFilter" title="只看某个领域（子库）或全部">
+              <option value="">全部领域</option>
+            </select>
+          </div>
+        </div>
+        <div class="canvas-body">
+          <div class="graph-stage">
+            <div id="network" class="network">
+              <div id="graphLegend" class="graph-legend" aria-hidden="true"></div>
+            </div>
+            <div id="network3d" class="network-3d" hidden></div>
+            <div id="graphHint" class="graph-hint">加载图引擎中…</div>
+          </div>
+          <aside id="detailDrawer" class="detail-drawer" hidden>
+            <div class="drawer-head">
+              <div>
+                <div id="drawerTag" class="drawer-tag">节点</div>
+                <h3 id="drawerTitle">详情</h3>
+                <p id="drawerVid" class="muted mono"></p>
+              </div>
+              <button id="btnCloseDrawer" class="ghost" type="button" aria-label="关闭">✕</button>
+            </div>
+            <div id="drawerBody" class="drawer-body"></div>
+            <div class="drawer-actions">
+              <button id="btnFocusNode" type="button">聚焦子图</button>
+              <button id="btnDeleteNode" class="danger" type="button">删除</button>
+              <a id="drawerLink" class="ghost link" href="#" target="_blank" rel="noreferrer" hidden>打开链接</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-mask" id="loginMask" hidden>
+    <div class="modal modal-small">
+      <h3 style="margin-bottom:10px">登录（写入口令）</h3>
+      <p style="color:#8ba3c7;font-size:12px;margin-bottom:12px">登录后才能编辑/添加/写入图谱；未登录可浏览。<br>填写的「标识」会作为操作人 ID 记录在入库审阅里（建议用工号/姓名）。</p>
+      <input id="loginUser" type="text" placeholder="操作人标识（如工号/姓名，可空）" autocomplete="off" style="width:100%;background:#0b1220;border:1px solid #2c3b55;color:#e6edf7;border-radius:6px;padding:9px 10px;font-size:13px;margin-bottom:8px" />
+      <input id="loginPwd" type="password" placeholder="请输入写入口令" autocomplete="off" style="width:100%;background:#0b1220;border:1px solid #2c3b55;color:#e6edf7;border-radius:6px;padding:9px 10px;font-size:13px" />
+      <p id="loginMsg" class="msg" style="color:#f0a8a8;font-size:12px;margin:6px 0 0" hidden></p>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:14px">
+        <button id="btnLoginCancel" type="button" style="background:#1b2b44;border:1px solid #31445f;color:#c7d9f5;border-radius:6px;padding:7px 16px;cursor:pointer">取消</button>
+        <button id="btnLoginOk" type="button" style="background:#2563eb;border:1px solid #3b82f6;color:#fff;border-radius:6px;padding:7px 16px;cursor:pointer">登录</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/vendor/vis-network.min.js"></script>
+  <script src="/static/vendor/3d-force-graph.min.js"></script>
+  <script src="/static/app.js?v=202610"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
