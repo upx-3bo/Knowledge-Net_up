@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+pydantic
+python-dotenv
+nebula3-python==3.8.3
+httpx
+mcp==1.12.4

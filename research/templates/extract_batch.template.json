@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "topic": "示例主题（如：线控底盘 / 整车性能）",
+    "stage": "human_reviewed",
+    "note": "第一轮：资料→AI筛选抽取→人工审查。通过后把 human_review.passed 设为 true，再跑 import_with_ai_review.py 做第二轮 AI 质检。"
+  },
+  "items": [
+    {
+      "id": "doc_001",
+      "source": {
+        "title": "原始资料标题",
+        "path": "绿区或共享盘路径/文件名.pdf",
+        "url": "",
+        "collector": "姓名或工号"
+      },
+      "human_review": {
+        "passed": true,
+        "reviewer": "姓名",
+        "comment": "人工确认技术点与材料挂接无误"
+      },
+      "extraction": {
+        "domain": "线控底盘",
+        "subdomain": "线控制动",
+        "tech_points": [
+          {
+            "name": "示例技术点",
+            "description": "一句话说明该技术点解决什么问题",
+            "keywords": "关键词1,关键词2"
+          }
+        ],
+        "materials": [
+          {
+            "name": "论文·示例短名",
+            "type": "paper",
+            "title": "原始英文/中文标题",
+            "summary": "≤100字：这篇材料支撑了什么结论",
+            "source_url": "",
+            "published_at": "2024-01-01"
+          }
+        ],
+        "tech_material_links": [
+          { "tech": "示例技术点", "material": "论文·示例短名" }
+        ],
+        "notes": "不确定处写这里，供第二轮 AI 质检参考"
+      }
+    }
+  ]
+}
