@@ -41,6 +41,8 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
 }
 .brand { display: flex; align-items: center; gap: 14px; }
 .ver-badge {
@@ -306,30 +308,19 @@ button[type="submit"], #btnSearch {
   flex-direction: column;
   overflow: hidden;
 }
-.canvas-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--line);
-}
-.canvas-head-main { min-width: 0; flex: 1; }
-.canvas-head-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  flex-shrink: 0;
-}
 .canvas-budget {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 6;
+  pointer-events: none;
   font-family: var(--mono);
   font-size: 0.75rem;
   color: var(--muted);
   padding: 4px 8px;
   border-radius: 8px;
   border: 1px solid var(--line);
-  background: #12171d;
+  background: rgba(15, 20, 27, 0.66);
   white-space: nowrap;
 }
 .canvas-budget.warn {
@@ -340,9 +331,36 @@ button[type="submit"], #btnSearch {
   color: #fca5a5;
   border-color: rgba(248, 113, 113, 0.5);
 }
-.canvas-head h2 {
-  margin: 0;
-  font-size: 1.1rem;
+.subarea {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 8px;
+  margin-top: 2px;
+  border-top: 1px dashed rgba(148, 163, 184, 0.22);
+}
+.subarea-title {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+.sidebar-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 6px;
+  align-items: center;
+}
+.sidebar-filters .lbl {
+  flex: 0 0 auto;
+  margin-right: 2px;
+}
+.sidebar-filters select {
+  width: auto;
+  flex: 1 1 90px;
+  min-width: 70px;
+  padding: 6px 8px;
+  font-size: 12px;
 }
 .label3d-controls {
   display: flex;
@@ -372,17 +390,6 @@ button[type="submit"], #btnSearch {
 .label3d-controls .label3d-layers .tog:disabled {
   opacity: 0.35;
   cursor: not-allowed;
-}
-.canvas-filters {
-  padding: 8px 16px 10px;
-  border-bottom: 1px solid var(--line);
-  background: rgba(15, 20, 27, 0.55);
-}
-.canvas-filters.collapsed {
-  display: none;
-}
-.canvas-filters .lbl {
-  margin-right: 2px;
 }
 .network {
   position: relative;

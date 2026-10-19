@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <title>AI4KnowledgeNet · 技术点工作台</title>
   <link rel="stylesheet" href="/static/vendor/vis-network.min.css" />
-  <link rel="stylesheet" href="/static/styles.css?v=202610a" />
+  <link rel="stylesheet" href="/static/styles.css?v=202610c" />
 </head>
 <body>
   <div class="app">
@@ -16,7 +16,7 @@
         <span class="mark">AiX</span>
         <div>
           <h1>KnowledgeNet</h1>
-          <p>汽车创新技术点网络 · 工作台 <span id="verBadge" class="ver-badge" title="前端版本号">v202610b</span></p>
+          <p>汽车创新技术点网络 · 工作台 <span id="verBadge" class="ver-badge" title="前端版本号">v202610c</span></p>
         </div>
       </div>
       <div class="top-actions">
@@ -67,6 +67,31 @@
             <div class="row" id="btnReheatRow">
               <button id="btnReheat" type="button" class="tog" title="力导向下把重叠节点重新撑开" hidden>重新撑开</button>
               <button id="btnIsolate" type="button" class="tog" title="仅显示当前选中点及其一跳邻居">只看选中</button>
+              <button id="btnFitGraph" type="button" class="tog" title="适应画布">适应画布</button>
+            </div>
+            <div class="subarea">
+              <div class="subarea-title">图层与领域筛选</div>
+              <div class="row sidebar-filters">
+                <span class="lbl">显示层级</span>
+                <select id="layerCap" title="选择看到哪一层">
+                  <option value="vehicle">车辆</option>
+                  <option value="domain">领域</option>
+                  <option value="subdomain">子域/系统</option>
+                  <option value="module">模块</option>
+                  <option value="technology" selected>技术点</option>
+                  <option value="material">文档</option>
+                </select>
+                <select id="layerScope" title="仅本层，或本层及其所有上层">
+                  <option value="with_upper" selected>含上层</option>
+                  <option value="only">仅本层</option>
+                </select>
+              </div>
+              <div class="row sidebar-filters">
+                <span class="lbl">领域筛选</span>
+                <select id="domainFilter" title="只看某个领域（子库）或全部">
+                  <option value="">全部领域</option>
+                </select>
+              </div>
             </div>
             <div id="label3dControls" class="label3d-controls" hidden>
               <button id="btnLabels3d" type="button" class="tog active" title="显示/隐藏三维节点名称">标注</button>
@@ -410,42 +435,9 @@
       <div class="splitter" id="panelSplitter" title="拖动调节左侧宽度" role="separator" aria-orientation="vertical"></div>
 
       <section class="canvas-wrap">
-        <div class="canvas-head">
-          <div class="canvas-head-main">
-            <h2 id="focusTitle">选择节点查看子图</h2>
-            <p id="focusMeta" class="muted">点击左侧列表或图中球体查看详情</p>
-          </div>
-          <div class="canvas-head-actions">
-            <span id="canvasBudget" class="canvas-budget" title="当前画布节点/边数量">0 / 0</span>
-            <button id="btnFitGraph" type="button" class="tog" title="适应画布">适应</button>
-            <button id="btnToggleFilters" class="tog" type="button" title="展开/收起层级筛选">筛选 ▸</button>
-          </div>
-        </div>
-        <div id="canvasFilters" class="canvas-filters collapsed">
-          <div class="row canvas-controls">
-            <span class="lbl">显示层级</span>
-            <select id="layerCap" title="选择看到哪一层">
-              <option value="vehicle">车辆</option>
-              <option value="domain">领域</option>
-              <option value="subdomain">子域/系统</option>
-              <option value="module">模块</option>
-              <option value="technology" selected>技术点</option>
-              <option value="material">文档</option>
-            </select>
-            <select id="layerScope" title="仅本层，或本层及其所有上层">
-              <option value="with_upper" selected>含上层</option>
-              <option value="only">仅本层</option>
-            </select>
-          </div>
-          <div class="row canvas-controls">
-            <span class="lbl">领域筛选</span>
-            <select id="domainFilter" title="只看某个领域（子库）或全部">
-              <option value="">全部领域</option>
-            </select>
-          </div>
-        </div>
         <div class="canvas-body">
           <div class="graph-stage">
+            <span id="canvasBudget" class="canvas-budget" title="当前画布节点/边数量">0 / 0</span>
             <div id="network" class="network">
               <div id="graphLegend" class="graph-legend" aria-hidden="true"></div>
             </div>
@@ -489,7 +481,7 @@
 
   <script src="/static/vendor/vis-network.min.js"></script>
   <script src="/static/vendor/3d-force-graph.min.js"></script>
-  <script src="/static/app.js?v=202610b"></script>
+  <script src="/static/app.js?v=202610c"></script>
 </body>
 </html>
 

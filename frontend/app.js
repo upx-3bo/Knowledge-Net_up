@@ -366,16 +366,9 @@ function layerFilterLabel() {
 }
 
 function updateFocusMetaAfterDraw(center) {
-  const shown = lastGraphPayload?.view;
-  const n = (shown?.nodes || []).length;
-  const e = (shown?.edges || []).length;
-  const lay = layoutMode === "radial" ? "同心圆" : "力导向";
-  if (overviewMode) {
-    $("focusTitle").textContent = "图谱全貌";
-    $("focusMeta").textContent = "";
-  } else if (focusVid) {
-    $("focusMeta").textContent = `${TAG_LABEL[center?.tag] || center?.tag || ""} · ${layerFilterLabel()} · ${n} 节点 · ${lay}`;
-  }
+  // 画布顶部标题栏已移除：聚焦上下文改由详情抽屉呈现
+  const ft = $("focusTitle"); if (ft) ft.textContent = "";
+  const fm = $("focusMeta"); if (fm) fm.textContent = "";
 }
 
 function updateGraphLegend() {
@@ -866,13 +859,12 @@ async function showSubgraph(vid, { withDetail = true } = {}) {
   forceFitNext = true;
   const data = await api(`/subgraph/${encodeURIComponent(vid)}?depth=${SUBGRAPH_DEPTH}`);
   const center = (data.nodes || []).find((n) => n.vid === vid);
-  const title = nodeDisplayName(center || { props: {}, vid });
-  $("focusTitle").textContent = title;
+  const ft = $("focusTitle"); if (ft) ft.textContent = "";
   drawGraph(data, vid);
   const shown = lastGraphPayload?.view;
   const n = (shown?.nodes || []).length;
   const matNote = hideMaterials ? " · 已藏文档" : "";
-  $("focusMeta").textContent = `${TAG_LABEL[center?.tag] || center?.tag || ""} · ${n} 节点${matNote}`;
+  const fm = $("focusMeta"); if (fm) fm.textContent = "";
   [...$("nodeList").querySelectorAll("li")].forEach((li) => {
     li.classList.toggle("active", li.dataset.vid === vid || li.dataset.vid === detailVid);
   });
@@ -4183,8 +4175,8 @@ async function runPathQuery() {
       { nodes: data.path.nodes, edges: data.path.edges || [] },
       src
     );
-    $("focusTitle").textContent = "最短路径";
-    $("focusMeta").textContent = names;
+    const ft = $("focusTitle"); if (ft) ft.textContent = "";
+    const fm = $("focusMeta"); if (fm) fm.textContent = "";
   } catch (err) {
     msg.className = "msg err";
     msg.textContent = String(err.message || err);
@@ -4374,28 +4366,6 @@ async function boot() {
     const x = $("aiText"); if (x) x.value = "";
     const m = $("aiMsg"); if (m) { m.hidden = true; m.textContent = ""; }
   });
-  $("btnToggleFilters")?.addEventListener("click", () => {
-    const box = $("canvasFilters");
-    const btn = $("btnToggleFilters");
-    if (!box) return;
-    const collapsed = box.classList.toggle("collapsed");
-    if (btn) btn.textContent = collapsed ? "筛选 ▸" : "筛选 ▾";
-    setTimeout(() => {
-      if (network && viewMode === "2d") {
-        const c = $("network");
-        const boxn = c.getBoundingClientRect();
-        network.setSize(`${Math.floor(boxn.width)}px`, `${Math.floor(boxn.height)}px`);
-        network.redraw();
-      }
-    }, 30);
-  });
-  // Filters start collapsed (only layer cap/scope inside)
-  {
-    const box = $("canvasFilters");
-    const btn = $("btnToggleFilters");
-    if (box && !box.classList.contains("collapsed")) box.classList.add("collapsed");
-    if (btn) btn.textContent = "筛选 ▸";
-  }
   // 视图与布局已移入侧栏手风琴（默认展开），无顶部工具条折叠逻辑
   const splitter = $("panelSplitter");
   if (splitter && layoutEl) {
