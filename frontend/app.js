@@ -2186,8 +2186,8 @@ function drawGraph2d(data, centerVid) {
           strokeWidth: 3,
           strokeColor: centerLabel ? "#0b1220" : lightTheme ? "#ffffff" : "#0b1220",
           align: "middle",
-          // 同心圆压在彩色圆上的标签：两主题都白字深描边、不要底矩形
-          background: centerLabel ? "rgba(0,0,0,0)" : "rgba(11,18,32,0.55)",
+          // 同心圆压在彩色圆上的标签：两主题都白字深描边、不要底矩形；浅色下外置标签也去底衬（白描边已足够）
+          background: centerLabel || lightTheme ? "rgba(0,0,0,0)" : "rgba(11,18,32,0.55)",
           ...(centerLabel ? { vadjust: labelVadjust } : {}),
         },
         borderWidth: isReview ? 4 : isSel ? 4 : isSearchHit ? 4 : isNear ? 2 : 1,
