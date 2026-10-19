@@ -51,3 +51,7 @@ Thumbs.db
 
 # ===== 本地参考克隆 =====
 reference/
+
+# ===== 前端第三方库：仓库只保留拆分件 parts/，完整文件由 scripts/assemble_vendor.py 生成 =====
+frontend/vendor/3d-force-graph.min.js
+frontend/vendor/vis-network.min.js

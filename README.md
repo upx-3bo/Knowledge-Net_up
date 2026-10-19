@@ -100,6 +100,7 @@
 | 运行时数据库 | `data/*.db`（history/radar/collector） | 本机审计与审阅记录，随实例变化，不迁移 |
 | Nebula 原生二进制 | `infra/nebula/native/` | 约 240MB；按需单独安装/拷贝 |
 | 发布包 / 报告 | `dist/`、`1022汇报PPT/` | 构建产物与汇报材料 |
+| 前端第三方大库完整文件 | `frontend/vendor/3d-force-graph.min.js`、`vis-network.min.js` | 仓库以 `frontend/vendor/parts/*.partNNN` 分片保存（规避单次上传体积限制），`setup.bat`/`run.bat` 会自动调用 `scripts/assemble_vendor.py` 拼回完整文件 |
 
 > 契约：**代码/脚本/文档 = 仓库；数据/环境/密钥 = 本地 + 单独迁移**。
 
