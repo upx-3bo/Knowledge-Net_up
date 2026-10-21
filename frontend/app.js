@@ -137,6 +137,10 @@ let hideMaterials = false; // derived when layerCap !== material
 let nodesCache = [];
 let lastExtract = null;
 let lastGraphPayload = null; // { data, centerVid, view }
+let ctrlPressed = false; // Ctrl 全局按键状态（拖拽建点用）
+let dragCreateCtx = null; // Ctrl+拖拽建点的上下文
+let dragCtx = null; // 本次 2D 拖拽的起始信息
+const dropSeedPositions = new Map(); // vid -> {x,y} 新建节点落点（会话内）
 let detailNode = null;
 let pathNodeIndex = {}; // name -> vid
 let addPool = {}; // tag -> [{name,vid,tag}]（「添加节点」表单候选池）
@@ -2157,7 +2161,8 @@ function drawGraph2d(data, centerVid) {
       const degBoost = weightByDegree ? Math.min(14, deg * 1.15) : 0;
       const mass = nodePhysicsMass(n, deg);
       const kept = savedPositions?.[n.vid];
-      const seed = isTree ? treePos?.get?.(n.vid) || treePos?.[n.vid] : radial?.[n.vid];
+      const dropSeed = dropSeedPositions.get(n.vid);
+      const seed = dropSeed || (isTree ? treePos?.get?.(n.vid) || treePos?.[n.vid] : radial?.[n.vid]);
       // 仅作初始种子，物理关闭 → 之后可自由拖动到任意位置（拖动结果在重绘时自动保留）
       const xy = kept || seed || null;
       // 节点最终尺寸（含选中/搜索/审阅加粗与度加权），保持不变
@@ -2318,6 +2323,52 @@ function drawGraph2d(data, centerVid) {
       detailEdge = null;
       syncDrawerActionLabels();
       redrawCurrentGraph();
+    });
+    // Ctrl+拖拽：以源节点为模板新建同层节点（确认前不写库）
+    network.on("dragStart", (params) => {
+      const vid = params.nodes?.[0];
+      if (!vid) return;
+      const pos = network.getPositions([vid])[vid] || {};
+      const node = (lastGraphPayload?.view?.nodes || lastGraphPayload?.data?.nodes || []).find((n) => n.vid === vid);
+      dragCtx = {
+        vid,
+        x: pos.x,
+        y: pos.y,
+        tag: node?.tag || "",
+        clientX: params.event?.srcEvent?.clientX ?? params.event?.clientX ?? 0,
+        clientY: params.event?.srcEvent?.clientY ?? params.event?.clientY ?? 0,
+        ctrl: !!(params.event?.srcEvent?.ctrlKey || ctrlPressed),
+      };
+      if (dragCtx.ctrl) {
+        setGraphHint(
+          isDragCreateAllowed(dragCtx.tag)
+            ? "Ctrl 拖拽：松手后弹出新建表单（取消不写库）"
+            : "该层级不支持拖拽新建，请用左侧「新增节点」表单",
+          false
+        );
+      }
+    });
+    network.on("dragEnd", (params) => {
+      const ctx = dragCtx;
+      dragCtx = null;
+      const vid = params.nodes?.[0] || ctx?.vid;
+      if (!vid || !ctx) return;
+      const ctrl = !!(params.event?.srcEvent?.ctrlKey || ctx.ctrl || ctrlPressed);
+      if (!ctrl) return;
+      const before = network.getPositions([vid])[vid] || {};
+      const movedVis = Math.hypot((before.x ?? 0) - (ctx.x ?? 0), (before.y ?? 0) - (ctx.y ?? 0));
+      // 模板节点不能被拖走：恢复到拖拽前位置
+      try { network.moveNode(vid, ctx.x, ctx.y); network.redraw(); } catch (_) {}
+      const ex = params.event?.srcEvent?.clientX ?? params.event?.clientX;
+      const ey = params.event?.srcEvent?.clientY ?? params.event?.clientY;
+      let movedPx = movedVis;
+      if (typeof ex === "number" && typeof ey === "number") {
+        movedPx = Math.hypot(ex - (ctx.clientX || 0), ey - (ctx.clientY || 0));
+      }
+      setGraphHint("", false);
+      if (movedPx < 15) return; // 拖拽距离太短：视作取消，不弹表单
+      const pos = params.pointer?.canvas || before || { x: ctx.x, y: ctx.y };
+      openDragCreateModal(vid, { x: pos.x, y: pos.y }, isDragCreateAllowed(ctx.tag)).catch(alertError);
     });
     const refit = () => resizeGraphViewport();
     window.addEventListener("resize", refit);
@@ -4219,6 +4270,209 @@ async function runPathQuery() {
   }
 }
 
+/* ================= Ctrl + 拖拽新建节点 ================= */
+function isDragCreateAllowed(tag) {
+  return tag === "subdomain" || tag === "module" || tag === "technology";
+}
+
+// 拖拽新建时允许选择的上层层级（严格按架构：技术→模块、模块→子域、子域→领域）
+function dragParentTags(tag) {
+  if (tag === "technology") return ["module"];
+  if (tag === "module") return ["subdomain"];
+  if (tag === "subdomain") return ["domain"];
+  return [];
+}
+
+function findSourceParentVid(srcVid) {
+  const edges = lastGraphPayload?.view?.edges || lastGraphPayload?.data?.edges || [];
+  const e = edges.find((x) => x.edge_type === "belongs_to" && x.src_vid === srcVid);
+  return e ? e.dst_vid : "";
+}
+
+function dcSetMsg(text, isErr) {
+  const m = $("dcMsg");
+  if (!m) return;
+  m.hidden = !text;
+  m.className = isErr ? "msg err" : "msg";
+  m.textContent = text || "";
+}
+
+async function openDragCreateModal(srcVid, dropPos, allowed) {
+  const mask = $("dragCreateMask");
+  if (!mask) return;
+  const nodes = lastGraphPayload?.view?.nodes || lastGraphPayload?.data?.nodes || [];
+  const src = nodes.find((n) => n.vid === srcVid);
+  const tag = src?.tag || "";
+  const can = !!allowed && isDragCreateAllowed(tag);
+  dragCreateCtx = { srcVid, tag, dropPos, allowed: can };
+
+  const layerEl = $("dcLayer");
+  if (layerEl) layerEl.textContent = `${TAG_LABEL[tag] || tag}「${nodeDisplayName(src || {})}」`;
+
+  // 重置字段
+  ["dcName", "dcDesc", "dcKeywords", "dcDocName", "dcDocTitle", "dcDocUrl"].forEach((id) => {
+    const el = $(id);
+    if (el) el.value = "";
+  });
+  const withDoc = $("dcWithDoc");
+  if (withDoc) withDoc.checked = false;
+  const docFields = $("dcDocFields");
+  if (docFields) docFields.hidden = true;
+  const docType = $("dcDocType");
+  if (docType) docType.value = "doc";
+  dcSetMsg("", false);
+
+  const withDocRow = $("dcWithDocRow");
+  if (withDocRow) withDocRow.hidden = !(tag === "technology" || tag === "module");
+  const kwRow = $("dcKeywordsRow");
+  if (kwRow) kwRow.hidden = !(tag === "module" || tag === "technology");
+
+  const parentSel = $("dcParent");
+  const note = $("dcNote");
+  const confirmBtn = $("dcConfirm");
+  if (!can) {
+    if (parentSel) parentSel.innerHTML = '<option value="">（不可用）</option>';
+    if (note) {
+      note.hidden = false;
+      note.textContent = "整支/领域层级不支持拖拽新建，请使用左侧「新增节点」表单。";
+    }
+    if (confirmBtn) confirmBtn.disabled = true;
+    mask.hidden = false;
+    return;
+  }
+  if (note) note.hidden = true;
+  if (confirmBtn) confirmBtn.disabled = false;
+
+  // 候选上层：该层级所有合法父级（默认源节点的父级）
+  const defVid = findSourceParentVid(srcVid);
+  const opts = [];
+  for (const pt of dragParentTags(tag)) {
+    try {
+      const d = await api(`/vertices?tag=${encodeURIComponent(pt)}&limit=500`);
+      opts.push(...(d.items || []));
+    } catch (_) {
+      /* ignore */
+    }
+  }
+  if (parentSel) {
+    parentSel.innerHTML = opts.length
+      ? opts
+          .map(
+            (n) =>
+              `<option value="${escHtml(n.vid)}"${n.vid === defVid ? " selected" : ""}>` +
+              `${escHtml(nodeDisplayName(n))}（${TAG_LABEL[n.tag] || n.tag}）</option>`
+          )
+          .join("")
+      : '<option value="">（无可选上层）</option>';
+  }
+  mask.hidden = false;
+}
+
+function closeDragCreateModal() {
+  const m = $("dragCreateMask");
+  if (m) m.hidden = true;
+  dragCreateCtx = null;
+}
+
+async function confirmDragCreate() {
+  if (!dragCreateCtx || !dragCreateCtx.allowed) return;
+  const { tag, dropPos } = dragCreateCtx;
+  const name = ($("dcName")?.value || "").trim();
+  const desc = ($("dcDesc")?.value || "").trim();
+  const kw = ($("dcKeywords")?.value || "").trim();
+  const parentVid = $("dcParent")?.value || "";
+  const withDocRow = $("dcWithDocRow");
+  const withDoc = !!($("dcWithDoc")?.checked && withDocRow && !withDocRow.hidden);
+  const docName = ($("dcDocName")?.value || "").trim();
+  const docType = $("dcDocType")?.value || "doc";
+  const docTitle = ($("dcDocTitle")?.value || "").trim();
+  const docUrl = ($("dcDocUrl")?.value || "").trim();
+
+  if (!name) return dcSetMsg("请填写节点名称", true);
+  if (!parentVid) return dcSetMsg("请选择所属上层", true);
+  if (withDoc && !docName) return dcSetMsg("已勾选新建支撑文档，请填写文档名", true);
+
+  const confirmBtn = $("dcConfirm");
+  if (confirmBtn) confirmBtn.disabled = true;
+  dcSetMsg("写入中…", false);
+
+  let newNodeVid = null;
+  let docVid = null;
+  try {
+    const props = {
+      name,
+      description: desc,
+      keywords: tag === "module" || tag === "technology" ? kw : "",
+      status: "active",
+    };
+    const node = await api("/vertices", { method: "POST", body: JSON.stringify({ tag, props }) });
+    newNodeVid = node.vid;
+
+    // 挂接边：新节点 belongs_to 上层；失败则回滚刚建的节点
+    try {
+      await api("/edges", {
+        method: "POST",
+        body: JSON.stringify({
+          edge_type: "belongs_to",
+          src_vid: newNodeVid,
+          dst_vid: parentVid,
+          props: { weight: 1.0 },
+        }),
+      });
+    } catch (e) {
+      await api(`/vertices/${encodeURIComponent(newNodeVid)}`, { method: "DELETE" }).catch(() => {});
+      newNodeVid = null;
+      throw new Error("挂接上层失败，已回滚新节点：" + (e.message || e));
+    }
+
+    // 可选：同时新建支撑文档，用 supports 只挂到本新节点
+    if (withDoc) {
+      try {
+        const doc = await api("/vertices", {
+          method: "POST",
+          body: JSON.stringify({
+            tag: "material",
+            props: {
+              name: docName,
+              material_type: docType,
+              title: docTitle || docName,
+              summary: "",
+              source_url: docUrl,
+              published_at: "",
+            },
+          }),
+        });
+        docVid = doc.vid;
+        await api("/edges", {
+          method: "POST",
+          body: JSON.stringify({
+            edge_type: "supports",
+            src_vid: docVid,
+            dst_vid: newNodeVid,
+            props: { weight: 1.0 },
+          }),
+        });
+      } catch (e) {
+        if (docVid) await api(`/vertices/${encodeURIComponent(docVid)}`, { method: "DELETE" }).catch(() => {});
+        if (newNodeVid) await api(`/vertices/${encodeURIComponent(newNodeVid)}`, { method: "DELETE" }).catch(() => {});
+        newNodeVid = null;
+        throw new Error("支撑文档创建/挂接失败，已回滚：" + (e.message || e));
+      }
+    }
+
+    if (dropPos && newNodeVid) dropSeedPositions.set(newNodeVid, { x: dropPos.x, y: dropPos.y });
+    closeDragCreateModal();
+    setGraphHint(`已新建${TAG_LABEL[tag] || tag}「${name}」`, false);
+    await loadStats();
+    await searchNodes();
+    await refreshClusterOptions().catch(() => {});
+    await showSubgraph(newNodeVid, { withDetail: false });
+  } catch (err) {
+    dcSetMsg(String(err.message || err), true);
+    if (confirmBtn) confirmBtn.disabled = false;
+  }
+}
+
 async function boot() {
   // URL hash 快捷入口：如 #view=2d&layout=tree / #view=3d&layout=tree，便于分享指定视图
   try {
@@ -4457,6 +4711,16 @@ async function boot() {
   $("btnUndo")?.addEventListener("click", () => doUndoRedo("/history/undo"));
   $("btnRedo")?.addEventListener("click", () => doUndoRedo("/history/redo"));
   $("btnTheme")?.addEventListener("click", () => applyTheme(isLightTheme() ? "dark" : "light"));
+  // Ctrl+拖拽新建：弹窗按钮、文档勾选、全局 Ctrl 状态
+  $("dcCancel")?.addEventListener("click", closeDragCreateModal);
+  $("dcConfirm")?.addEventListener("click", () => confirmDragCreate());
+  $("dcWithDoc")?.addEventListener("change", () => {
+    const f = $("dcDocFields");
+    if (f) f.hidden = !$("dcWithDoc").checked;
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Control") ctrlPressed = true; });
+  document.addEventListener("keyup", (e) => { if (e.key === "Control") ctrlPressed = false; });
+  window.addEventListener("blur", () => { ctrlPressed = false; });
   $("btnAssistRefine").addEventListener("click", () => runFormAssist("refine"));
   $("btnAssistTranslate").addEventListener("click", () => runFormAssist("translate"));
   $("drawerBody").addEventListener("click", (e) => {

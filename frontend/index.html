@@ -17,7 +17,7 @@
     })();
   </script>
   <link rel="stylesheet" href="/static/vendor/vis-network.min.css" />
-  <link rel="stylesheet" href="/static/styles.css?v=202610d" />
+  <link rel="stylesheet" href="/static/styles.css?v=202610f" />
 </head>
 <body>
   <div class="app">
@@ -26,7 +26,7 @@
         <span class="mark">AiX</span>
         <div>
           <h1>KnowledgeNet</h1>
-          <p>汽车创新技术点网络 · 工作台 <span id="verBadge" class="ver-badge" title="前端版本号">v202610e</span></p>
+          <p>汽车创新技术点网络 · 工作台 <span id="verBadge" class="ver-badge" title="前端版本号">v202610f</span></p>
         </div>
       </div>
       <div class="top-actions">
@@ -476,6 +476,70 @@
     </main>
   </div>
 
+  <div class="modal-mask" id="dragCreateMask" hidden>
+    <div class="modal modal-scroll">
+      <h3 style="margin:0 0 4px">Ctrl 拖拽新建节点</h3>
+      <p class="muted" style="font-size:12px;margin:0 0 10px">
+        模板：<b id="dcLayer">—</b> · 在原节点右侧松手位置新建一个<b>同层级空白节点</b>，信息请重新填写。
+        确认前不会写入数据库。
+      </p>
+      <div class="dc-field">
+        <label for="dcName">名称 *</label>
+        <input id="dcName" type="text" placeholder="新节点名称" autocomplete="off" />
+      </div>
+      <div class="dc-field">
+        <label for="dcParent">所属上层 *</label>
+        <select id="dcParent"></select>
+      </div>
+      <div class="dc-field">
+        <label for="dcDesc">描述</label>
+        <textarea id="dcDesc" rows="2" placeholder="可选"></textarea>
+      </div>
+      <div class="dc-field" id="dcKeywordsRow">
+        <label for="dcKeywords">关键词</label>
+        <input id="dcKeywords" type="text" placeholder="可选，逗号分隔" autocomplete="off" />
+      </div>
+      <div id="dcWithDocRow">
+        <label class="check" style="align-items:center">
+          <input type="checkbox" id="dcWithDoc" autocomplete="off" />同时新建支撑文档（用 supports 只挂到本新节点）
+        </label>
+        <div id="dcDocFields" hidden style="margin-top:6px">
+          <div class="dc-field">
+            <label for="dcDocName">文档名 *</label>
+            <input id="dcDocName" type="text" placeholder="文档名称" autocomplete="off" />
+          </div>
+          <div class="dc-field">
+            <label for="dcDocType">类型</label>
+            <select id="dcDocType">
+              <option value="doc">文档 doc</option>
+              <option value="standard">标准 standard</option>
+              <option value="patent">专利 patent</option>
+              <option value="paper">论文 paper</option>
+              <option value="news">资讯 news</option>
+            </select>
+          </div>
+          <div class="dc-field">
+            <label for="dcDocTitle">原始标题</label>
+            <input id="dcDocTitle" type="text" placeholder="可选，默认同文档名" autocomplete="off" />
+          </div>
+          <div class="dc-field">
+            <label for="dcDocUrl">来源链接</label>
+            <input id="dcDocUrl" type="text" placeholder="可选" autocomplete="off" />
+          </div>
+        </div>
+      </div>
+      <p class="hint" style="margin-top:8px">
+        提示：已存在的文档若要从属于某节点，无需拖拽，请在节点右侧详情里用【建立关联】建立 supports 支持关系。
+      </p>
+      <p id="dcNote" class="msg err" hidden></p>
+      <p id="dcMsg" class="msg" hidden></p>
+      <div class="row" style="justify-content:flex-end;margin-top:12px">
+        <button id="dcCancel" type="button" class="ghost">取消</button>
+        <button id="dcConfirm" type="button">确认新建</button>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-mask" id="loginMask" hidden>
     <div class="modal modal-small">
       <h3 style="margin-bottom:10px">登录（写入口令）</h3>
@@ -492,7 +556,7 @@
 
   <script src="/static/vendor/vis-network.min.js"></script>
   <script src="/static/vendor/3d-force-graph.min.js"></script>
-  <script src="/static/app.js?v=202610e"></script>
+  <script src="/static/app.js?v=202610f"></script>
 </body>
 </html>
 

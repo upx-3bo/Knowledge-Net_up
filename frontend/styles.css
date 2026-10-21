@@ -1042,3 +1042,14 @@ button[type="submit"], #btnSearch {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
 }
 [data-theme="light"] .modal-mask { background: rgba(15, 23, 42, 0.28); }
+
+/* Ctrl 拖拽新建：可滚动弹窗 + 表单字段 */
+.modal-scroll { max-height: 82vh; overflow-y: auto; }
+.dc-field { display: grid; gap: 4px; margin-bottom: 8px; }
+.dc-field > label { font-size: 12px; color: var(--muted); }
+.dc-field input,
+.dc-field select,
+.dc-field textarea { width: 100%; }
+.modal .check input { width: auto; }
+#dcNote { margin: 6px 0 0; }
+#dcMsg { margin: 6px 0 0; }
