@@ -1,0 +1,5892 @@
+{
+  "export": {
+    "format": "json",
+    "architecture_version": "1.0",
+    "exported_at": "2026-10-22T03:03:08+00:00",
+    "scope": {
+      "root_vid": "dom_7c85bfb782",
+      "root_name": "整车信息系统",
+      "from_level": "domain",
+      "to_level": "material"
+    },
+    "stats": {
+      "nodes": 200,
+      "edges": 199,
+      "dropped_invalid_edges": 0,
+      "materials_moved_from_children": 0
+    },
+    "node_counts": {
+      "domain": 1,
+      "subdomain": 6,
+      "module": 92,
+      "material": 101
+    }
+  },
+  "tree": {
+    "vid": "dom_7c85bfb782",
+    "tag": "domain",
+    "props": {
+      "description": "",
+      "name": "整车信息系统"
+    },
+    "children": [
+      {
+        "vid": "sub_94e4be7a02",
+        "tag": "subdomain",
+        "props": {
+          "description": "",
+          "name": "转向与制动"
+        },
+        "children": [
+          {
+            "vid": "mod_02a6d5ef98",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 转向系统/线控转向。资料来源板块：板块四 · 转向与制动系统",
+              "name": "线控转向核心技术（同驭）",
+              "status": "active",
+              "keywords": "转向系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_a29a44a922",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "同驭--【外部】线控转向核心技术：研发到量产的跨越.pdf",
+                  "published_at": "",
+                  "name": "同驭--【外部】线控转向核心技术：研发到量产的跨越",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_4411b95063",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 制动系统/线控制动。资料来源板块：板块四 · 转向与制动系统",
+              "name": "分布式电子踏板线控制动系统",
+              "status": "active",
+              "keywords": "制动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_594217f8d9",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "分布式电子踏板线控制动系统_欧摩威_分享版.pdf",
+                  "published_at": "",
+                  "name": "分布式电子踏板线控制动系统_欧摩威_分享版",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_0e26f1953f",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 转向系统/智能转向。资料来源板块：板块四 · 转向与制动系统",
+              "name": "重型商用车智能转向系统",
+              "status": "active",
+              "keywords": "转向系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_f7f2890ca4",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "北汽-重型商用车智能转向系统关键技术及产业化外发版.pdf",
+                  "published_at": "",
+                  "name": "北汽-重型商用车智能转向系统关键技术及产业化外发版",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_0e905af8c9",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 制动系统/功能安全。资料来源板块：板块四 · 转向与制动系统",
+              "name": "北汇实车底盘功能安全测试",
+              "status": "active",
+              "keywords": "制动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_5ba3569410",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "北汇--实车底盘功能安全测试解决方案(1).pdf",
+                  "published_at": "",
+                  "name": "北汇--实车底盘功能安全测试解决方案(1)",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_2f9aa2da94",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 制动系统/线控制动/EMB。资料来源板块：板块四 · 转向与制动系统",
+              "name": "EMB坐标系首发量产经验",
+              "status": "active",
+              "keywords": "制动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_e910e12fac",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "ATC - 坐标系首发量产经验分享(分享版).pdf",
+                  "published_at": "",
+                  "name": "ATC - 坐标系首发量产经验分享(分享版)",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_9230df0ea4",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 制动系统/线控制动/EMB。资料来源板块：板块四 · 转向与制动系统",
+              "name": "商用车EMB功能安全与冗余设计",
+              "status": "active",
+              "keywords": "制动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_cfe8d9a7e7",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "恒创智行-商用车EMB功能安全与全链路冗余设计.pdf",
+                  "published_at": "",
+                  "name": "恒创智行-商用车EMB功能安全与全链路冗余设计",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_53c71d604b",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 驱制动一体化。资料来源板块：板块四 · 转向与制动系统",
+              "name": "驱制动一体化系统关键技术",
+              "status": "active",
+              "keywords": "驱制动一体化"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_fbfea737be",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "13-清华大学-驱制动一体化系统关键技术.pdf",
+                  "published_at": "",
+                  "name": "13-清华大学-驱制动一体化系统关键技术",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_a2e76ef0dc",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 制动系统/制动盘涂层。资料来源板块：板块四 · 转向与制动系统",
+              "name": "汽车制动盘涂层系统性解决方案",
+              "status": "active",
+              "keywords": "制动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_52ff55647d",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "Höganäs 汽车制动盘涂层系统性解决方案-(外发).pdf",
+                  "published_at": "",
+                  "name": "Höganäs 汽车制动盘涂层系统性解决方案-(外发)",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_6099c27d3f",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 转向系统/转向制动协同。资料来源板块：板块四 · 转向与制动系统",
+              "name": "转向制动协同漂移控制",
+              "status": "active",
+              "keywords": "转向系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_f7a26d0729",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "基于转向与制动协同的智能汽车漂移运动控制--江苏大学.pdf",
+                  "published_at": "",
+                  "name": "基于转向与制动协同的智能汽车漂移运动控制--江苏大学",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_4b7d8c21b7",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 制动系统/线控制动。资料来源板块：板块四 · 转向与制动系统",
+              "name": "智能驾驶关键执行器",
+              "status": "active",
+              "keywords": "制动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_73f7442705",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "上海同驭--智能驾驶关键执行器_20260603 - ATC(1).pdf",
+                  "published_at": "",
+                  "name": "上海同驭--智能驾驶关键执行器_20260603 - ATC(1)",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_9cc8c32e8d",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 转向系统/滚珠丝杠。资料来源板块：板块四 · 转向与制动系统",
+              "name": "滚珠丝杠副精密磨削方案",
+              "status": "active",
+              "keywords": "转向系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_7522ad33a1",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "勇克集团用于电动助力转向和电动刹车滚珠丝杠副的精密磨削方案_公开版.pdf",
+                  "published_at": "",
+                  "name": "勇克集团用于电动助力转向和电动刹车滚珠丝杠副的精密磨削方案_公开版",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_b7565bfe8d",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 制动系统/摩擦材料。资料来源板块：板块四 · 转向与制动系统",
+              "name": "碳陶摩擦副在汽车领域的应用",
+              "status": "active",
+              "keywords": "制动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_3560aaf965",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "碳陶摩擦副在汽车领域的应用202606.pdf",
+                  "published_at": "",
+                  "name": "碳陶摩擦副在汽车领域的应用202606",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_02654498ee",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 制动系统/制动盘。资料来源板块：板块四 · 转向与制动系统",
+              "name": "制动盘激光熔覆技术",
+              "status": "active",
+              "keywords": "制动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_91d5b00c11",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "海天 制动盘激光熔覆（外发版）.pdf",
+                  "published_at": "",
+                  "name": "海天 制动盘激光熔覆（外发版）",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_54e5423ebf",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 制动系统/摩擦材料。资料来源板块：板块四 · 转向与制动系统",
+              "name": "欧7法规下摩擦材料配方调整策略",
+              "status": "active",
+              "keywords": "制动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_aaeec02a26",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "欧7制动排放法规下摩擦材料配方调整策略与影响分析6.9(1).pdf",
+                  "published_at": "",
+                  "name": "欧7制动排放法规下摩擦材料配方调整策略与影响分析6.9(1)",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_547b8c1e02",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：转向与制动 / 制动系统/湿式制动器。资料来源板块：板块四 · 转向与制动系统",
+              "name": "驱制一体湿式制动器方案",
+              "status": "active",
+              "keywords": "制动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_e9bf91a35a",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "珠海华粤 驱制一体解决方案-湿式制动器20260601.pdf",
+                  "published_at": "",
+                  "name": "珠海华粤 驱制一体解决方案-湿式制动器20260601",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          }
+        ],
+        "materials": []
+      },
+      {
+        "vid": "sub_1e5345418a",
+        "tag": "subdomain",
+        "props": {
+          "description": "",
+          "name": "开发与测试"
+        },
+        "children": [
+          {
+            "vid": "mod_3e580ac08f",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：开发与测试 / 开发工具/快速控制原型。资料来源板块：板块七 · 开发与测试",
+              "name": "恒润RCP与分布式电驱技术",
+              "status": "active",
+              "keywords": "开发工具"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_46976a52ce",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "恒润RCP技术洞察分析.pptx",
+                  "published_at": "",
+                  "name": "恒润RCP技术洞察分析",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_a99565a1aa",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：开发与测试 / 测试验证/建模仿真。资料来源板块：板块七 · 开发与测试",
+              "name": "驱动桥系统仿真与正向开发",
+              "status": "active",
+              "keywords": "测试验证"
+            },
+            "children": [],
+            "materials": []
+          },
+          {
+            "vid": "mod_b8de1c1e7c",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：开发与测试 / 测试验证/硬件在环。资料来源板块：板块七 · 开发与测试",
+              "name": "底盘全链路测试解决方案（北汇）",
+              "status": "active",
+              "keywords": "测试验证"
+            },
+            "children": [],
+            "materials": []
+          },
+          {
+            "vid": "mod_7c5af8cfd5",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：开发与测试 / 制造工艺/电机绝缘。资料来源板块：板块七 · 开发与测试",
+              "name": "1000V电压平台电机绝缘优化",
+              "status": "active",
+              "keywords": "制造工艺"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_174a8f25e7",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "8-中车-1000V电压平台的挑战与电机绝缘优化.pdf",
+                  "published_at": "",
+                  "name": "8-中车-1000V电压平台的挑战与电机绝缘优化",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_e5680a7053",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：开发与测试 / 制造工艺/铜排焊接。资料来源板块：板块七 · 开发与测试",
+              "name": "动力系统铜排焊接质量控制",
+              "status": "active",
+              "keywords": "制造工艺"
+            },
+            "children": [],
+            "materials": []
+          },
+          {
+            "vid": "mod_d8b56f7e48",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：开发与测试 / 测试验证/流热仿真。资料来源板块：板块七 · 开发与测试",
+              "name": "PJLSMPS粒子法油冷电驱动流热仿真",
+              "status": "active",
+              "keywords": "测试验证"
+            },
+            "children": [],
+            "materials": []
+          },
+          {
+            "vid": "mod_addb12aae7",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：开发与测试 / 开发工具/大数据仿真。资料来源板块：板块七 · 开发与测试",
+              "name": "大数据仿真与AI工程师",
+              "status": "active",
+              "keywords": "开发工具"
+            },
+            "children": [],
+            "materials": []
+          },
+          {
+            "vid": "mod_3725b25e6e",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：开发与测试 / 开发工具/AI研发。资料来源板块：其他 / 待定",
+              "name": "AI赋能研发与制造",
+              "status": "active",
+              "keywords": "开发工具"
+            },
+            "children": [],
+            "materials": []
+          }
+        ],
+        "materials": []
+      },
+      {
+        "vid": "sub_2bdaa4fc4e",
+        "tag": "subdomain",
+        "props": {
+          "description": "",
+          "name": "行驶系统"
+        },
+        "children": [
+          {
+            "vid": "mod_8dc6695186",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / 悬架/智能悬架。资料来源板块：板块三 · 行驶系统",
+              "name": "哈金森智能底盘解决方案",
+              "status": "active",
+              "keywords": "悬架"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_0e341ed137",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "20260603-Speech in ATC show_哈金森智能底盘解决方案_Xin Yanxia.pdf",
+                  "published_at": "",
+                  "name": "20260603-Speech in ATC show_哈金森智能底盘解决方案_Xin Yanxia",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_7687e1aee5",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / 车桥与车轮/角模块。资料来源板块：板块三 · 行驶系统",
+              "name": "角模块智能行驶机器人",
+              "status": "active",
+              "keywords": "车桥与车轮"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_99355f385d",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "角模块打造智能行驶机器人.pdf",
+                  "published_at": "",
+                  "name": "角模块打造智能行驶机器人",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_85c6977498",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / 轮胎/智能轮胎。资料来源板块：板块三 · 行驶系统",
+              "name": "上富智能轮胎传感器",
+              "status": "active",
+              "keywords": "轮胎"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_248d0a08f0",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "上富智能轮胎交流_0702.pptx",
+                  "published_at": "",
+                  "name": "上富智能轮胎交流_0702",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_f234e3af4f",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "新建 Microsoft Word 文档.docx",
+                  "published_at": "",
+                  "name": "新建 Microsoft Word 文档",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_ab6013520d",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "智能轮胎传感器产品介绍2026.pdf",
+                  "published_at": "",
+                  "name": "智能轮胎传感器产品介绍2026",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_3a8b76ff04",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / 轮胎/轮胎配方。资料来源板块：板块三 · 行驶系统",
+              "name": "UUHP夏季轮胎技术洞察",
+              "status": "active",
+              "keywords": "轮胎"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_6fe4044f49",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "解决方案技术洞察26年5月—UUHP夏季轮胎.pptx",
+                  "published_at": "",
+                  "name": "解决方案技术洞察26年5月—UUHP夏季轮胎",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_efcbda4b61",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / 车架与底盘/线控底盘。资料来源板块：板块三 · 行驶系统",
+              "name": "线控底盘学习笔记",
+              "status": "active",
+              "keywords": "车架与底盘"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_61c40c350a",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "线控底盘学习笔记.pdf",
+                  "published_at": "",
+                  "name": "线控底盘学习笔记",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_0153700ea8",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / NVH/振动噪声。资料来源板块：其他 / 待定",
+              "name": "国际汽车NVH技术会议快报",
+              "status": "active",
+              "keywords": "NVH"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_e55cb535df",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "2026ISNVH国际汽车NVH技术会议-解决方案参会快报.pptx",
+                  "published_at": "",
+                  "name": "2026ISNVH国际汽车NVH技术会议-解决方案参会快报",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_e2abd9a150",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / 悬架/减振器。资料来源板块：板块三 · 行驶系统",
+              "name": "天纳克悬架技术",
+              "status": "active",
+              "keywords": "悬架"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_2016adbaec",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "ATC China 2026_TENNECO.pdf",
+                  "published_at": "",
+                  "name": "ATC China 2026_TENNECO",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_92b610442f",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / 悬架/电磁悬架。资料来源板块：板块三 · 行驶系统",
+              "name": "江苏大学直线式电磁悬架",
+              "status": "active",
+              "keywords": "悬架"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_752c643ca3",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "江苏大学 直线式电磁悬架.pdf",
+                  "published_at": "",
+                  "name": "江苏大学 直线式电磁悬架",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_98e236fdd0",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / 悬架/主动悬架。资料来源板块：板块三 · 行驶系统",
+              "name": "京西重工主动悬架",
+              "status": "active",
+              "keywords": "悬架"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_a4258ba5c6",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "京西重工主动悬架 2023.pdf",
+                  "published_at": "",
+                  "name": "京西重工主动悬架 2023",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_15fdb8ac64",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / 车桥与车轮/主动气动轮毂。资料来源板块：板块三 · 行驶系统",
+              "name": "主动气动轮毂技术洞察",
+              "status": "active",
+              "keywords": "车桥与车轮"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_f82109f45c",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "25-5 Active Aero Wheel_CompActive.pdf",
+                  "published_at": "",
+                  "name": "25-5 Active Aero Wheel_CompActive",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_5df668dfaa",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "解决方案技术洞察26年5月—AAW.pptx",
+                  "published_at": "",
+                  "name": "解决方案技术洞察26年5月—AAW",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_a857e096c4",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "26-1 Aero Wheel Findings_CompActive.pdf",
+                  "published_at": "",
+                  "name": "26-1 Aero Wheel Findings_CompActive",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_31468042d6",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "26-2 Active Aero Wheel_Ready_Value.pdf",
+                  "published_at": "",
+                  "name": "26-2 Active Aero Wheel_Ready_Value",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_bd7f4129e4",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / 悬架/主动悬架。资料来源板块：板块三 · 行驶系统",
+              "name": "中科擎邦主动悬架",
+              "status": "active",
+              "keywords": "悬架"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_f32adfe8e7",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "中科擎邦主动悬架介绍(1).pdf",
+                  "published_at": "",
+                  "name": "中科擎邦主动悬架介绍(1)",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_553c610a3f",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：行驶系统 / 悬架/主动悬架。资料来源板块：板块三 · 行驶系统",
+              "name": "中科擎邦全主动悬架方案",
+              "status": "active",
+              "keywords": "悬架"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_da4a908d6b",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "全主动悬架方案介绍-中科擎邦(8).pptx",
+                  "published_at": "",
+                  "name": "全主动悬架方案介绍-中科擎邦(8)",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_8018b5c83c",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "中科擎邦 -2 - 客户.pptx",
+                  "published_at": "",
+                  "name": "中科擎邦 -2 - 客户",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          }
+        ],
+        "materials": []
+      },
+      {
+        "vid": "sub_04a6acbe7c",
+        "tag": "subdomain",
+        "props": {
+          "description": "",
+          "name": "车身与座舱"
+        },
+        "children": [
+          {
+            "vid": "mod_1f8953ac59",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：车身与座舱 / 智能座舱/防晕车。资料来源板块：板块五 · 车身、座舱、照明及附属",
+              "name": "头枕音响防晕车技术",
+              "status": "active",
+              "keywords": "智能座舱"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_d211d82e04",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "防晕车技术.pptx",
+                  "published_at": "",
+                  "name": "防晕车技术",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_1134e2a8e8",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "可嵌入汽车座椅头枕防晕车音响设备.pdf",
+                  "published_at": "",
+                  "name": "可嵌入汽车座椅头枕防晕车音响设备",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_d5e74b3664",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：车身与座舱 / 轻量化材料/镁合金。资料来源板块：板块五 · 车身、座舱、照明及附属",
+              "name": "镁合金材料及工艺研究进展",
+              "status": "active",
+              "keywords": "轻量化材料"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_58cdbfaa46",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "上海交大--镁合金材料及工艺的研究进展--曾小勤教授团队.pdf",
+                  "published_at": "",
+                  "name": "上海交大--镁合金材料及工艺的研究进展--曾小勤教授团队",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_04c6c9f5c8",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：车身与座舱 / 智能座舱/防晕控制。资料来源板块：板块五 · 车身、座舱、照明及附属",
+              "name": "智能座舱防晕控制",
+              "status": "active",
+              "keywords": "智能座舱"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_43464af657",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "解决方案技术洞察26年5月—智能座舱防晕控制.pptx",
+                  "published_at": "",
+                  "name": "解决方案技术洞察26年5月—智能座舱防晕控制",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_5eaf1432eb",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "智能座舱防晕控制_武汉理工大学.pdf",
+                  "published_at": "",
+                  "name": "智能座舱防晕控制_武汉理工大学",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_260033698c",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：车身与座舱 / 轻量化材料/轻量化材料。资料来源板块：板块五 · 车身、座舱、照明及附属",
+              "name": "先进底盘悬架材料选择与轻量化",
+              "status": "active",
+              "keywords": "轻量化材料"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_254d4cdbd3",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "恩骅力material selection for advanced chassis & suspension and lightweight.pdf",
+                  "published_at": "",
+                  "name": "恩骅力material selection for advanced chassis & suspension and lightweight",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_fd12007beb",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：车身与座舱 / 轻量化材料/特种聚合物。资料来源板块：板块五 · 车身、座舱、照明及附属",
+              "name": "电气化转型期特种聚合物研究",
+              "status": "active",
+              "keywords": "轻量化材料"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_325dba2a07",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "5-世索科-汽车行业电气化转型期的特种聚合物基础研究与测试.pdf",
+                  "published_at": "",
+                  "name": "5-世索科-汽车行业电气化转型期的特种聚合物基础研究与测试",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          }
+        ],
+        "materials": []
+      },
+      {
+        "vid": "sub_3a74911590",
+        "tag": "subdomain",
+        "props": {
+          "description": "",
+          "name": "动力系统"
+        },
+        "children": [
+          {
+            "vid": "mod_4f89d81cc3",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱传动/分布式驱动。资料来源板块：板块二 · 电驱传动系统",
+              "name": "长安太行分布式驱动",
+              "status": "active",
+              "keywords": "电驱传动"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_f64e44bd42",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "15-长安汽车-长安太行分布式驱动技术研究成果分享.pdf",
+                  "published_at": "",
+                  "name": "15-长安汽车-长安太行分布式驱动技术研究成果分享",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_f96c8025d9",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/轴向磁通电机。资料来源板块：板块一 · 动力系统",
+              "name": "轴向磁通电机产业化（盘毂）",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_2f3b3aca01",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "5-盘毂-轴向磁通电机的产业化应用实践.pdf",
+                  "published_at": "",
+                  "name": "5-盘毂-轴向磁通电机的产业化应用实践",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_2ab142c814",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/直线电机。资料来源板块：板块一 · 动力系统",
+              "name": "直线电机专利",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_94cbebda38",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "CN224401366U.pdf",
+                  "published_at": "",
+                  "name": "CN224401366U",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_56af3f2030",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/轴承电腐蚀。资料来源板块：板块一 · 动力系统",
+              "name": "电驱系统轴承电腐蚀",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_4f13a6a85c",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "5-哈尔滨工业大学-电动汽车电驱系统轴承电腐蚀问题.pdf",
+                  "published_at": "",
+                  "name": "5-哈尔滨工业大学-电动汽车电驱系统轴承电腐蚀问题",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_452fd33395",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/多相电机。资料来源板块：板块一 · 动力系统",
+              "name": "智能多相电驱动系统",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_a0d3056a76",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "4-鲲腾泰克-鲲腾泰克智能多相电驱动系统技术及产业化实现.pdf",
+                  "published_at": "",
+                  "name": "4-鲲腾泰克-鲲腾泰克智能多相电驱动系统技术及产业化实现",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_99faaf45b4",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/电机测试。资料来源板块：板块一 · 动力系统",
+              "name": "电机效率测试与报告（DeepDrive）",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_17babdc339",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "Generator_A1Sample_MG220_TestReport_OEMVersion.pdf",
+                  "published_at": "",
+                  "name": "Generator_A1Sample_MG220_TestReport_OEMVersion",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_e412c20515",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "MG_AV1_GS1002_EffMap_20260219_450Vdc.xlsx",
+                  "published_at": "",
+                  "name": "MG_AV1_GS1002_EffMap_20260219_450Vdc",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_4d49fe4d94",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "MG_AV1_GS1002_EffMap_20260318_590Vdc.xlsx",
+                  "published_at": "",
+                  "name": "MG_AV1_GS1002_EffMap_20260318_590Vdc",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_cf9dcd447b",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/下一代电驱。资料来源板块：板块一 · 动力系统",
+              "name": "中小型下一代电驱思考",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_870c610855",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "2-青山工业-对中小型下一代电驱的思考.pdf",
+                  "published_at": "",
+                  "name": "2-青山工业-对中小型下一代电驱的思考",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_a22bb0e6a9",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱系统。资料来源板块：板块一 · 动力系统",
+              "name": "Dauch电驱系统开发技术与应用",
+              "status": "active",
+              "keywords": "电驱系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_f626a40ac8",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "Dauch集团（原美桥）--电驱系统开发技术与应用.pdf",
+                  "published_at": "",
+                  "name": "Dauch集团（原美桥）--电驱系统开发技术与应用",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_02876645c1",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 动力电池/电池管理。资料来源板块：其他 / 待定",
+              "name": "汽车动力电池预印本",
+              "status": "active",
+              "keywords": "动力电池"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_a60a7da906",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "preprints202605.0939.v1.pdf",
+                  "published_at": "",
+                  "name": "preprints202605.0939.v1",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_ec53cb50a9",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/电机加热。资料来源板块：板块一 · 动力系统",
+              "name": "电机发热方法及装置",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_17fdbe34c5",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "CN202310200862.8_电机发热方法和装置电机控制器电动汽车及存储介质.pdf",
+                  "published_at": "",
+                  "name": "CN202310200862.8_电机发热方法和装置电机控制器电动汽车及存储介质",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_4775a54dc7",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "CN202310200862.8_电机发热方法和装置电机控制器电动汽车及存储介质 (1).pdf",
+                  "published_at": "",
+                  "name": "CN202310200862.8_电机发热方法和装置电机控制器电动汽车及存储介质 (1)",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_d1fdf4c08c",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/轮毂电机。资料来源板块：板块一 · 动力系统",
+              "name": "DeepDrive轮毂电机技术",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_8110126a30",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "260526_Presentation DeepDrive.pdf",
+                  "published_at": "",
+                  "name": "260526_Presentation DeepDrive",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_83cbe1e579",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "Datasheet_DeepDrive_IW2000.pdf",
+                  "published_at": "",
+                  "name": "Datasheet_DeepDrive_IW2000",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_867e85cb0a",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "Datasheet_DeepDrive_CD600.pdf",
+                  "published_at": "",
+                  "name": "Datasheet_DeepDrive_CD600",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_c89c76544d",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 发电机/增程/发电机。资料来源板块：板块一 · 动力系统",
+              "name": "DeepDrive发电机BOM",
+              "status": "active",
+              "keywords": "发电机/增程"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_2615a3597b",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "260316_BOM DeepDrive_Generator.pdf",
+                  "published_at": "",
+                  "name": "260316_BOM DeepDrive_Generator",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_1ce0309bb0",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱与功率电子/功率器件。资料来源板块：板块一 · 动力系统",
+              "name": "电驱与功率器件行业趋势",
+              "status": "active",
+              "keywords": "电驱与功率电子"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_7ab8674668",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "汽车电驱系统和功率器件行业需求与发展趋势公开版.pdf",
+                  "published_at": "",
+                  "name": "汽车电驱系统和功率器件行业需求与发展趋势公开版",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_9fe3defceb",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱系统。资料来源板块：其他 / 待定",
+              "name": "电驱传动系统本土化（采埃孚）",
+              "status": "active",
+              "keywords": "电驱系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_c42b269f11",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "3-采埃孚-全球领先电驱传动系统供应商本土化之路.pdf",
+                  "published_at": "",
+                  "name": "3-采埃孚-全球领先电驱传动系统供应商本土化之路",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_454fd351df",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "3-采埃孚-Localization Strategies of Global Electrified Powertrain Leader — ZF in China.pdf",
+                  "published_at": "",
+                  "name": "3-采埃孚-Localization Strategies of Global Electrified Powertrain Leader — ZF in China",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_a274bb1e8f",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱与功率电子/封装材料。资料来源板块：板块一 · 动力系统",
+              "name": "氧化可控型铜烧结浆料",
+              "status": "active",
+              "keywords": "电驱与功率电子"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_aad954cebd",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "用于高可靠性功率半导体的氧化可控型铜烧结浆料 - ATC.pdf",
+                  "published_at": "",
+                  "name": "用于高可靠性功率半导体的氧化可控型铜烧结浆料 - ATC",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_7dc371ce21",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱传动/差速器。资料来源板块：板块一 · 动力系统",
+              "name": "精进电动差速器及动力管理",
+              "status": "active",
+              "keywords": "电驱传动"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_396674b4b8",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "精进电动差速器及动力管理产品技术 - V03.pdf",
+                  "published_at": "",
+                  "name": "精进电动差速器及动力管理产品技术 - V03",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_15ca49540a",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/双转子电机。资料来源板块：板块一 · 动力系统",
+              "name": "DeepDrive双转子电机技术",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_9dc9b1c346",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "Datasheet_DeepDrive_MG250.pdf",
+                  "published_at": "",
+                  "name": "Datasheet_DeepDrive_MG250",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_f8785fa5ff",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "260417_DeepDrive_DualRotorTechnology.pdf",
+                  "published_at": "",
+                  "name": "260417_DeepDrive_DualRotorTechnology",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_c5ff3a128c",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/高速电驱。资料来源板块：板块一 · 动力系统",
+              "name": "高速电驱系统核心设计挑战",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_c1be16e043",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "9-SMT-高速电驱系统的核心设计挑战与分析要点.pdf",
+                  "published_at": "",
+                  "name": "9-SMT-高速电驱系统的核心设计挑战与分析要点",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_5b48b24db9",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱与功率电子/SGT。资料来源板块：板块一 · 动力系统",
+              "name": "中晶新源功率SGT",
+              "status": "active",
+              "keywords": "电驱与功率电子"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_f8a5c55ca8",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "中晶新源先进功率SGT助力机器人行业高效高质量发展 20260327 V1.pdf",
+                  "published_at": "",
+                  "name": "中晶新源先进功率SGT助力机器人行业高效高质量发展 20260327 V1",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_063fb1ad05",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱与功率电子/功率模块。资料来源板块：板块一 · 动力系统",
+              "name": "美科泰电动汽车动力系统解决方案",
+              "status": "active",
+              "keywords": "电驱与功率电子"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_994b1e17b0",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "MCOTI 美科泰电动汽车动力系统解决方案-ATC.pdf",
+                  "published_at": "",
+                  "name": "MCOTI 美科泰电动汽车动力系统解决方案-ATC",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_6457a34157",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/轴承PHM。资料来源板块：板块一 · 动力系统",
+              "name": "电机轴承PHM优化",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_2ec7cc40d4",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "10-人本-基于PHM技术的驱动电机轴承优化研究.pdf",
+                  "published_at": "",
+                  "name": "10-人本-基于PHM技术的驱动电机轴承优化研究",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_3cf2616e8a",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱传动/电磁离合器。资料来源板块：板块一 · 动力系统",
+              "name": "智能电磁爪式离合器系统",
+              "status": "active",
+              "keywords": "电驱传动"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_3989881587",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "16-贺尔碧格-智能电磁爪式离合器-感知-控制-执行一体化系统解决方案.pdf",
+                  "published_at": "",
+                  "name": "16-贺尔碧格-智能电磁爪式离合器-感知-控制-执行一体化系统解决方案",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_a43e435e1f",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/电机控制。资料来源板块：板块一 · 动力系统",
+              "name": "电驱先进控制实践",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_368219a644",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "17-深蓝汽车-电驱先进控制实践.pdf",
+                  "published_at": "",
+                  "name": "17-深蓝汽车-电驱先进控制实践",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_be44c63340",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱系统/高压电驱。资料来源板块：板块一 · 动力系统",
+              "name": "下一代高压化电驱动架构",
+              "status": "active",
+              "keywords": "电驱系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_1004e69d46",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "长城--下一代高压化电驱动架构发展趋势和挑战（外发）.pdf",
+                  "published_at": "",
+                  "name": "长城--下一代高压化电驱动架构发展趋势和挑战（外发）",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_8ecb5fbf4d",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱传动/电子限滑差速器。资料来源板块：板块一 · 动力系统",
+              "name": "带锁止功能的电子限滑差速器",
+              "status": "active",
+              "keywords": "电驱传动"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_6f20531543",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "17-博格华纳-一种带锁止功能的电子限滑差速器.pdf",
+                  "published_at": "",
+                  "name": "17-博格华纳-一种带锁止功能的电子限滑差速器",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_714404e846",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/轴向磁通电机。资料来源板块：板块一 · 动力系统",
+              "name": "轴向磁通电驱介绍（宁德时代）",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_94f2aba243",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "宁德时代智能--CAIT_AMDS轴向磁通电驱介绍- ATC.pdf",
+                  "published_at": "",
+                  "name": "宁德时代智能--CAIT_AMDS轴向磁通电驱介绍- ATC",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_3fd911646f",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱传动/电驱桥。资料来源板块：板块一 · 动力系统",
+              "name": "商用车多模耦合电驱桥",
+              "status": "active",
+              "keywords": "电驱传动"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_22e47d0c31",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "吉大王军年团队-商用车多模耦合驱动与转矩矢量分配一体化电驱桥.pdf",
+                  "published_at": "",
+                  "name": "吉大王军年团队-商用车多模耦合驱动与转矩矢量分配一体化电驱桥",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_146f25fee7",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱系统。资料来源板块：板块一 · 动力系统",
+              "name": "和骋科技EV先锋论坛",
+              "status": "active",
+              "keywords": "电驱系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_2d468b1792",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "和骋科技--EV先锋论坛20260601.pdf",
+                  "published_at": "",
+                  "name": "和骋科技--EV先锋论坛20260601",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_dcf8494ba2",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱传动/减速齿轮。资料来源板块：板块一 · 动力系统",
+              "name": "高性能粉末冶金同轴减速器齿圈",
+              "status": "active",
+              "keywords": "电驱传动"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_96c2dcb31d",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "10-赫格纳斯-高性能粉末冶金同轴减速器齿圈.pdf",
+                  "published_at": "",
+                  "name": "10-赫格纳斯-高性能粉末冶金同轴减速器齿圈",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_6a47dd23f3",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 电驱与功率电子/电机控制芯片。资料来源板块：板块一 · 动力系统",
+              "name": "矽力杰SA32D电机方案",
+              "status": "active",
+              "keywords": "电驱与功率电子"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_4bec1f97e9",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "SA32D系列电机解决方案.pdf",
+                  "published_at": "",
+                  "name": "SA32D系列电机解决方案",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              },
+              {
+                "vid": "mat_d06acead21",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "矽力杰半导体.pptx",
+                  "published_at": "",
+                  "name": "矽力杰半导体",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_5aec8cfe3d",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：动力系统 / 驱动电机/非晶电驱。资料来源板块：板块一 · 动力系统",
+              "name": "非晶碳纤维电驱关键技术",
+              "status": "active",
+              "keywords": "驱动电机"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_7972cf40a3",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "2-广汽-高效高功率密度非晶-碳纤维电驱关键技术.pdf",
+                  "published_at": "",
+                  "name": "2-广汽-高效高功率密度非晶-碳纤维电驱关键技术",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          }
+        ],
+        "materials": []
+      },
+      {
+        "vid": "sub_321402a6b3",
+        "tag": "subdomain",
+        "props": {
+          "description": "",
+          "name": "整车控制"
+        },
+        "children": [
+          {
+            "vid": "mod_d3105f18af",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 配电与高压架构/电源网络。资料来源板块：板块六 · 整车控制",
+              "name": "ST汽车48V电源网络方案",
+              "status": "active",
+              "keywords": "配电与高压架构"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_c4f88121d0",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "意法半导体-陈舒仪-ST Solution for Automotive EEA 48V Power Net [ATC].pdf",
+                  "published_at": "",
+                  "name": "意法半导体-陈舒仪-ST Solution for Automotive EEA 48V Power Net [ATC]",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_114a228445",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 混动系统/混动架构。资料来源板块：板块六 · 整车控制",
+              "name": "2026TMC动力系统参会总结",
+              "status": "active",
+              "keywords": "混动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_e3fa34938c",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "2026TMC国际汽车动力系统参会总结.pptx",
+                  "published_at": "",
+                  "name": "2026TMC国际汽车动力系统参会总结",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_7c506767b0",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 配电与高压架构/DCDC变换器。资料来源板块：板块六 · 整车控制",
+              "name": "48V-12V双向DCDC变换器",
+              "status": "active",
+              "keywords": "配电与高压架构"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_43d1dcd87e",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "捷翼科技-崔其祥-车载48V-12V双向DCDC变换器主要拓扑以及关键参数.pdf",
+                  "published_at": "",
+                  "name": "捷翼科技-崔其祥-车载48V-12V双向DCDC变换器主要拓扑以及关键参数",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_d47701f0a1",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 配电与高压架构/800V高压架构。资料来源板块：板块六 · 整车控制",
+              "name": "800V碳化硅功率模块可靠性",
+              "status": "active",
+              "keywords": "配电与高压架构"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_9154fe8b58",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "车用800V系統-碳化硅功率模块可靠度的挑战--260603 - 副本.pptx",
+                  "published_at": "",
+                  "name": "车用800V系統-碳化硅功率模块可靠度的挑战--260603 - 副本",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_8908311b06",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 整车热管理/热管理架构。资料来源板块：板块六 · 整车控制",
+              "name": "电动车热管理单一流体架构",
+              "status": "active",
+              "keywords": "整车热管理"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_5c5d18a262",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "7-道达尔-为电动车热管理开发的单一流体架构.pdf",
+                  "published_at": "",
+                  "name": "7-道达尔-为电动车热管理开发的单一流体架构",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_7e52409456",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 配电与高压架构/48V配电网络。资料来源板块：板块六 · 整车控制",
+              "name": "车载48V配电网络",
+              "status": "active",
+              "keywords": "配电与高压架构"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_7a261daac8",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "Yole Group-杨宇-车载48V配电网络_Yu YANG_Sharing.pdf",
+                  "published_at": "",
+                  "name": "Yole Group-杨宇-车载48V配电网络_Yu YANG_Sharing",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_88b3389c62",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 混动系统/排放法规。资料来源板块：板块六 · 整车控制",
+              "name": "EU7动力总成要点",
+              "status": "active",
+              "keywords": "混动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_8e206be24a",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "APL--EU7 Powertrain Essentials for Chinese OEMs Entering the European Market_2026.pdf",
+                  "published_at": "",
+                  "name": "APL--EU7 Powertrain Essentials for Chinese OEMs Entering the European Market_2026",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_45f74a6bfb",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 混动系统/动力总成架构。资料来源板块：板块六 · 整车控制",
+              "name": "大众动力总成架构与策略",
+              "status": "active",
+              "keywords": "混动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_1da57a4896",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "大众汽车-2026ATC_Dr. Holger Opfer_PowertrainArchitecturesandStrategies-HO-short-distrib.pdf",
+                  "published_at": "",
+                  "name": "大众汽车-2026ATC_Dr. Holger Opfer_PowertrainArchitecturesandStrategies-HO-short-distrib",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_0c880568e2",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 配电与高压架构/超级电容。资料来源板块：板块六 · 整车控制",
+              "name": "超级电容在48V智驾电源应用",
+              "status": "active",
+              "keywords": "配电与高压架构"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_18d5478d88",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "稊米汽车-莫永聪-超级电容在高端智驾48V电源系统的应用0610(1).pdf",
+                  "published_at": "",
+                  "name": "稊米汽车-莫永聪-超级电容在高端智驾48V电源系统的应用0610(1)",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_c3dacdc92c",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 配电与高压架构/电源管理。资料来源板块：板块六 · 整车控制",
+              "name": "矽力杰48V全栈国产方案",
+              "status": "active",
+              "keywords": "配电与高压架构"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_821666b236",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "矽力杰-白小伟-矽力杰48V全栈国产解决方案，重塑汽车电子电气架构生态.pdf",
+                  "published_at": "",
+                  "name": "矽力杰-白小伟-矽力杰48V全栈国产解决方案，重塑汽车电子电气架构生态",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_b2919c2e6d",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 配电与高压架构/低压电气标准。资料来源板块：板块六 · 整车控制",
+              "name": "48V低压电气标准解析及仿真",
+              "status": "active",
+              "keywords": "配电与高压架构"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_576ca3210c",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "中汽研-汪春华-48V低压电气标准解析及仿真分析.pdf",
+                  "published_at": "",
+                  "name": "中汽研-汪春华-48V低压电气标准解析及仿真分析",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_837c275113",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 配电与高压架构/48V电源。资料来源板块：板块六 · 整车控制",
+              "name": "Allegro 48V全域解决方案",
+              "status": "active",
+              "keywords": "配电与高压架构"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_a0c7a6f8d9",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "埃戈罗-曹姜威-领航 48V 新篇章：Allegro“智驱+感知”全域解决方案战略规划.pdf",
+                  "published_at": "",
+                  "name": "埃戈罗-曹姜威-领航 48V 新篇章：Allegro“智驱+感知”全域解决方案战略规划",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_51ecec9330",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 整车热管理/油冷电机。资料来源板块：板块六 · 整车控制",
+              "name": "油冷电机流热系统",
+              "status": "active",
+              "keywords": "整车热管理"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_8860ebf84f",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "油冷电机流热系统开发流程--陈建树.pdf",
+                  "published_at": "",
+                  "name": "油冷电机流热系统开发流程--陈建树",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_9e0a9bd0b2",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 混动系统/混动架构。资料来源板块：板块六 · 整车控制",
+              "name": "日产混动技术",
+              "status": "active",
+              "keywords": "混动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_56baed39c7",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "东风日产--ATC宣讲资料.pdf",
+                  "published_at": "",
+                  "name": "东风日产--ATC宣讲资料",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_a48569221f",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 整车控制。资料来源板块：其他 / 待定",
+              "name": "动力底盘技术洞察",
+              "status": "active",
+              "keywords": "整车控制"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_5117c61f12",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "动力底盘技术洞察202607.pptx",
+                  "published_at": "",
+                  "name": "动力底盘技术洞察202607",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_fc433bd7a9",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 配电与高压架构/电源架构。资料来源板块：板块六 · 整车控制",
+              "name": "48V电源架构与行业趋势",
+              "status": "active",
+              "keywords": "配电与高压架构"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_aee0ee067e",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "北汽-路万里-48V电源架构：关键技术突破与行业趋势洞察.pdf",
+                  "published_at": "",
+                  "name": "北汽-路万里-48V电源架构：关键技术突破与行业趋势洞察",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_333cadef3d",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 混动系统/高效发动机。资料来源板块：板块六 · 整车控制",
+              "name": "广汽高效发动机技术",
+              "status": "active",
+              "keywords": "混动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_af09ef0185",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "广汽动力BU李钰怀--面向双碳目标的广汽高效发动机关键技术开发-【对外】.pdf",
+                  "published_at": "",
+                  "name": "广汽动力BU李钰怀--面向双碳目标的广汽高效发动机关键技术开发-【对外】",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_fd4992382d",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 配电与高压架构/48V电机。资料来源板块：板块六 · 整车控制",
+              "name": "德昌电机48V低压电气架构",
+              "status": "active",
+              "keywords": "配电与高压架构"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_0e6635c473",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "德昌电机适配48V低压电气架构全套电机解决方案(ATC2026) 20260601.pdf",
+                  "published_at": "",
+                  "name": "德昌电机适配48V低压电气架构全套电机解决方案(ATC2026) 20260601",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_60f7b9ef1c",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 混动控制。资料来源板块：其他 / 待定",
+              "name": "解决方案技术洞察",
+              "status": "active",
+              "keywords": "混动控制"
+            },
+            "children": [],
+            "materials": []
+          },
+          {
+            "vid": "mod_aa97a2525a",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 整车热管理/冷却液。资料来源板块：板块六 · 整车控制",
+              "name": "第四代低电导率冷却液",
+              "status": "active",
+              "keywords": "整车热管理"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_ab30a285e2",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "6-龙蟠-第四代低电导率冷却液.pdf",
+                  "published_at": "",
+                  "name": "6-龙蟠-第四代低电导率冷却液",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          },
+          {
+            "vid": "mod_57f593de8e",
+            "tag": "module",
+            "props": {
+              "description": "归属路径：整车控制 / 混动系统/混动架构。资料来源板块：板块六 · 整车控制",
+              "name": "马赫动力混动系统",
+              "status": "active",
+              "keywords": "混动系统"
+            },
+            "children": [],
+            "materials": [
+              {
+                "vid": "mat_ab722c5cd8",
+                "tag": "material",
+                "props": {
+                  "material_type": "doc",
+                  "title": "东风汽车集团--马赫动力高品质混动系统创新实践 发布-对外.pdf",
+                  "published_at": "",
+                  "name": "东风汽车集团--马赫动力高品质混动系统创新实践 发布-对外",
+                  "source_url": "",
+                  "summary": ""
+                },
+                "children": [],
+                "materials": []
+              }
+            ]
+          }
+        ],
+        "materials": []
+      }
+    ],
+    "materials": []
+  },
+  "nodes": [
+    {
+      "vid": "dom_7c85bfb782",
+      "tag": "domain",
+      "props": {
+        "description": "",
+        "name": "整车信息系统"
+      }
+    },
+    {
+      "vid": "sub_04a6acbe7c",
+      "tag": "subdomain",
+      "props": {
+        "description": "",
+        "name": "车身与座舱"
+      }
+    },
+    {
+      "vid": "sub_1e5345418a",
+      "tag": "subdomain",
+      "props": {
+        "description": "",
+        "name": "开发与测试"
+      }
+    },
+    {
+      "vid": "sub_2bdaa4fc4e",
+      "tag": "subdomain",
+      "props": {
+        "description": "",
+        "name": "行驶系统"
+      }
+    },
+    {
+      "vid": "sub_321402a6b3",
+      "tag": "subdomain",
+      "props": {
+        "description": "",
+        "name": "整车控制"
+      }
+    },
+    {
+      "vid": "sub_3a74911590",
+      "tag": "subdomain",
+      "props": {
+        "description": "",
+        "name": "动力系统"
+      }
+    },
+    {
+      "vid": "sub_94e4be7a02",
+      "tag": "subdomain",
+      "props": {
+        "description": "",
+        "name": "转向与制动"
+      }
+    },
+    {
+      "vid": "mod_0153700ea8",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / NVH/振动噪声。资料来源板块：其他 / 待定",
+        "name": "国际汽车NVH技术会议快报",
+        "status": "active",
+        "keywords": "NVH"
+      }
+    },
+    {
+      "vid": "mod_02654498ee",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 制动系统/制动盘。资料来源板块：板块四 · 转向与制动系统",
+        "name": "制动盘激光熔覆技术",
+        "status": "active",
+        "keywords": "制动系统"
+      }
+    },
+    {
+      "vid": "mod_02876645c1",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 动力电池/电池管理。资料来源板块：其他 / 待定",
+        "name": "汽车动力电池预印本",
+        "status": "active",
+        "keywords": "动力电池"
+      }
+    },
+    {
+      "vid": "mod_02a6d5ef98",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 转向系统/线控转向。资料来源板块：板块四 · 转向与制动系统",
+        "name": "线控转向核心技术（同驭）",
+        "status": "active",
+        "keywords": "转向系统"
+      }
+    },
+    {
+      "vid": "mod_04c6c9f5c8",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：车身与座舱 / 智能座舱/防晕控制。资料来源板块：板块五 · 车身、座舱、照明及附属",
+        "name": "智能座舱防晕控制",
+        "status": "active",
+        "keywords": "智能座舱"
+      }
+    },
+    {
+      "vid": "mod_063fb1ad05",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱与功率电子/功率模块。资料来源板块：板块一 · 动力系统",
+        "name": "美科泰电动汽车动力系统解决方案",
+        "status": "active",
+        "keywords": "电驱与功率电子"
+      }
+    },
+    {
+      "vid": "mod_0c880568e2",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 配电与高压架构/超级电容。资料来源板块：板块六 · 整车控制",
+        "name": "超级电容在48V智驾电源应用",
+        "status": "active",
+        "keywords": "配电与高压架构"
+      }
+    },
+    {
+      "vid": "mod_0e26f1953f",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 转向系统/智能转向。资料来源板块：板块四 · 转向与制动系统",
+        "name": "重型商用车智能转向系统",
+        "status": "active",
+        "keywords": "转向系统"
+      }
+    },
+    {
+      "vid": "mod_0e905af8c9",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 制动系统/功能安全。资料来源板块：板块四 · 转向与制动系统",
+        "name": "北汇实车底盘功能安全测试",
+        "status": "active",
+        "keywords": "制动系统"
+      }
+    },
+    {
+      "vid": "mod_114a228445",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 混动系统/混动架构。资料来源板块：板块六 · 整车控制",
+        "name": "2026TMC动力系统参会总结",
+        "status": "active",
+        "keywords": "混动系统"
+      }
+    },
+    {
+      "vid": "mod_146f25fee7",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱系统。资料来源板块：板块一 · 动力系统",
+        "name": "和骋科技EV先锋论坛",
+        "status": "active",
+        "keywords": "电驱系统"
+      }
+    },
+    {
+      "vid": "mod_15ca49540a",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/双转子电机。资料来源板块：板块一 · 动力系统",
+        "name": "DeepDrive双转子电机技术",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_15fdb8ac64",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / 车桥与车轮/主动气动轮毂。资料来源板块：板块三 · 行驶系统",
+        "name": "主动气动轮毂技术洞察",
+        "status": "active",
+        "keywords": "车桥与车轮"
+      }
+    },
+    {
+      "vid": "mod_1ce0309bb0",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱与功率电子/功率器件。资料来源板块：板块一 · 动力系统",
+        "name": "电驱与功率器件行业趋势",
+        "status": "active",
+        "keywords": "电驱与功率电子"
+      }
+    },
+    {
+      "vid": "mod_1f8953ac59",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：车身与座舱 / 智能座舱/防晕车。资料来源板块：板块五 · 车身、座舱、照明及附属",
+        "name": "头枕音响防晕车技术",
+        "status": "active",
+        "keywords": "智能座舱"
+      }
+    },
+    {
+      "vid": "mod_260033698c",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：车身与座舱 / 轻量化材料/轻量化材料。资料来源板块：板块五 · 车身、座舱、照明及附属",
+        "name": "先进底盘悬架材料选择与轻量化",
+        "status": "active",
+        "keywords": "轻量化材料"
+      }
+    },
+    {
+      "vid": "mod_2ab142c814",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/直线电机。资料来源板块：板块一 · 动力系统",
+        "name": "直线电机专利",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_2f9aa2da94",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 制动系统/线控制动/EMB。资料来源板块：板块四 · 转向与制动系统",
+        "name": "EMB坐标系首发量产经验",
+        "status": "active",
+        "keywords": "制动系统"
+      }
+    },
+    {
+      "vid": "mod_333cadef3d",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 混动系统/高效发动机。资料来源板块：板块六 · 整车控制",
+        "name": "广汽高效发动机技术",
+        "status": "active",
+        "keywords": "混动系统"
+      }
+    },
+    {
+      "vid": "mod_3725b25e6e",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：开发与测试 / 开发工具/AI研发。资料来源板块：其他 / 待定",
+        "name": "AI赋能研发与制造",
+        "status": "active",
+        "keywords": "开发工具"
+      }
+    },
+    {
+      "vid": "mod_3a8b76ff04",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / 轮胎/轮胎配方。资料来源板块：板块三 · 行驶系统",
+        "name": "UUHP夏季轮胎技术洞察",
+        "status": "active",
+        "keywords": "轮胎"
+      }
+    },
+    {
+      "vid": "mod_3cf2616e8a",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱传动/电磁离合器。资料来源板块：板块一 · 动力系统",
+        "name": "智能电磁爪式离合器系统",
+        "status": "active",
+        "keywords": "电驱传动"
+      }
+    },
+    {
+      "vid": "mod_3e580ac08f",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：开发与测试 / 开发工具/快速控制原型。资料来源板块：板块七 · 开发与测试",
+        "name": "恒润RCP与分布式电驱技术",
+        "status": "active",
+        "keywords": "开发工具"
+      }
+    },
+    {
+      "vid": "mod_3fd911646f",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱传动/电驱桥。资料来源板块：板块一 · 动力系统",
+        "name": "商用车多模耦合电驱桥",
+        "status": "active",
+        "keywords": "电驱传动"
+      }
+    },
+    {
+      "vid": "mod_4411b95063",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 制动系统/线控制动。资料来源板块：板块四 · 转向与制动系统",
+        "name": "分布式电子踏板线控制动系统",
+        "status": "active",
+        "keywords": "制动系统"
+      }
+    },
+    {
+      "vid": "mod_452fd33395",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/多相电机。资料来源板块：板块一 · 动力系统",
+        "name": "智能多相电驱动系统",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_45f74a6bfb",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 混动系统/动力总成架构。资料来源板块：板块六 · 整车控制",
+        "name": "大众动力总成架构与策略",
+        "status": "active",
+        "keywords": "混动系统"
+      }
+    },
+    {
+      "vid": "mod_4b7d8c21b7",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 制动系统/线控制动。资料来源板块：板块四 · 转向与制动系统",
+        "name": "智能驾驶关键执行器",
+        "status": "active",
+        "keywords": "制动系统"
+      }
+    },
+    {
+      "vid": "mod_4f89d81cc3",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱传动/分布式驱动。资料来源板块：板块二 · 电驱传动系统",
+        "name": "长安太行分布式驱动",
+        "status": "active",
+        "keywords": "电驱传动"
+      }
+    },
+    {
+      "vid": "mod_51ecec9330",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 整车热管理/油冷电机。资料来源板块：板块六 · 整车控制",
+        "name": "油冷电机流热系统",
+        "status": "active",
+        "keywords": "整车热管理"
+      }
+    },
+    {
+      "vid": "mod_53c71d604b",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 驱制动一体化。资料来源板块：板块四 · 转向与制动系统",
+        "name": "驱制动一体化系统关键技术",
+        "status": "active",
+        "keywords": "驱制动一体化"
+      }
+    },
+    {
+      "vid": "mod_547b8c1e02",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 制动系统/湿式制动器。资料来源板块：板块四 · 转向与制动系统",
+        "name": "驱制一体湿式制动器方案",
+        "status": "active",
+        "keywords": "制动系统"
+      }
+    },
+    {
+      "vid": "mod_54e5423ebf",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 制动系统/摩擦材料。资料来源板块：板块四 · 转向与制动系统",
+        "name": "欧7法规下摩擦材料配方调整策略",
+        "status": "active",
+        "keywords": "制动系统"
+      }
+    },
+    {
+      "vid": "mod_553c610a3f",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / 悬架/主动悬架。资料来源板块：板块三 · 行驶系统",
+        "name": "中科擎邦全主动悬架方案",
+        "status": "active",
+        "keywords": "悬架"
+      }
+    },
+    {
+      "vid": "mod_56af3f2030",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/轴承电腐蚀。资料来源板块：板块一 · 动力系统",
+        "name": "电驱系统轴承电腐蚀",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_57f593de8e",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 混动系统/混动架构。资料来源板块：板块六 · 整车控制",
+        "name": "马赫动力混动系统",
+        "status": "active",
+        "keywords": "混动系统"
+      }
+    },
+    {
+      "vid": "mod_5aec8cfe3d",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/非晶电驱。资料来源板块：板块一 · 动力系统",
+        "name": "非晶碳纤维电驱关键技术",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_5b48b24db9",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱与功率电子/SGT。资料来源板块：板块一 · 动力系统",
+        "name": "中晶新源功率SGT",
+        "status": "active",
+        "keywords": "电驱与功率电子"
+      }
+    },
+    {
+      "vid": "mod_6099c27d3f",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 转向系统/转向制动协同。资料来源板块：板块四 · 转向与制动系统",
+        "name": "转向制动协同漂移控制",
+        "status": "active",
+        "keywords": "转向系统"
+      }
+    },
+    {
+      "vid": "mod_60f7b9ef1c",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 混动控制。资料来源板块：其他 / 待定",
+        "name": "解决方案技术洞察",
+        "status": "active",
+        "keywords": "混动控制"
+      }
+    },
+    {
+      "vid": "mod_6457a34157",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/轴承PHM。资料来源板块：板块一 · 动力系统",
+        "name": "电机轴承PHM优化",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_6a47dd23f3",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱与功率电子/电机控制芯片。资料来源板块：板块一 · 动力系统",
+        "name": "矽力杰SA32D电机方案",
+        "status": "active",
+        "keywords": "电驱与功率电子"
+      }
+    },
+    {
+      "vid": "mod_714404e846",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/轴向磁通电机。资料来源板块：板块一 · 动力系统",
+        "name": "轴向磁通电驱介绍（宁德时代）",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_7687e1aee5",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / 车桥与车轮/角模块。资料来源板块：板块三 · 行驶系统",
+        "name": "角模块智能行驶机器人",
+        "status": "active",
+        "keywords": "车桥与车轮"
+      }
+    },
+    {
+      "vid": "mod_7c506767b0",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 配电与高压架构/DCDC变换器。资料来源板块：板块六 · 整车控制",
+        "name": "48V-12V双向DCDC变换器",
+        "status": "active",
+        "keywords": "配电与高压架构"
+      }
+    },
+    {
+      "vid": "mod_7c5af8cfd5",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：开发与测试 / 制造工艺/电机绝缘。资料来源板块：板块七 · 开发与测试",
+        "name": "1000V电压平台电机绝缘优化",
+        "status": "active",
+        "keywords": "制造工艺"
+      }
+    },
+    {
+      "vid": "mod_7dc371ce21",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱传动/差速器。资料来源板块：板块一 · 动力系统",
+        "name": "精进电动差速器及动力管理",
+        "status": "active",
+        "keywords": "电驱传动"
+      }
+    },
+    {
+      "vid": "mod_7e52409456",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 配电与高压架构/48V配电网络。资料来源板块：板块六 · 整车控制",
+        "name": "车载48V配电网络",
+        "status": "active",
+        "keywords": "配电与高压架构"
+      }
+    },
+    {
+      "vid": "mod_837c275113",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 配电与高压架构/48V电源。资料来源板块：板块六 · 整车控制",
+        "name": "Allegro 48V全域解决方案",
+        "status": "active",
+        "keywords": "配电与高压架构"
+      }
+    },
+    {
+      "vid": "mod_85c6977498",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / 轮胎/智能轮胎。资料来源板块：板块三 · 行驶系统",
+        "name": "上富智能轮胎传感器",
+        "status": "active",
+        "keywords": "轮胎"
+      }
+    },
+    {
+      "vid": "mod_88b3389c62",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 混动系统/排放法规。资料来源板块：板块六 · 整车控制",
+        "name": "EU7动力总成要点",
+        "status": "active",
+        "keywords": "混动系统"
+      }
+    },
+    {
+      "vid": "mod_8908311b06",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 整车热管理/热管理架构。资料来源板块：板块六 · 整车控制",
+        "name": "电动车热管理单一流体架构",
+        "status": "active",
+        "keywords": "整车热管理"
+      }
+    },
+    {
+      "vid": "mod_8dc6695186",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / 悬架/智能悬架。资料来源板块：板块三 · 行驶系统",
+        "name": "哈金森智能底盘解决方案",
+        "status": "active",
+        "keywords": "悬架"
+      }
+    },
+    {
+      "vid": "mod_8ecb5fbf4d",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱传动/电子限滑差速器。资料来源板块：板块一 · 动力系统",
+        "name": "带锁止功能的电子限滑差速器",
+        "status": "active",
+        "keywords": "电驱传动"
+      }
+    },
+    {
+      "vid": "mod_9230df0ea4",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 制动系统/线控制动/EMB。资料来源板块：板块四 · 转向与制动系统",
+        "name": "商用车EMB功能安全与冗余设计",
+        "status": "active",
+        "keywords": "制动系统"
+      }
+    },
+    {
+      "vid": "mod_92b610442f",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / 悬架/电磁悬架。资料来源板块：板块三 · 行驶系统",
+        "name": "江苏大学直线式电磁悬架",
+        "status": "active",
+        "keywords": "悬架"
+      }
+    },
+    {
+      "vid": "mod_98e236fdd0",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / 悬架/主动悬架。资料来源板块：板块三 · 行驶系统",
+        "name": "京西重工主动悬架",
+        "status": "active",
+        "keywords": "悬架"
+      }
+    },
+    {
+      "vid": "mod_99faaf45b4",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/电机测试。资料来源板块：板块一 · 动力系统",
+        "name": "电机效率测试与报告（DeepDrive）",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_9cc8c32e8d",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 转向系统/滚珠丝杠。资料来源板块：板块四 · 转向与制动系统",
+        "name": "滚珠丝杠副精密磨削方案",
+        "status": "active",
+        "keywords": "转向系统"
+      }
+    },
+    {
+      "vid": "mod_9e0a9bd0b2",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 混动系统/混动架构。资料来源板块：板块六 · 整车控制",
+        "name": "日产混动技术",
+        "status": "active",
+        "keywords": "混动系统"
+      }
+    },
+    {
+      "vid": "mod_9fe3defceb",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱系统。资料来源板块：其他 / 待定",
+        "name": "电驱传动系统本土化（采埃孚）",
+        "status": "active",
+        "keywords": "电驱系统"
+      }
+    },
+    {
+      "vid": "mod_a22bb0e6a9",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱系统。资料来源板块：板块一 · 动力系统",
+        "name": "Dauch电驱系统开发技术与应用",
+        "status": "active",
+        "keywords": "电驱系统"
+      }
+    },
+    {
+      "vid": "mod_a274bb1e8f",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱与功率电子/封装材料。资料来源板块：板块一 · 动力系统",
+        "name": "氧化可控型铜烧结浆料",
+        "status": "active",
+        "keywords": "电驱与功率电子"
+      }
+    },
+    {
+      "vid": "mod_a2e76ef0dc",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 制动系统/制动盘涂层。资料来源板块：板块四 · 转向与制动系统",
+        "name": "汽车制动盘涂层系统性解决方案",
+        "status": "active",
+        "keywords": "制动系统"
+      }
+    },
+    {
+      "vid": "mod_a43e435e1f",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/电机控制。资料来源板块：板块一 · 动力系统",
+        "name": "电驱先进控制实践",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_a48569221f",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 整车控制。资料来源板块：其他 / 待定",
+        "name": "动力底盘技术洞察",
+        "status": "active",
+        "keywords": "整车控制"
+      }
+    },
+    {
+      "vid": "mod_a99565a1aa",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：开发与测试 / 测试验证/建模仿真。资料来源板块：板块七 · 开发与测试",
+        "name": "驱动桥系统仿真与正向开发",
+        "status": "active",
+        "keywords": "测试验证"
+      }
+    },
+    {
+      "vid": "mod_aa97a2525a",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 整车热管理/冷却液。资料来源板块：板块六 · 整车控制",
+        "name": "第四代低电导率冷却液",
+        "status": "active",
+        "keywords": "整车热管理"
+      }
+    },
+    {
+      "vid": "mod_addb12aae7",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：开发与测试 / 开发工具/大数据仿真。资料来源板块：板块七 · 开发与测试",
+        "name": "大数据仿真与AI工程师",
+        "status": "active",
+        "keywords": "开发工具"
+      }
+    },
+    {
+      "vid": "mod_b2919c2e6d",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 配电与高压架构/低压电气标准。资料来源板块：板块六 · 整车控制",
+        "name": "48V低压电气标准解析及仿真",
+        "status": "active",
+        "keywords": "配电与高压架构"
+      }
+    },
+    {
+      "vid": "mod_b7565bfe8d",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：转向与制动 / 制动系统/摩擦材料。资料来源板块：板块四 · 转向与制动系统",
+        "name": "碳陶摩擦副在汽车领域的应用",
+        "status": "active",
+        "keywords": "制动系统"
+      }
+    },
+    {
+      "vid": "mod_b8de1c1e7c",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：开发与测试 / 测试验证/硬件在环。资料来源板块：板块七 · 开发与测试",
+        "name": "底盘全链路测试解决方案（北汇）",
+        "status": "active",
+        "keywords": "测试验证"
+      }
+    },
+    {
+      "vid": "mod_bd7f4129e4",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / 悬架/主动悬架。资料来源板块：板块三 · 行驶系统",
+        "name": "中科擎邦主动悬架",
+        "status": "active",
+        "keywords": "悬架"
+      }
+    },
+    {
+      "vid": "mod_be44c63340",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱系统/高压电驱。资料来源板块：板块一 · 动力系统",
+        "name": "下一代高压化电驱动架构",
+        "status": "active",
+        "keywords": "电驱系统"
+      }
+    },
+    {
+      "vid": "mod_c3dacdc92c",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 配电与高压架构/电源管理。资料来源板块：板块六 · 整车控制",
+        "name": "矽力杰48V全栈国产方案",
+        "status": "active",
+        "keywords": "配电与高压架构"
+      }
+    },
+    {
+      "vid": "mod_c5ff3a128c",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/高速电驱。资料来源板块：板块一 · 动力系统",
+        "name": "高速电驱系统核心设计挑战",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_c89c76544d",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 发电机/增程/发电机。资料来源板块：板块一 · 动力系统",
+        "name": "DeepDrive发电机BOM",
+        "status": "active",
+        "keywords": "发电机/增程"
+      }
+    },
+    {
+      "vid": "mod_cf9dcd447b",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/下一代电驱。资料来源板块：板块一 · 动力系统",
+        "name": "中小型下一代电驱思考",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_d1fdf4c08c",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/轮毂电机。资料来源板块：板块一 · 动力系统",
+        "name": "DeepDrive轮毂电机技术",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_d3105f18af",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 配电与高压架构/电源网络。资料来源板块：板块六 · 整车控制",
+        "name": "ST汽车48V电源网络方案",
+        "status": "active",
+        "keywords": "配电与高压架构"
+      }
+    },
+    {
+      "vid": "mod_d47701f0a1",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 配电与高压架构/800V高压架构。资料来源板块：板块六 · 整车控制",
+        "name": "800V碳化硅功率模块可靠性",
+        "status": "active",
+        "keywords": "配电与高压架构"
+      }
+    },
+    {
+      "vid": "mod_d5e74b3664",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：车身与座舱 / 轻量化材料/镁合金。资料来源板块：板块五 · 车身、座舱、照明及附属",
+        "name": "镁合金材料及工艺研究进展",
+        "status": "active",
+        "keywords": "轻量化材料"
+      }
+    },
+    {
+      "vid": "mod_d8b56f7e48",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：开发与测试 / 测试验证/流热仿真。资料来源板块：板块七 · 开发与测试",
+        "name": "PJLSMPS粒子法油冷电驱动流热仿真",
+        "status": "active",
+        "keywords": "测试验证"
+      }
+    },
+    {
+      "vid": "mod_dcf8494ba2",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 电驱传动/减速齿轮。资料来源板块：板块一 · 动力系统",
+        "name": "高性能粉末冶金同轴减速器齿圈",
+        "status": "active",
+        "keywords": "电驱传动"
+      }
+    },
+    {
+      "vid": "mod_e2abd9a150",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / 悬架/减振器。资料来源板块：板块三 · 行驶系统",
+        "name": "天纳克悬架技术",
+        "status": "active",
+        "keywords": "悬架"
+      }
+    },
+    {
+      "vid": "mod_e5680a7053",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：开发与测试 / 制造工艺/铜排焊接。资料来源板块：板块七 · 开发与测试",
+        "name": "动力系统铜排焊接质量控制",
+        "status": "active",
+        "keywords": "制造工艺"
+      }
+    },
+    {
+      "vid": "mod_ec53cb50a9",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/电机加热。资料来源板块：板块一 · 动力系统",
+        "name": "电机发热方法及装置",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_efcbda4b61",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：行驶系统 / 车架与底盘/线控底盘。资料来源板块：板块三 · 行驶系统",
+        "name": "线控底盘学习笔记",
+        "status": "active",
+        "keywords": "车架与底盘"
+      }
+    },
+    {
+      "vid": "mod_f96c8025d9",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：动力系统 / 驱动电机/轴向磁通电机。资料来源板块：板块一 · 动力系统",
+        "name": "轴向磁通电机产业化（盘毂）",
+        "status": "active",
+        "keywords": "驱动电机"
+      }
+    },
+    {
+      "vid": "mod_fc433bd7a9",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 配电与高压架构/电源架构。资料来源板块：板块六 · 整车控制",
+        "name": "48V电源架构与行业趋势",
+        "status": "active",
+        "keywords": "配电与高压架构"
+      }
+    },
+    {
+      "vid": "mod_fd12007beb",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：车身与座舱 / 轻量化材料/特种聚合物。资料来源板块：板块五 · 车身、座舱、照明及附属",
+        "name": "电气化转型期特种聚合物研究",
+        "status": "active",
+        "keywords": "轻量化材料"
+      }
+    },
+    {
+      "vid": "mod_fd4992382d",
+      "tag": "module",
+      "props": {
+        "description": "归属路径：整车控制 / 配电与高压架构/48V电机。资料来源板块：板块六 · 整车控制",
+        "name": "德昌电机48V低压电气架构",
+        "status": "active",
+        "keywords": "配电与高压架构"
+      }
+    },
+    {
+      "vid": "mat_0e341ed137",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "20260603-Speech in ATC show_哈金森智能底盘解决方案_Xin Yanxia.pdf",
+        "published_at": "",
+        "name": "20260603-Speech in ATC show_哈金森智能底盘解决方案_Xin Yanxia",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_0e6635c473",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "德昌电机适配48V低压电气架构全套电机解决方案(ATC2026) 20260601.pdf",
+        "published_at": "",
+        "name": "德昌电机适配48V低压电气架构全套电机解决方案(ATC2026) 20260601",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_1004e69d46",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "长城--下一代高压化电驱动架构发展趋势和挑战（外发）.pdf",
+        "published_at": "",
+        "name": "长城--下一代高压化电驱动架构发展趋势和挑战（外发）",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_1134e2a8e8",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "可嵌入汽车座椅头枕防晕车音响设备.pdf",
+        "published_at": "",
+        "name": "可嵌入汽车座椅头枕防晕车音响设备",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_174a8f25e7",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "8-中车-1000V电压平台的挑战与电机绝缘优化.pdf",
+        "published_at": "",
+        "name": "8-中车-1000V电压平台的挑战与电机绝缘优化",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_17babdc339",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "Generator_A1Sample_MG220_TestReport_OEMVersion.pdf",
+        "published_at": "",
+        "name": "Generator_A1Sample_MG220_TestReport_OEMVersion",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_17fdbe34c5",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "CN202310200862.8_电机发热方法和装置电机控制器电动汽车及存储介质.pdf",
+        "published_at": "",
+        "name": "CN202310200862.8_电机发热方法和装置电机控制器电动汽车及存储介质",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_18d5478d88",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "稊米汽车-莫永聪-超级电容在高端智驾48V电源系统的应用0610(1).pdf",
+        "published_at": "",
+        "name": "稊米汽车-莫永聪-超级电容在高端智驾48V电源系统的应用0610(1)",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_1da57a4896",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "大众汽车-2026ATC_Dr. Holger Opfer_PowertrainArchitecturesandStrategies-HO-short-distrib.pdf",
+        "published_at": "",
+        "name": "大众汽车-2026ATC_Dr. Holger Opfer_PowertrainArchitecturesandStrategies-HO-short-distrib",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_2016adbaec",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "ATC China 2026_TENNECO.pdf",
+        "published_at": "",
+        "name": "ATC China 2026_TENNECO",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_22e47d0c31",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "吉大王军年团队-商用车多模耦合驱动与转矩矢量分配一体化电驱桥.pdf",
+        "published_at": "",
+        "name": "吉大王军年团队-商用车多模耦合驱动与转矩矢量分配一体化电驱桥",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_248d0a08f0",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "上富智能轮胎交流_0702.pptx",
+        "published_at": "",
+        "name": "上富智能轮胎交流_0702",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_254d4cdbd3",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "恩骅力material selection for advanced chassis & suspension and lightweight.pdf",
+        "published_at": "",
+        "name": "恩骅力material selection for advanced chassis & suspension and lightweight",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_2615a3597b",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "260316_BOM DeepDrive_Generator.pdf",
+        "published_at": "",
+        "name": "260316_BOM DeepDrive_Generator",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_2d468b1792",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "和骋科技--EV先锋论坛20260601.pdf",
+        "published_at": "",
+        "name": "和骋科技--EV先锋论坛20260601",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_2ec7cc40d4",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "10-人本-基于PHM技术的驱动电机轴承优化研究.pdf",
+        "published_at": "",
+        "name": "10-人本-基于PHM技术的驱动电机轴承优化研究",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_2f3b3aca01",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "5-盘毂-轴向磁通电机的产业化应用实践.pdf",
+        "published_at": "",
+        "name": "5-盘毂-轴向磁通电机的产业化应用实践",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_31468042d6",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "26-2 Active Aero Wheel_Ready_Value.pdf",
+        "published_at": "",
+        "name": "26-2 Active Aero Wheel_Ready_Value",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_325dba2a07",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "5-世索科-汽车行业电气化转型期的特种聚合物基础研究与测试.pdf",
+        "published_at": "",
+        "name": "5-世索科-汽车行业电气化转型期的特种聚合物基础研究与测试",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_3560aaf965",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "碳陶摩擦副在汽车领域的应用202606.pdf",
+        "published_at": "",
+        "name": "碳陶摩擦副在汽车领域的应用202606",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_368219a644",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "17-深蓝汽车-电驱先进控制实践.pdf",
+        "published_at": "",
+        "name": "17-深蓝汽车-电驱先进控制实践",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_396674b4b8",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "精进电动差速器及动力管理产品技术 - V03.pdf",
+        "published_at": "",
+        "name": "精进电动差速器及动力管理产品技术 - V03",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_3989881587",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "16-贺尔碧格-智能电磁爪式离合器-感知-控制-执行一体化系统解决方案.pdf",
+        "published_at": "",
+        "name": "16-贺尔碧格-智能电磁爪式离合器-感知-控制-执行一体化系统解决方案",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_43464af657",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "解决方案技术洞察26年5月—智能座舱防晕控制.pptx",
+        "published_at": "",
+        "name": "解决方案技术洞察26年5月—智能座舱防晕控制",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_43d1dcd87e",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "捷翼科技-崔其祥-车载48V-12V双向DCDC变换器主要拓扑以及关键参数.pdf",
+        "published_at": "",
+        "name": "捷翼科技-崔其祥-车载48V-12V双向DCDC变换器主要拓扑以及关键参数",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_454fd351df",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "3-采埃孚-Localization Strategies of Global Electrified Powertrain Leader — ZF in China.pdf",
+        "published_at": "",
+        "name": "3-采埃孚-Localization Strategies of Global Electrified Powertrain Leader — ZF in China",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_46976a52ce",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "恒润RCP技术洞察分析.pptx",
+        "published_at": "",
+        "name": "恒润RCP技术洞察分析",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_4775a54dc7",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "CN202310200862.8_电机发热方法和装置电机控制器电动汽车及存储介质 (1).pdf",
+        "published_at": "",
+        "name": "CN202310200862.8_电机发热方法和装置电机控制器电动汽车及存储介质 (1)",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_4bec1f97e9",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "SA32D系列电机解决方案.pdf",
+        "published_at": "",
+        "name": "SA32D系列电机解决方案",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_4d49fe4d94",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "MG_AV1_GS1002_EffMap_20260318_590Vdc.xlsx",
+        "published_at": "",
+        "name": "MG_AV1_GS1002_EffMap_20260318_590Vdc",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_4f13a6a85c",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "5-哈尔滨工业大学-电动汽车电驱系统轴承电腐蚀问题.pdf",
+        "published_at": "",
+        "name": "5-哈尔滨工业大学-电动汽车电驱系统轴承电腐蚀问题",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_5117c61f12",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "动力底盘技术洞察202607.pptx",
+        "published_at": "",
+        "name": "动力底盘技术洞察202607",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_52ff55647d",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "Höganäs 汽车制动盘涂层系统性解决方案-(外发).pdf",
+        "published_at": "",
+        "name": "Höganäs 汽车制动盘涂层系统性解决方案-(外发)",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_56baed39c7",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "东风日产--ATC宣讲资料.pdf",
+        "published_at": "",
+        "name": "东风日产--ATC宣讲资料",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_576ca3210c",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "中汽研-汪春华-48V低压电气标准解析及仿真分析.pdf",
+        "published_at": "",
+        "name": "中汽研-汪春华-48V低压电气标准解析及仿真分析",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_58cdbfaa46",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "上海交大--镁合金材料及工艺的研究进展--曾小勤教授团队.pdf",
+        "published_at": "",
+        "name": "上海交大--镁合金材料及工艺的研究进展--曾小勤教授团队",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_594217f8d9",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "分布式电子踏板线控制动系统_欧摩威_分享版.pdf",
+        "published_at": "",
+        "name": "分布式电子踏板线控制动系统_欧摩威_分享版",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_5ba3569410",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "北汇--实车底盘功能安全测试解决方案(1).pdf",
+        "published_at": "",
+        "name": "北汇--实车底盘功能安全测试解决方案(1)",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_5c5d18a262",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "7-道达尔-为电动车热管理开发的单一流体架构.pdf",
+        "published_at": "",
+        "name": "7-道达尔-为电动车热管理开发的单一流体架构",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_5df668dfaa",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "解决方案技术洞察26年5月—AAW.pptx",
+        "published_at": "",
+        "name": "解决方案技术洞察26年5月—AAW",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_5eaf1432eb",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "智能座舱防晕控制_武汉理工大学.pdf",
+        "published_at": "",
+        "name": "智能座舱防晕控制_武汉理工大学",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_61c40c350a",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "线控底盘学习笔记.pdf",
+        "published_at": "",
+        "name": "线控底盘学习笔记",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_6f20531543",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "17-博格华纳-一种带锁止功能的电子限滑差速器.pdf",
+        "published_at": "",
+        "name": "17-博格华纳-一种带锁止功能的电子限滑差速器",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_6fe4044f49",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "解决方案技术洞察26年5月—UUHP夏季轮胎.pptx",
+        "published_at": "",
+        "name": "解决方案技术洞察26年5月—UUHP夏季轮胎",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_73f7442705",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "上海同驭--智能驾驶关键执行器_20260603 - ATC(1).pdf",
+        "published_at": "",
+        "name": "上海同驭--智能驾驶关键执行器_20260603 - ATC(1)",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_7522ad33a1",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "勇克集团用于电动助力转向和电动刹车滚珠丝杠副的精密磨削方案_公开版.pdf",
+        "published_at": "",
+        "name": "勇克集团用于电动助力转向和电动刹车滚珠丝杠副的精密磨削方案_公开版",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_752c643ca3",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "江苏大学 直线式电磁悬架.pdf",
+        "published_at": "",
+        "name": "江苏大学 直线式电磁悬架",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_7972cf40a3",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "2-广汽-高效高功率密度非晶-碳纤维电驱关键技术.pdf",
+        "published_at": "",
+        "name": "2-广汽-高效高功率密度非晶-碳纤维电驱关键技术",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_7a261daac8",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "Yole Group-杨宇-车载48V配电网络_Yu YANG_Sharing.pdf",
+        "published_at": "",
+        "name": "Yole Group-杨宇-车载48V配电网络_Yu YANG_Sharing",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_7ab8674668",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "汽车电驱系统和功率器件行业需求与发展趋势公开版.pdf",
+        "published_at": "",
+        "name": "汽车电驱系统和功率器件行业需求与发展趋势公开版",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_8018b5c83c",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "中科擎邦 -2 - 客户.pptx",
+        "published_at": "",
+        "name": "中科擎邦 -2 - 客户",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_8110126a30",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "260526_Presentation DeepDrive.pdf",
+        "published_at": "",
+        "name": "260526_Presentation DeepDrive",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_821666b236",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "矽力杰-白小伟-矽力杰48V全栈国产解决方案，重塑汽车电子电气架构生态.pdf",
+        "published_at": "",
+        "name": "矽力杰-白小伟-矽力杰48V全栈国产解决方案，重塑汽车电子电气架构生态",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_83cbe1e579",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "Datasheet_DeepDrive_IW2000.pdf",
+        "published_at": "",
+        "name": "Datasheet_DeepDrive_IW2000",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_867e85cb0a",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "Datasheet_DeepDrive_CD600.pdf",
+        "published_at": "",
+        "name": "Datasheet_DeepDrive_CD600",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_870c610855",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "2-青山工业-对中小型下一代电驱的思考.pdf",
+        "published_at": "",
+        "name": "2-青山工业-对中小型下一代电驱的思考",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_8860ebf84f",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "油冷电机流热系统开发流程--陈建树.pdf",
+        "published_at": "",
+        "name": "油冷电机流热系统开发流程--陈建树",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_8e206be24a",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "APL--EU7 Powertrain Essentials for Chinese OEMs Entering the European Market_2026.pdf",
+        "published_at": "",
+        "name": "APL--EU7 Powertrain Essentials for Chinese OEMs Entering the European Market_2026",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_9154fe8b58",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "车用800V系統-碳化硅功率模块可靠度的挑战--260603 - 副本.pptx",
+        "published_at": "",
+        "name": "车用800V系統-碳化硅功率模块可靠度的挑战--260603 - 副本",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_91d5b00c11",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "海天 制动盘激光熔覆（外发版）.pdf",
+        "published_at": "",
+        "name": "海天 制动盘激光熔覆（外发版）",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_94cbebda38",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "CN224401366U.pdf",
+        "published_at": "",
+        "name": "CN224401366U",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_94f2aba243",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "宁德时代智能--CAIT_AMDS轴向磁通电驱介绍- ATC.pdf",
+        "published_at": "",
+        "name": "宁德时代智能--CAIT_AMDS轴向磁通电驱介绍- ATC",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_96c2dcb31d",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "10-赫格纳斯-高性能粉末冶金同轴减速器齿圈.pdf",
+        "published_at": "",
+        "name": "10-赫格纳斯-高性能粉末冶金同轴减速器齿圈",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_99355f385d",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "角模块打造智能行驶机器人.pdf",
+        "published_at": "",
+        "name": "角模块打造智能行驶机器人",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_994b1e17b0",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "MCOTI 美科泰电动汽车动力系统解决方案-ATC.pdf",
+        "published_at": "",
+        "name": "MCOTI 美科泰电动汽车动力系统解决方案-ATC",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_9dc9b1c346",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "Datasheet_DeepDrive_MG250.pdf",
+        "published_at": "",
+        "name": "Datasheet_DeepDrive_MG250",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_a0c7a6f8d9",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "埃戈罗-曹姜威-领航 48V 新篇章：Allegro“智驱+感知”全域解决方案战略规划.pdf",
+        "published_at": "",
+        "name": "埃戈罗-曹姜威-领航 48V 新篇章：Allegro“智驱+感知”全域解决方案战略规划",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_a0d3056a76",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "4-鲲腾泰克-鲲腾泰克智能多相电驱动系统技术及产业化实现.pdf",
+        "published_at": "",
+        "name": "4-鲲腾泰克-鲲腾泰克智能多相电驱动系统技术及产业化实现",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_a29a44a922",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "同驭--【外部】线控转向核心技术：研发到量产的跨越.pdf",
+        "published_at": "",
+        "name": "同驭--【外部】线控转向核心技术：研发到量产的跨越",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_a4258ba5c6",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "京西重工主动悬架 2023.pdf",
+        "published_at": "",
+        "name": "京西重工主动悬架 2023",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_a60a7da906",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "preprints202605.0939.v1.pdf",
+        "published_at": "",
+        "name": "preprints202605.0939.v1",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_a857e096c4",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "26-1 Aero Wheel Findings_CompActive.pdf",
+        "published_at": "",
+        "name": "26-1 Aero Wheel Findings_CompActive",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_aad954cebd",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "用于高可靠性功率半导体的氧化可控型铜烧结浆料 - ATC.pdf",
+        "published_at": "",
+        "name": "用于高可靠性功率半导体的氧化可控型铜烧结浆料 - ATC",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_aaeec02a26",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "欧7制动排放法规下摩擦材料配方调整策略与影响分析6.9(1).pdf",
+        "published_at": "",
+        "name": "欧7制动排放法规下摩擦材料配方调整策略与影响分析6.9(1)",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_ab30a285e2",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "6-龙蟠-第四代低电导率冷却液.pdf",
+        "published_at": "",
+        "name": "6-龙蟠-第四代低电导率冷却液",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_ab6013520d",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "智能轮胎传感器产品介绍2026.pdf",
+        "published_at": "",
+        "name": "智能轮胎传感器产品介绍2026",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_ab722c5cd8",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "东风汽车集团--马赫动力高品质混动系统创新实践 发布-对外.pdf",
+        "published_at": "",
+        "name": "东风汽车集团--马赫动力高品质混动系统创新实践 发布-对外",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_aee0ee067e",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "北汽-路万里-48V电源架构：关键技术突破与行业趋势洞察.pdf",
+        "published_at": "",
+        "name": "北汽-路万里-48V电源架构：关键技术突破与行业趋势洞察",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_af09ef0185",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "广汽动力BU李钰怀--面向双碳目标的广汽高效发动机关键技术开发-【对外】.pdf",
+        "published_at": "",
+        "name": "广汽动力BU李钰怀--面向双碳目标的广汽高效发动机关键技术开发-【对外】",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_c1be16e043",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "9-SMT-高速电驱系统的核心设计挑战与分析要点.pdf",
+        "published_at": "",
+        "name": "9-SMT-高速电驱系统的核心设计挑战与分析要点",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_c42b269f11",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "3-采埃孚-全球领先电驱传动系统供应商本土化之路.pdf",
+        "published_at": "",
+        "name": "3-采埃孚-全球领先电驱传动系统供应商本土化之路",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_c4f88121d0",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "意法半导体-陈舒仪-ST Solution for Automotive EEA 48V Power Net [ATC].pdf",
+        "published_at": "",
+        "name": "意法半导体-陈舒仪-ST Solution for Automotive EEA 48V Power Net [ATC]",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_cfe8d9a7e7",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "恒创智行-商用车EMB功能安全与全链路冗余设计.pdf",
+        "published_at": "",
+        "name": "恒创智行-商用车EMB功能安全与全链路冗余设计",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_d06acead21",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "矽力杰半导体.pptx",
+        "published_at": "",
+        "name": "矽力杰半导体",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_d211d82e04",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "防晕车技术.pptx",
+        "published_at": "",
+        "name": "防晕车技术",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_da4a908d6b",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "全主动悬架方案介绍-中科擎邦(8).pptx",
+        "published_at": "",
+        "name": "全主动悬架方案介绍-中科擎邦(8)",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_e3fa34938c",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "2026TMC国际汽车动力系统参会总结.pptx",
+        "published_at": "",
+        "name": "2026TMC国际汽车动力系统参会总结",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_e412c20515",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "MG_AV1_GS1002_EffMap_20260219_450Vdc.xlsx",
+        "published_at": "",
+        "name": "MG_AV1_GS1002_EffMap_20260219_450Vdc",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_e55cb535df",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "2026ISNVH国际汽车NVH技术会议-解决方案参会快报.pptx",
+        "published_at": "",
+        "name": "2026ISNVH国际汽车NVH技术会议-解决方案参会快报",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_e910e12fac",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "ATC - 坐标系首发量产经验分享(分享版).pdf",
+        "published_at": "",
+        "name": "ATC - 坐标系首发量产经验分享(分享版)",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_e9bf91a35a",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "珠海华粤 驱制一体解决方案-湿式制动器20260601.pdf",
+        "published_at": "",
+        "name": "珠海华粤 驱制一体解决方案-湿式制动器20260601",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_f234e3af4f",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "新建 Microsoft Word 文档.docx",
+        "published_at": "",
+        "name": "新建 Microsoft Word 文档",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_f32adfe8e7",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "中科擎邦主动悬架介绍(1).pdf",
+        "published_at": "",
+        "name": "中科擎邦主动悬架介绍(1)",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_f626a40ac8",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "Dauch集团（原美桥）--电驱系统开发技术与应用.pdf",
+        "published_at": "",
+        "name": "Dauch集团（原美桥）--电驱系统开发技术与应用",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_f64e44bd42",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "15-长安汽车-长安太行分布式驱动技术研究成果分享.pdf",
+        "published_at": "",
+        "name": "15-长安汽车-长安太行分布式驱动技术研究成果分享",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_f7a26d0729",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "基于转向与制动协同的智能汽车漂移运动控制--江苏大学.pdf",
+        "published_at": "",
+        "name": "基于转向与制动协同的智能汽车漂移运动控制--江苏大学",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_f7f2890ca4",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "北汽-重型商用车智能转向系统关键技术及产业化外发版.pdf",
+        "published_at": "",
+        "name": "北汽-重型商用车智能转向系统关键技术及产业化外发版",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_f82109f45c",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "25-5 Active Aero Wheel_CompActive.pdf",
+        "published_at": "",
+        "name": "25-5 Active Aero Wheel_CompActive",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_f8785fa5ff",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "260417_DeepDrive_DualRotorTechnology.pdf",
+        "published_at": "",
+        "name": "260417_DeepDrive_DualRotorTechnology",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_f8a5c55ca8",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "中晶新源先进功率SGT助力机器人行业高效高质量发展 20260327 V1.pdf",
+        "published_at": "",
+        "name": "中晶新源先进功率SGT助力机器人行业高效高质量发展 20260327 V1",
+        "source_url": "",
+        "summary": ""
+      }
+    },
+    {
+      "vid": "mat_fbfea737be",
+      "tag": "material",
+      "props": {
+        "material_type": "doc",
+        "title": "13-清华大学-驱制动一体化系统关键技术.pdf",
+        "published_at": "",
+        "name": "13-清华大学-驱制动一体化系统关键技术",
+        "source_url": "",
+        "summary": ""
+      }
+    }
+  ],
+  "edges": [
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_0153700ea8",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_02654498ee",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_02876645c1",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_02a6d5ef98",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_04c6c9f5c8",
+      "dst_vid": "sub_04a6acbe7c"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_063fb1ad05",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_0c880568e2",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_0e26f1953f",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_0e905af8c9",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_114a228445",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_146f25fee7",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_15ca49540a",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_15fdb8ac64",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_1ce0309bb0",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_1f8953ac59",
+      "dst_vid": "sub_04a6acbe7c"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_260033698c",
+      "dst_vid": "sub_04a6acbe7c"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_2ab142c814",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_2f9aa2da94",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_333cadef3d",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_3725b25e6e",
+      "dst_vid": "sub_1e5345418a"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_3a8b76ff04",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_3cf2616e8a",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_3e580ac08f",
+      "dst_vid": "sub_1e5345418a"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_3fd911646f",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_4411b95063",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_452fd33395",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_45f74a6bfb",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_4b7d8c21b7",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_4f89d81cc3",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_51ecec9330",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_53c71d604b",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_547b8c1e02",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_54e5423ebf",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_553c610a3f",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_56af3f2030",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_57f593de8e",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_5aec8cfe3d",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_5b48b24db9",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_6099c27d3f",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_60f7b9ef1c",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_6457a34157",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_6a47dd23f3",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_714404e846",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_7687e1aee5",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_7c506767b0",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_7c5af8cfd5",
+      "dst_vid": "sub_1e5345418a"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_7dc371ce21",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_7e52409456",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_837c275113",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_85c6977498",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_88b3389c62",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_8908311b06",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_8dc6695186",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_8ecb5fbf4d",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_9230df0ea4",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_92b610442f",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_98e236fdd0",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_99faaf45b4",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_9cc8c32e8d",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_9e0a9bd0b2",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_9fe3defceb",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_a22bb0e6a9",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_a274bb1e8f",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_a2e76ef0dc",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_a43e435e1f",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_a48569221f",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_a99565a1aa",
+      "dst_vid": "sub_1e5345418a"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_aa97a2525a",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_addb12aae7",
+      "dst_vid": "sub_1e5345418a"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_b2919c2e6d",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_b7565bfe8d",
+      "dst_vid": "sub_94e4be7a02"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_b8de1c1e7c",
+      "dst_vid": "sub_1e5345418a"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_bd7f4129e4",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_be44c63340",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_c3dacdc92c",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_c5ff3a128c",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_c89c76544d",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_cf9dcd447b",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_d1fdf4c08c",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_d3105f18af",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_d47701f0a1",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_d5e74b3664",
+      "dst_vid": "sub_04a6acbe7c"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_d8b56f7e48",
+      "dst_vid": "sub_1e5345418a"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_dcf8494ba2",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_e2abd9a150",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_e5680a7053",
+      "dst_vid": "sub_1e5345418a"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_ec53cb50a9",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_efcbda4b61",
+      "dst_vid": "sub_2bdaa4fc4e"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_f96c8025d9",
+      "dst_vid": "sub_3a74911590"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_fc433bd7a9",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_fd12007beb",
+      "dst_vid": "sub_04a6acbe7c"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "mod_fd4992382d",
+      "dst_vid": "sub_321402a6b3"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "sub_04a6acbe7c",
+      "dst_vid": "dom_7c85bfb782"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "sub_1e5345418a",
+      "dst_vid": "dom_7c85bfb782"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "sub_2bdaa4fc4e",
+      "dst_vid": "dom_7c85bfb782"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "sub_321402a6b3",
+      "dst_vid": "dom_7c85bfb782"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "sub_3a74911590",
+      "dst_vid": "dom_7c85bfb782"
+    },
+    {
+      "edge_type": "belongs_to",
+      "src_vid": "sub_94e4be7a02",
+      "dst_vid": "dom_7c85bfb782"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_0e341ed137",
+      "dst_vid": "mod_8dc6695186"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_0e6635c473",
+      "dst_vid": "mod_fd4992382d"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_1004e69d46",
+      "dst_vid": "mod_be44c63340"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_1134e2a8e8",
+      "dst_vid": "mod_1f8953ac59"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_174a8f25e7",
+      "dst_vid": "mod_7c5af8cfd5"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_17babdc339",
+      "dst_vid": "mod_99faaf45b4"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_17fdbe34c5",
+      "dst_vid": "mod_ec53cb50a9"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_18d5478d88",
+      "dst_vid": "mod_0c880568e2"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_1da57a4896",
+      "dst_vid": "mod_45f74a6bfb"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_2016adbaec",
+      "dst_vid": "mod_e2abd9a150"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_22e47d0c31",
+      "dst_vid": "mod_3fd911646f"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_248d0a08f0",
+      "dst_vid": "mod_85c6977498"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_254d4cdbd3",
+      "dst_vid": "mod_260033698c"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_2615a3597b",
+      "dst_vid": "mod_c89c76544d"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_2d468b1792",
+      "dst_vid": "mod_146f25fee7"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_2ec7cc40d4",
+      "dst_vid": "mod_6457a34157"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_2f3b3aca01",
+      "dst_vid": "mod_f96c8025d9"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_31468042d6",
+      "dst_vid": "mod_15fdb8ac64"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_325dba2a07",
+      "dst_vid": "mod_fd12007beb"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_3560aaf965",
+      "dst_vid": "mod_b7565bfe8d"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_368219a644",
+      "dst_vid": "mod_a43e435e1f"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_396674b4b8",
+      "dst_vid": "mod_7dc371ce21"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_3989881587",
+      "dst_vid": "mod_3cf2616e8a"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_43464af657",
+      "dst_vid": "mod_04c6c9f5c8"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_43d1dcd87e",
+      "dst_vid": "mod_7c506767b0"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_454fd351df",
+      "dst_vid": "mod_9fe3defceb"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_46976a52ce",
+      "dst_vid": "mod_3e580ac08f"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_4775a54dc7",
+      "dst_vid": "mod_ec53cb50a9"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_4bec1f97e9",
+      "dst_vid": "mod_6a47dd23f3"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_4d49fe4d94",
+      "dst_vid": "mod_99faaf45b4"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_4f13a6a85c",
+      "dst_vid": "mod_56af3f2030"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_5117c61f12",
+      "dst_vid": "mod_a48569221f"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_52ff55647d",
+      "dst_vid": "mod_a2e76ef0dc"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_56baed39c7",
+      "dst_vid": "mod_9e0a9bd0b2"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_576ca3210c",
+      "dst_vid": "mod_b2919c2e6d"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_58cdbfaa46",
+      "dst_vid": "mod_d5e74b3664"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_594217f8d9",
+      "dst_vid": "mod_4411b95063"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_5ba3569410",
+      "dst_vid": "mod_0e905af8c9"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_5c5d18a262",
+      "dst_vid": "mod_8908311b06"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_5df668dfaa",
+      "dst_vid": "mod_15fdb8ac64"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_5eaf1432eb",
+      "dst_vid": "mod_04c6c9f5c8"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_61c40c350a",
+      "dst_vid": "mod_efcbda4b61"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_6f20531543",
+      "dst_vid": "mod_8ecb5fbf4d"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_6fe4044f49",
+      "dst_vid": "mod_3a8b76ff04"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_73f7442705",
+      "dst_vid": "mod_4b7d8c21b7"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_7522ad33a1",
+      "dst_vid": "mod_9cc8c32e8d"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_752c643ca3",
+      "dst_vid": "mod_92b610442f"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_7972cf40a3",
+      "dst_vid": "mod_5aec8cfe3d"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_7a261daac8",
+      "dst_vid": "mod_7e52409456"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_7ab8674668",
+      "dst_vid": "mod_1ce0309bb0"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_8018b5c83c",
+      "dst_vid": "mod_553c610a3f"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_8110126a30",
+      "dst_vid": "mod_d1fdf4c08c"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_821666b236",
+      "dst_vid": "mod_c3dacdc92c"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_83cbe1e579",
+      "dst_vid": "mod_d1fdf4c08c"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_867e85cb0a",
+      "dst_vid": "mod_d1fdf4c08c"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_870c610855",
+      "dst_vid": "mod_cf9dcd447b"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_8860ebf84f",
+      "dst_vid": "mod_51ecec9330"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_8e206be24a",
+      "dst_vid": "mod_88b3389c62"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_9154fe8b58",
+      "dst_vid": "mod_d47701f0a1"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_91d5b00c11",
+      "dst_vid": "mod_02654498ee"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_94cbebda38",
+      "dst_vid": "mod_2ab142c814"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_94f2aba243",
+      "dst_vid": "mod_714404e846"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_96c2dcb31d",
+      "dst_vid": "mod_dcf8494ba2"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_99355f385d",
+      "dst_vid": "mod_7687e1aee5"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_994b1e17b0",
+      "dst_vid": "mod_063fb1ad05"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_9dc9b1c346",
+      "dst_vid": "mod_15ca49540a"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_a0c7a6f8d9",
+      "dst_vid": "mod_837c275113"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_a0d3056a76",
+      "dst_vid": "mod_452fd33395"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_a29a44a922",
+      "dst_vid": "mod_02a6d5ef98"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_a4258ba5c6",
+      "dst_vid": "mod_98e236fdd0"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_a60a7da906",
+      "dst_vid": "mod_02876645c1"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_a857e096c4",
+      "dst_vid": "mod_15fdb8ac64"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_aad954cebd",
+      "dst_vid": "mod_a274bb1e8f"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_aaeec02a26",
+      "dst_vid": "mod_54e5423ebf"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_ab30a285e2",
+      "dst_vid": "mod_aa97a2525a"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_ab6013520d",
+      "dst_vid": "mod_85c6977498"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_ab722c5cd8",
+      "dst_vid": "mod_57f593de8e"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_aee0ee067e",
+      "dst_vid": "mod_fc433bd7a9"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_af09ef0185",
+      "dst_vid": "mod_333cadef3d"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_c1be16e043",
+      "dst_vid": "mod_c5ff3a128c"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_c42b269f11",
+      "dst_vid": "mod_9fe3defceb"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_c4f88121d0",
+      "dst_vid": "mod_d3105f18af"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_cfe8d9a7e7",
+      "dst_vid": "mod_9230df0ea4"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_d06acead21",
+      "dst_vid": "mod_6a47dd23f3"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_d211d82e04",
+      "dst_vid": "mod_1f8953ac59"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_da4a908d6b",
+      "dst_vid": "mod_553c610a3f"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_e3fa34938c",
+      "dst_vid": "mod_114a228445"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_e412c20515",
+      "dst_vid": "mod_99faaf45b4"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_e55cb535df",
+      "dst_vid": "mod_0153700ea8"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_e910e12fac",
+      "dst_vid": "mod_2f9aa2da94"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_e9bf91a35a",
+      "dst_vid": "mod_547b8c1e02"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_f234e3af4f",
+      "dst_vid": "mod_85c6977498"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_f32adfe8e7",
+      "dst_vid": "mod_bd7f4129e4"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_f626a40ac8",
+      "dst_vid": "mod_a22bb0e6a9"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_f64e44bd42",
+      "dst_vid": "mod_4f89d81cc3"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_f7a26d0729",
+      "dst_vid": "mod_6099c27d3f"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_f7f2890ca4",
+      "dst_vid": "mod_0e26f1953f"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_f82109f45c",
+      "dst_vid": "mod_15fdb8ac64"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_f8785fa5ff",
+      "dst_vid": "mod_15ca49540a"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_f8a5c55ca8",
+      "dst_vid": "mod_5b48b24db9"
+    },
+    {
+      "edge_type": "supports",
+      "src_vid": "mat_fbfea737be",
+      "dst_vid": "mod_53c71d604b"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": "20261022",
+  "tag": "kb-20261022",
+  "format": "knowledge_export_v1",
+  "architecture_version": "1.0",
+  "note": "底盘知识库快照；JSON 可直接通过 /import/knowledge 导入（与 /export/knowledge 同构：tree/nodes/edges）。",
+  "domains": [
+    {
+      "name": "底盘技术",
+      "vid": "domain_chassis_tech",
+      "json": "knowledge_base/domain_chassis_tech.json",
+      "markdown": "knowledge_base/domain_chassis_tech.md",
+      "stats": {
+        "nodes": 237,
+        "edges": 240,
+        "dropped_invalid_edges": 1,
+        "materials_moved_from_children": 1
+      },
+      "node_counts": {
+        "domain": 1,
+        "subdomain": 12,
+        "module": 43,
+        "technology": 75,
+        "material": 106
+      },
+      "exported_at": "2026-10-22T03:03:07+00:00"
+    },
+    {
+      "name": "整车信息系统",
+      "vid": "dom_7c85bfb782",
+      "json": "knowledge_base/dom_7c85bfb782.json",
+      "markdown": "knowledge_base/dom_7c85bfb782.md",
+      "stats": {
+        "nodes": 200,
+        "edges": 199
+      },
+      "node_counts": {
+        "domain": 1,
+        "subdomain": 6,
+        "module": 92,
+        "material": 101
+      },
+      "exported_at": "2026-10-22T03:03:08+00:00"
+    }
+  ]
+}
