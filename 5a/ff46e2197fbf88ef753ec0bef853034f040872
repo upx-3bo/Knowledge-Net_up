@@ -1,0 +1,41 @@
+knowledge_base/VERSION
+  s_acc14c5595c14c::t_b48f2f6135db06 1
+scripts/import_snapshot.py
+  s_acc14c5595c14c::t_34ada840033be4 1-58
+knowledge_base/manifest.json
+  s_acc14c5595c14c::t_3b657bc3184f5c 3-17
+  s_acc14c5595c14c::t_db94a0dec1ba38 1-2
+  s_acc14c5595c14c::t_c4311b11a57066 18-20
+  h_68135c1a43e1f2 21-46
+knowledge_base/README.md
+  s_acc14c5595c14c::t_fcbf16d27fda25 1-61
+knowledge_base/dom_7c85bfb782.json
+  h_68135c1a43e1f2 1-5892
+knowledge_base/dom_7c85bfb782.md
+  h_68135c1a43e1f2 1-653
+knowledge_base/domain_chassis_tech.json
+  h_68135c1a43e1f2 1-7098
+knowledge_base/domain_chassis_tech.md
+  h_68135c1a43e1f2 1-752
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "5aff46e2197fbf88ef753ec0bef853034f040872",
+  "prompts": {},
+  "humans": {
+    "h_68135c1a43e1f2": {
+      "author": "upx-3bo <upx-3bo@users.noreply.github.com>"
+    }
+  },
+  "sessions": {
+    "s_acc14c5595c14c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_06ddc9d57ffesGZq3QqI5qhWhZ",
+        "model": "unknown"
+      },
+      "human_author": "upx-3bo <upx-3bo@users.noreply.github.com>"
+    }
+  }
+}
