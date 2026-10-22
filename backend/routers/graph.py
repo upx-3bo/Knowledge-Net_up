@@ -15,9 +15,11 @@ def _store() -> GraphStore:
     return GraphStore(history=get_history())
 
 
-def _store_for(x_client_id: str = "", request: Request = None, user_id: str = "") -> GraphStore:
-    s = GraphStore(history=get_history())
-    # 编辑者身份：优先登录时登记的 X-User-Id；其次请求带的 client id；都没有则为空
+def _identity(x_client_id: str = "", request: Request = None, user_id: str = "") -> str:
+    """编辑者身份解析：优先登录时登记的 X-User-Id；其次请求带的 client id；都没有则为空。
+
+    写操作与撤回/重做必须用同一套身份，否则登录后「撤回」会落到别的身份的旧操作上。
+    """
     uid = (user_id or "").strip()
     if not uid and request is not None:
         uid = (request.headers.get("x-user-id") or "").strip()
@@ -27,7 +29,12 @@ def _store_for(x_client_id: str = "", request: Request = None, user_id: str = ""
             pass
     if not uid:
         uid = (x_client_id or "").strip()
-    s.user = uid
+    return uid
+
+
+def _store_for(x_client_id: str = "", request: Request = None, user_id: str = "") -> GraphStore:
+    s = GraphStore(history=get_history())
+    s.user = _identity(x_client_id, request, user_id)
     if request is not None:
         try:
             s.ip = (request.client.host if request.client else "") or ""
@@ -411,13 +418,13 @@ def _looks_opaque(s: str) -> bool:
 @router.post("/history/undo")
 def history_undo(_token: str = Depends(require_write_token), x_client_id: str = Header(default=""), request: Request = None):
     store = _store_for(x_client_id, request)
-    return get_history().undo(store, user=x_client_id)
+    return get_history().undo(store, user=_identity(x_client_id, request))
 
 
 @router.post("/history/redo")
 def history_redo(_token: str = Depends(require_write_token), x_client_id: str = Header(default=""), request: Request = None):
     store = _store_for(x_client_id, request)
-    return get_history().redo(store, user=x_client_id)
+    return get_history().redo(store, user=_identity(x_client_id, request))
 
 
 @router.get("/meta/schema")

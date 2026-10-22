@@ -87,10 +87,11 @@ class HistoryRecorder:
             return cur.lastrowid
 
     def _undo_batch(self, op_id: int, batch: str) -> dict:
-        """整体撤回同一个 batch 的所有操作。
+        """整体撤回同一个 batch 的所有操作（= 一次用户操作）。
 
-        同一 HTTP 请求内的批量写（如一次导入 = 1 个 batch）会在一次点击里全部回退。
-        批次内撤销顺序按 id 倒序执行（先撤后发生的，保证删点前其关联边已撤）。
+        同一 HTTP 请求内的批量写（如一次级联删除、一次导入）会在一次点击里全部回退。
+        恢复节点时采用两阶段：先把批次内所有顶点按 id 升序（叶子先于父）重建，
+        再统一补边，避免“父/子还未恢复导致边插入失败”。
         """
         if not batch:
             return None
@@ -106,12 +107,35 @@ class HistoryRecorder:
                 ops.append((r[0], json.loads(r[1])))
             except (TypeError, ValueError):
                 continue
-        # 先撤 insert_edge（后执行/记录），再撤 insert_vertex —— 逆序执行已满足（边记录靠后）
-        for _id, undo_data in ops:
+        from backend.store import GraphStore
+
+        store = GraphStore()  # 非记录型实例：撤回本身不再写入历史
+        restores = [(i, u) for i, u in ops if u.get("kind") == "vertex_with_edges"]
+        others = [(i, u) for i, u in ops if u.get("kind") != "vertex_with_edges"]
+        # 1) 其它逆操作按 id 倒序（先撤后发生的，例如先撤边再撤点）
+        for _id, u in others:
             try:
-                self._apply_runner(undo_data)
+                self._apply(store, u)
             except Exception as exc:
                 return {"ok": False, "reason": f"撤回失败(op {_id}): {exc}"}
+        # 2) 恢复被删顶点：先全部顶点（叶子先于父），再统一补边
+        for _id, u in sorted(restores, key=lambda t: t[0]):
+            v = u.get("vertex") or {}
+            if not v.get("vid"):
+                continue
+            try:
+                store.insert_vertex(v.get("tag"), v["vid"], v.get("props") or {})
+            except Exception as exc:
+                return {"ok": False, "reason": f"撤回失败(op {_id}): {exc}"}
+        edge_fail = 0
+        for _id, u in sorted(restores, key=lambda t: t[0]):
+            for e in u.get("edges") or []:
+                if not (e.get("src_vid") and e.get("dst_vid") and e.get("edge_type")):
+                    continue
+                try:
+                    store.insert_edge(e["edge_type"], e["src_vid"], e["dst_vid"], e.get("props") or {})
+                except Exception:
+                    edge_fail += 1  # 边端点已不存在等：不阻断整批撤回
         with self._lock:
             for _id, _ in ops:
                 self._conn.execute("UPDATE ops SET done=0 WHERE id=?", (_id,))
@@ -120,64 +144,7 @@ class HistoryRecorder:
         return {
             "ok": True,
             "op": {"id": first, "action": "batch_undo", "payload": {"batch": batch, "ops": len(ops)}},
-            "undone": {"kind": "batch", "batch": batch, "ops": len(ops)},
-        }
-
-    def _undo_delete_streak(self, op_id: int, user: str = "") -> dict | None:
-        """把以最新 delete_vertex 为终点、向更早连续出现的 delete_vertex 合并成一次撤回。
-
-        只有“连续”（中间没有其它类型的 done=1 操作隔开）的 delete_vertex 才会被合并，
-        避免误伤不同时刻的独立删除。
-        """
-        with self._lock:
-            user_cond = " AND user=?" if user else ""
-            rows = self._conn.execute(
-                "SELECT id, undo FROM ops WHERE done=1" + user_cond
-                + " ORDER BY id DESC LIMIT 500;",
-                (user,) if user else (),
-            ).fetchall()
-        ids: list[int] = []
-        undos: list[dict] = []
-        stop = False
-        for r in rows:
-            _id = r[0]
-            try:
-                u = json.loads(r[1])
-            except (TypeError, ValueError):
-                u = {}
-            if _id == op_id:
-                stop = True  # 从最新一条开始，遇到它即进入“连续”段
-            if not stop:
-                continue
-            # delete_vertex 的 undo 有两种形态：单独删点=vertex_delete；级联删点=vertex_with_edges
-            act = u.get("kind")
-            if act in ("vertex_delete", "vertex_with_edges"):
-                if ids and (r[0] < ids[-1] - 1):
-                    # 有缺口（中间插入过其它成功操作）则不再往前扩展
-                    break
-                ids.append(_id)
-                undos.append(u)
-                continue
-            break
-        if len(ids) <= 1:
-            return None
-        # 执行撤销：按 id 升序（先恢复最早被删的节点）。级联删除是“子先父后”，
-        # 最早被删的是最下层叶子。先恢复叶子再恢复上层，避免中途出现无父节点。
-        ordered = sorted(zip(ids, undos), key=lambda t: t[0])
-        for _id, u in ordered:
-            try:
-                self._apply_runner(u)
-            except Exception as exc:
-                return {"ok": False, "reason": f"撤回失败(op {_id}): {exc}"}
-        with self._lock:
-            for _id in ids:
-                self._conn.execute("UPDATE ops SET done=0 WHERE id=?", (_id,))
-            self._conn.commit()
-        return {
-            "ok": True,
-            "op": {"id": op_id, "action": "batch_undo",
-                   "payload": {"delete_streak": True, "ops": len(ids)}},
-            "undone": {"kind": "delete_streak", "ops": len(ids)},
+            "undone": {"kind": "batch", "batch": batch, "ops": len(ops), "edge_fail": edge_fail},
         }
 
     def _redo_batch(self, batch: str) -> dict:
@@ -211,69 +178,11 @@ class HistoryRecorder:
             "undone": {"kind": "batch", "batch": batch, "ops": len(ops)},
         }
 
-    def _redo_delete_streak(self, op_id: int, user: str = "") -> dict | None:
-        """与 _undo_delete_streak 对称：把一段连续被撤销的 delete_vertex 一起重做。
-
-        以最新一条 undone(done=0) delete_vertex 为终点，向更早合并连续 done=0 的
-        delete_vertex（中间不能有其它 done=0 操作隔开）。重做顺序为“父先子后”，
-        与原始删除方向相反，保证建父再建子。
-        """
-        with self._lock:
-            user_cond = " AND user=?" if user else ""
-            rows = self._conn.execute(
-                "SELECT id, payload FROM ops WHERE done=0" + user_cond
-                + " ORDER BY id DESC LIMIT 500;",
-                (user,) if user else (),
-            ).fetchall()
-        ids: list[int] = []
-        payloads: list[dict] = []
-        stop = False
-        for r in rows:
-            _id = r[0]
-            try:
-                p = json.loads(r[1])
-            except (TypeError, ValueError):
-                p = {}
-            if _id == op_id:
-                stop = True
-            if not stop:
-                continue
-            # 仅合并 delete_vertex（payload.kind=vertex_delete）
-            if p.get("kind") == "vertex_delete":
-                if ids and (r[0] < ids[-1] - 1):
-                    break
-                ids.append(_id)
-                payloads.append(p)
-                continue
-            break
-        if len(ids) <= 1:
-            return None
-        # 重做顺序：id 倒序（先重做最后被撤销的=最早被删除的根？）
-        # 原始删除：叶子先删、根后删 → 撤销时叶子先恢复。重做应把删除重新做一遍：
-        # 因此重做应“先删根场景”不可取——毕竟目标是恢复“已撤销”状态。
-        # 重做 = 重新执行删除，即把 nodes 再删一次。顺序对删除影响小，用 id 倒序即可。
-        ordered = sorted(zip(ids, payloads), key=lambda t: t[0], reverse=True)
-        for _id, p in ordered:
-            try:
-                self._apply_runner(p)
-            except Exception as exc:
-                return {"ok": False, "reason": f"重做失败(op {_id}): {exc}"}
-        with self._lock:
-            for _id in ids:
-                self._conn.execute("UPDATE ops SET done=1 WHERE id=?", (_id,))
-            self._conn.commit()
-        return {
-            "ok": True,
-            "op": {"id": op_id, "action": "batch_redo",
-                   "payload": {"delete_streak": True, "ops": len(ids)}},
-            "undone": {"kind": "delete_streak", "ops": len(ids)},
-        }
-
     def undo(self, store, user: str = "") -> dict:
-        """Undo the most recent done op belonging to this client (if user given) or any.
+        """撤回该用户最近的一次操作（一次用户动作 = 一个 batch）。
 
-        优先按“批次”整体撤回：同一次批量写入（batch 非空且未撤销的最近一组）一键全撤；
-        无 batch（历史单点操作）则回退单条 op，保持兼容。
+        每次只回退“最近一次操作”：若是批量写（如级联删除/导入）则整批回退，
+        单条写则只回退该条。不再把多次独立删除合并成一次撤回。
         """
         with self._lock:
             row = self._conn.execute(
@@ -288,12 +197,6 @@ class HistoryRecorder:
         batch_res = self._undo_batch(op_id, batch)
         if batch_res:
             return batch_res
-        # 无 batch 的单条删除：向前合并“同一用户 + 连续 delete_vertex”一起撤回，
-        # 兼容早期“逐条 DELETE”记录的级联删除（一次点击恢复一整片）。
-        if action == "delete_vertex":
-            streak = self._undo_delete_streak(op_id, user)
-            if streak:
-                return streak
         undo_data = json.loads(undo)
         try:
             self._apply_runner(undo_data)
@@ -305,10 +208,7 @@ class HistoryRecorder:
         return {"ok": True, "op": {"id": op_id, "action": action, "payload": json.loads(payload)}, "undone": undo_data}
 
     def redo(self, store, user: str = "") -> dict:
-        """Redo the most recent undone op belonging to this client (if user given) or any.
-
-        与 undo 对称：最近被整体撤销的 batch 一键重做；无 batch 则重做单条 op。
-        """
+        """重做该用户最近一次被撤回的操作（与 undo 对称：一次操作一个 batch）。"""
         with self._lock:
             row = self._conn.execute(
                 "SELECT id, action, payload, batch FROM ops WHERE done=0"
@@ -322,11 +222,6 @@ class HistoryRecorder:
         batch_res = self._redo_batch(batch)
         if batch_res:
             return batch_res
-        # 对称处理：连续被整体撤销的 delete_vertex 段，一起重做（与 _undo_delete_streak 对应）
-        if action == "delete_vertex":
-            streak = self._redo_delete_streak(op_id, user)
-            if streak:
-                return streak
         try:
             self._apply_runner(json.loads(payload))
         except Exception as exc:
